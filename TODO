@@ -1,0 +1,12 @@
+* change favicon
+* github remote repo
+* static files, cache headers
+* lazy sortupdate method (underscore.js)
+* move database to webapp directory
+
+done:
+* move contentEditable inner most so user cant delete outer tags
+* add to every new link attribute target (admin.js)
+* convert pasted url to plain text (admin.js)
+* avoid gallery refresh on move on delete (main.js)
+* move carousel key binding to global App object (main.js)

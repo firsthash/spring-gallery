@@ -1,0 +1,37 @@
+/* move modal caption down */
+.carousel-caption {
+    position: relative;
+}
+
+/* fixed position of modal arrow buttons */
+.carousel-control {
+    top: 100px;
+}
+
+/* last digit controls opacity */
+/* align is 'regression' */
+.modal {
+    background: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    padding: 1%;
+}
+
+/* center modal vertically on mobile devices */
+.modal.fade.in {
+    top: 10%;
+}
+
+/* smaller device - bigger modal */
+@media (max-width: 1500px) {
+    .modal {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        margin: 0;
+    }
+    .modal img {
+        width: 100%;
+    }
+}

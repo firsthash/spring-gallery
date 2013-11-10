@@ -1,0 +1,115 @@
+// bootstrap carousel modification
+
+function lazyLoad() {
+    console.log('div.modal...show', this);
+    var carousel = $(this).find('.carousel').hide();
+    var deferreds = [];
+    var imgs = $('.carousel', this).find('img');
+    // loop over each img
+    imgs.each(function(){
+        var self = $(this);
+        var datasrc = self.attr('data-src');
+        if (datasrc) {
+            var d = $.Deferred();
+            self.one('load', d.resolve)
+                .attr("src", datasrc)
+                .attr('data-src', '');
+            deferreds.push(d.promise());
+        }
+    });
+
+    $.when.apply($, deferreds).done(function(){
+        $('#ajaxloader').hide();
+        carousel.fadeIn(1000);
+    });
+}
+
+// lazy load images
+$('div.modal').on('show', function(e){
+    // there must be code above
+});
+
+// onclick event handler
+function showModal(obj) {
+    //var thumbnail = $(obj).parent()
+    //var gallery = thumbnail.closest('.thumbnails')
+    //// console.log('gallery', gallery)
+    //var modal = $('#' + gallery.attr('id') + 'Modal')
+    //// console.log('modal', modal)
+    //var carousel = modal.find('.carousel')
+    //var index = gallery.find('li:not(.exclude)').index(thumbnail)
+    //// bug fix: slide while popup
+    //carousel.carousel('pause')
+    //
+    //carousel.carousel(index)
+    //carousel.carousel('pause')
+    //
+    //modal.modal('show');
+    //
+    //console.log('modal', '#' + gallery.attr('id') + 'Modal');
+    //var newLazyLoad = _.bind(lazyLoad, modal);
+    //newLazyLoad();
+}
+
+
+//function initCarousel() {
+//    console.log('initCarousel');
+//    var popup = $('.modal-template')
+//    var carouselItem = popup.find('.carousel .item')
+//    // create multiple modals
+//    $('.thumbnails').each(function(){
+//        var gallery = $(this)
+//        var newPopup = popup.clone()
+//        newPopup.attr('id', gallery.attr('id') + 'Modal')
+//        var carouselId = gallery.attr('id') + 'Carousel'
+//        newPopup.find('.carousel').attr('id', carouselId)
+//        newPopup.find('.carousel-control').attr('href', '#' + carouselId)
+//        $('body').append(newPopup)
+//        var carouselContainer = newPopup.find('.carousel-inner').empty()
+//
+//        var links = gallery.find('li:not(.exclude) .thumbnail')
+//        links.each(function(index, link) {
+//            var link = $(link)
+//            var item = carouselItem.clone()
+//            index == 0 ? item.addClass('active') : null
+//            item.find('img').attr('src', link.attr('href'))
+//            item.find('h4').text(link.attr('title'))
+//            // change???
+//            if (link.data('header'))
+//                item.find('.carousel-caption').html(link.data('header'))
+//
+//            // youtube video
+//            if (link.data('embed')) {
+//                item.find('.embed').html(link.data('embed'))
+//            }
+//
+//            // refs to source image
+//            item.data('id', link.attr('id'))
+//            carouselContainer.append(item)
+//        })
+//    })
+//
+//    // transparent style of 'swf'
+//    $('object').append('<param name="wmode" value="transparent"/>')
+//
+//    // fix playing in background
+//    $('.carousel, .modal').on('slid hidden', function(e){
+//        // youtube
+//        $('iframe').each(function(){this.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*')})
+//        // html5 video tag
+//        $('video').each(function(){
+//            this.pause()
+//        })
+//    })
+//
+//
+//    // fix youtube fullscreen
+//    $('.modal').on('show', function(){
+//        var modal = $(this)
+//        if (modal.find('.active iframe')[0]) {
+//            var embed = modal.find('.active .embed')
+//            embed.html(embed.html())
+//        }
+//    })
+//
+//}

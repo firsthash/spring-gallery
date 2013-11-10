@@ -1,0 +1,30 @@
+/*
+* remove all spaces between gallery items
+*/
+
+.thumbnail {
+    padding: 0;
+    border: 0;
+}
+
+/* decrease space between thumbnails */
+
+.row-fluid [class*="span"] {
+    margin-left: 0;
+}
+
+.thumbnails>li {
+    margin-bottom: 0;
+}
+
+
+/* remove small leftover spaces between rows */
+
+.thumbnail>img {
+    display: inline-block;
+}
+
+/* fit thumbnail to surrounding border */
+.thumbnail img {
+    width: 100%;
+}
