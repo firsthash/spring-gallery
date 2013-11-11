@@ -8,10 +8,11 @@
 original/
 bak/
 tmp/
-*.tmp
-*.bak
 test/
 files/
+*.tmp
+*.bak
+*.old
 
 # output
 target/
