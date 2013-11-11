@@ -3,12 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>spring-gallery</groupId>
     <artifactId>spring-gallery</artifactId>
-    <!-- contains a list of goals to bind to a particular phase -->
+    <!-- determine what goals to bind to a particular phase -->
     <packaging>war</packaging>
     <version>1.0</version>
     <name>Spring Gallery</name>
-    <!-- check actual versions: http://mvnrepository.com -->
-    <!-- search web ex.: site:mvnrepository.com tomcat7-plugin -->
+    <!-- check actual versions: http://mvnrepository.com/artifact/<groupId> -->
     <properties>
         <!-- special -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -100,7 +100,7 @@ var CarouselItemView = Backbone.View.extend({
         // trying to set figure always visible
         obj.css('min-height', '10em');
         var image = obj.find('img');
-        var el = '<img style="position: absolute; left: 45%; top: 5em; width: 4em; height: 4em" class="placeholder" src="/static/custom/img/loading.gif"/>';
+        var el = '<img style="position: absolute; left: 45%; top: 5em; width: 4em" class="placeholder" src="/static/custom/img/loading.gif"/>';
         image.before(el);
         //image.hide();
         image.on('load', _.bind(this.imageLoaded, this, image));
