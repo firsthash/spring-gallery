@@ -6,6 +6,8 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <name>spring-gallery</name>
+    <!-- check actual versions: http://mvnrepository.com -->
+    <!-- search web ex.: site:mvnrepository.com tomcat7-plugin -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -25,7 +27,8 @@
         <jstl.version>1.2</jstl.version>
         <tomcat7-plugin.version>2.1</tomcat7-plugin.version>
         <compiler-plugin.version>3.1</compiler-plugin.version>
-        <war-plugin.version>2.3</war-plugin.version>
+        <war-plugin.version>2.4</war-plugin.version>
+        <maven-war-plugin.version>2.4</maven-war-plugin.version
         <surefire-plugin.version>2.4.3</surefire-plugin.version>
         <assembly-plugin.version>2.4</assembly-plugin.version>
         <log4j.version>1.2.17</log4j.version>
@@ -174,6 +177,26 @@
         </dependency>
     </dependencies>
     <profiles>
+        <profile>
+            <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
+            <!-- Use this profile for any OpenShift specific customization your app will need. -->
+            <!-- By default that is to put the resulting archive into the 'webapps' folder. -->
+            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
+            <id>openshift</id>
+            <build>
+                <finalName>spring-gallery</finalName>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>${maven-war-plugin.version}</version>
+                        <configuration>
+                            <outputDirectory>webapps</outputDirectory>
+                            <warName>ROOT</warName>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>home-server</id>
             <activation>
