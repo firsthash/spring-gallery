@@ -236,17 +236,21 @@ CarouselItemView = CarouselItemView.extend({
 
         // update content immediately
         //this.listenTo(this.model, 'change:embed', this.render);
-
     },
     onfocusout: function(event) {
         // html has escaped characters
-        var embed = $(event.target).text().trim();
+        var target = $(event.target);
+        var embed = target.text().trim();
+        //var original = this.model.get('embed');
         console.log('CarouselItemView.focusout');
 
-        if (this.prevEmbed != embed) {
+        if (embed != this.embedCode && embed != this.embedMessage) {
             this.model.set('embed', embed).save();
             this.render();
             this.lazyLoad();
+        } else {
+            // message fully erased
+            target.text(this.embedMessage);
         }
     },
     render: function() {
@@ -257,9 +261,12 @@ CarouselItemView = CarouselItemView.extend({
         return this;
     },
     addEmbed: function() {
+        this.embedMessage = "Paste embed code here";
+        this.embedCode = this.model.get('embed');
+
         var tmpl = '<h4 contenteditable="true" style="color: white;">{%- embed %}</h4>';
-        var embed = _.template(tmpl, {embed: this.$el.html()});
-        this.prevEmbed = this.$el.html().trim();
+        var embed = _.template(tmpl, {embed: this.embedCode || this.embedMessage});
+        //this.prevEmbed = this.$el.html().trim();
         this.$el.append(embed);
     }
 });
