@@ -7,77 +7,13 @@ window.editable = true;
 var BaseAppView = AppView;
 AppView = AppView.extend({
     _events: {
-        'click #addGallery': 'addGallery',
-        'click #changeBackground': 'changeBackground'
+        'click #addGallery': 'addGallery'
     },
     initialize: function() {
         BaseAppView.prototype.initialize.call(this);
         _.extend(this.events, this._events);
 
-        //this.listenTo(this.collection, 'sync', this.initBackgroundForm);
-        //this.listenTo(imageModelList, 'sync', this.initBackgroundImage);
-
         console.log('init BaseAppView');
-    },
-    addForm: function(gallery) {
-        this.backgroundGallery = gallery;
-
-        console.log('gallery name, id', gallery.get('name'), gallery.get('id'));
-
-        var form = _.template($('#change-background-template').html(), gallery.toJSON());
-
-        this.$('#changeBackground').after(form);
-    },
-
-    initBackgroundForm: function(collection) {
-        // sometimes collection is other object. why?
-        var isCollection = collection instanceof Backbone.Collection;
-        if (!isCollection) {
-            return;
-        }
-
-        // create or get gallery with name 'changeBackground'
-        var gallery = collection.findWhere({name: 'changeBackground'});
-        if (!gallery) {
-            gallery = new GalleryModel({name: 'changeBackground'});
-            collection.create(gallery, {wait: true});
-            // NOTE: wait till server assigns id
-            this.listenToOnce(collection, 'add', this.addForm);
-            return;
-        }
-
-        this.addForm(gallery);
-    },
-    getBackgroundImage: function() {
-        if (!this.backgroundGallery) {
-            return null;
-        }
-
-        // remove all images from gallery
-        var id = this.backgroundGallery.get('id');
-        console.log('id', id);
-        var image = imageModelList.findWhere({gallery_id: id});
-        return image;
-    },
-
-    initBackgroundImage: function() {
-        var image = this.getBackgroundImage();
-        console.log('image', image);
-        if (!image) {
-            return;
-        }
-
-        $.backstretch(image.get('file'));
-    },
-    changeBackground: function() {
-        // remove all images from gallery
-        var image = this.getBackgroundImage();
-        if (image) {
-            image.destroy();
-        }
-
-        // add new image to gallery
-        _.delay(function() {$('#changeBackgroundForm input:file').click()}, 1000);
     },
     addGallery: function() {
         console.log('addGallery');
@@ -111,8 +47,7 @@ SectionView = SectionView.extend({
 
         var oldContent = this.model.get('header').trim();
 
-        // resize number of post requests
-        // save changes
+        // resize number of post requests, save changes
         if (oldContent != content) {
             console.log('header changed');
             this.model.set('header', content).save();
@@ -233,25 +168,31 @@ CarouselItemView = CarouselItemView.extend({
         BaseCarouselItemView.prototype.initialize.call(this);
 
         _.extend(this.events, this._events);
-
-        // update content immediately
-        //this.listenTo(this.model, 'change:embed', this.render);
     },
     onfocusout: function(event) {
-        // html has escaped characters
         var target = $(event.target);
+        // unescape characters
         var embed = target.text().trim();
-        //var original = this.model.get('embed');
         console.log('CarouselItemView.focusout');
 
-        if (embed != this.embedCode && embed != this.embedMessage) {
-            this.model.set('embed', embed).save();
-            this.render();
-            this.lazyLoad();
-        } else {
-            // message fully erased
+        // field fully erased
+        if (embed == '') {
             target.text(this.embedMessage);
         }
+
+        // field is not changed
+        if (embed == this.embedMessage){
+            return;
+        }
+
+        // field is not changed
+        if (embed == this.embedCode){
+            return;
+        }
+
+        this.model.set('embed', embed).save();
+        this.render();
+        this.lazyLoad();
     },
     render: function() {
         BaseCarouselItemView.prototype.render.call(this);
@@ -266,7 +207,6 @@ CarouselItemView = CarouselItemView.extend({
 
         var tmpl = '<h4 contenteditable="true" style="color: white;">{%- embed %}</h4>';
         var embed = _.template(tmpl, {embed: this.embedCode || this.embedMessage});
-        //this.prevEmbed = this.$el.html().trim();
         this.$el.append(embed);
     }
 });
