@@ -91,21 +91,21 @@ var CarouselItemView = Backbone.View.extend({
         // show loading figure
         this.addPlaceholder(obj);
         console.log('obj', obj);
-        this.$el.append(obj);
+        // don't append there may be re-render
+        this.$el.html(obj);
 
         return this;
     },
     addPlaceholder: function(obj) {
         // add placeholder while image is loading
         // trying to set figure always visible
-        obj.css('min-height', '10em');
-        var image = obj.find('img');
-        var el = '<img style="position: absolute; left: 45%; top: 5em; width: 4em" class="placeholder" src="/static/custom/img/loading.gif"/>';
-        image.before(el);
-        //image.hide();
-        image.on('load', _.bind(this.imageLoaded, this, image));
+        // obj.css('min-height', '10em');
+        var image = obj.find('img[data-src]');
+        // var el = '<img style="position: absolute; left: 45%; top: 5em; width: 4em" class="placeholder" src="/static/custom/img/loading.gif"/>';
+        // image.before(el);
+        image.on('load', _.bind(this.hidePlaceholder, this, image));
     },
-    imageLoaded: function(image) {
+    hidePlaceholder: function(image) {
         // hide our placeholder
         console.log('image loaded');
         this.$('.placeholder').remove();

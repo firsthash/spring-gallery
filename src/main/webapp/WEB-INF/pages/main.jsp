@@ -92,13 +92,14 @@
     <!-- Backbone Templates -->
 
     <script type="text/template" id="carousel-item-template">
-        <div>
-            {% if (embed == "") { %}
+        {% if (embed == "") { %}
+        <div style="min-height: 10em">
             <img data-src="{%= prefix %}{%= file %}" alt=""/>
-            {% } else { %}
-            {%= embed %}
-            {% } %}
+            <img style="position: absolute; left: 45%; top: 5em; width: 4em" class="placeholder" src="/static/custom/img/loading.gif"/>
         </div>
+        {% } else { %}
+        {%= embed %}
+        {% } %}
     </script>
 
     <%-- TODO: bind template to element or use backbone initializers --%>

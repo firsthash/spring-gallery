@@ -234,26 +234,32 @@ CarouselItemView = CarouselItemView.extend({
 
         _.extend(this.events, this._events);
 
-        this.listenTo(this.model, 'change:embed', this.render);
+        // update content immediately
+        //this.listenTo(this.model, 'change:embed', this.render);
 
     },
     onfocusout: function(event) {
-        // NOTE: html method suddenly escapes characters
-        var content = $(event.target).text().trim();
-        console.log('CarouselItemView.focusout', content);
-        this.model.set('embed', content).save();
-        console.log(this.model);
+        // html has escaped characters
+        var embed = $(event.target).text().trim();
+        console.log('CarouselItemView.focusout');
+
+        if (this.prevEmbed != embed) {
+            this.model.set('embed', embed).save();
+            this.render();
+            this.lazyLoad();
+        }
     },
     render: function() {
         BaseCarouselItemView.prototype.render.call(this);
 
-        this.addField();
+        this.addEmbed();
 
         return this;
     },
-    addField: function() {
+    addEmbed: function() {
         var tmpl = '<h4 contenteditable="true" style="color: white;">{%- embed %}</h4>';
         var embed = _.template(tmpl, {embed: this.$el.html()});
+        this.prevEmbed = this.$el.html().trim();
         this.$el.append(embed);
     }
 });

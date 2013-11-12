@@ -8,6 +8,7 @@
 original/
 bak/
 tmp/
+old/
 test/
 files/
 *.tmp
