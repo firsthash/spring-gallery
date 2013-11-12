@@ -1,9 +1,11 @@
-* portin to new bootstrap
+* static files, cache headers
+* spring static files handling
+* porting to new bootstrap
 * jackson json parser
 * change favicon
 * github remote repo
-* static files, cache headers
 * lazy sortupdate method (underscore.js)
+* use variable as app name
 
 done:
 * move database to HOME directory

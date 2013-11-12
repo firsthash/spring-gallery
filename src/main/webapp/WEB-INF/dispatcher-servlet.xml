@@ -63,4 +63,6 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <mvc:resources location="/static/" mapping="/static/**"/>
+
 </beans>
