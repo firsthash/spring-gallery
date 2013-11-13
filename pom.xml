@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>spring-gallery</groupId>
+    <groupId>firsthash</groupId>
     <artifactId>spring-gallery</artifactId>
     <!-- determine what goals to bind to a particular phase -->
     <packaging>war</packaging>
@@ -184,7 +184,7 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <build>
-                <finalName>spring-gallery</finalName>
+                <finalName>${project.artifactId}</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-war-plugin</artifactId>
@@ -198,7 +198,7 @@
             </build>
         </profile>
         <profile>
-            <id>home-server</id>
+            <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -206,7 +206,7 @@
             <!-- ex: use logging only in home environment -->
             </dependencies>
             <build>
-                <finalName>spring-gallery</finalName>
+                <finalName>${project.artifactId}</finalName>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.tomcat.maven</groupId>

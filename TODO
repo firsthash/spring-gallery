@@ -1,13 +1,11 @@
-* static files, cache headers
-* spring static files handling
-* porting to new bootstrap
 * jackson json parser
-* change favicon
-* github remote repo
-* lazy sortupdate method (underscore.js)
-* use variable as app name
+* static files, cache headers
+* migrate to bootstrap3
 
 done:
+* github remote repo
+* use variable as app name
+* change favicon
 * move database to HOME directory
 * move contentEditable inner most so user cant delete outer tags
 * add to every new link attribute target (admin.js)
