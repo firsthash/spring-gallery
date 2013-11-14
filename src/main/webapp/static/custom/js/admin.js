@@ -175,33 +175,23 @@ CarouselItemView = CarouselItemView.extend({
         var embed = target.text().trim();
         console.log('CarouselItemView.focusout');
 
-        //// field fully erased
-        //if (embed == '') {
-        //    target.text(this.embedMessage);
-        //}
-        //
-        //// field is not changed
-        //if (embed == this.embedMessage){
-        //    return;
-        //}
-
-        target.text(this.embedMessage);
-
         // field is not changed
         if (this.embedCode && embed == this.embedCode){
             return;
         }
 
         // match returns array or null if not found
-        var isTag = embed.match(/<.*>/g);
+        var isTag = embed.match(/<.{10,}>/g);
 
-        // changed of fully erased
+        // changed to valid embed code or fully erased
         if (isTag || embed == '') {
             this.model.set('embed', embed).save();
             this.render();
             this.lazyLoad();
         }
 
+        // all others, must be last
+        target.text(this.embedMessage);
     },
     render: function() {
         BaseCarouselItemView.prototype.render.call(this);

@@ -1,3 +1,11 @@
+/*
+override bootstrap style
+rule must be specified exactly as is
+*/
+.carousel-inner>.item>img {
+    display: inline-block;
+}
+
 /* move modal caption down */
 .carousel-caption {
     position: relative;
@@ -8,8 +16,10 @@
     top: 100px;
 }
 
-/* last digit controls opacity */
-/* align is 'regression' */
+/*
+last digit controls opacity
+align is 'regression'
+*/
 .modal {
     background: rgba(0, 0, 0, 0.3);
     text-align: center;
