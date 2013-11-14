@@ -175,24 +175,33 @@ CarouselItemView = CarouselItemView.extend({
         var embed = target.text().trim();
         console.log('CarouselItemView.focusout');
 
-        // field fully erased
-        if (embed == '') {
-            target.text(this.embedMessage);
-        }
+        //// field fully erased
+        //if (embed == '') {
+        //    target.text(this.embedMessage);
+        //}
+        //
+        //// field is not changed
+        //if (embed == this.embedMessage){
+        //    return;
+        //}
+
+        target.text(this.embedMessage);
 
         // field is not changed
-        if (embed == this.embedMessage){
+        if (this.embedCode && embed == this.embedCode){
             return;
         }
 
-        // field is not changed
-        if (embed == this.embedCode){
-            return;
+        // match returns array or null if not found
+        var isTag = embed.match(/<.*>/g);
+
+        // changed of fully erased
+        if (isTag || embed == '') {
+            this.model.set('embed', embed).save();
+            this.render();
+            this.lazyLoad();
         }
 
-        this.model.set('embed', embed).save();
-        this.render();
-        this.lazyLoad();
     },
     render: function() {
         BaseCarouselItemView.prototype.render.call(this);
