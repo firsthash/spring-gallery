@@ -193,7 +193,7 @@
                         <configuration>
                             <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                             <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
-                            <outputDirectory>webapps</outputDirectory>
+                            <outputDirectory>${env.HOME}/jbossews/webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
