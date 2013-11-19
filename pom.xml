@@ -197,6 +197,34 @@
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>yuicompressor-maven-plugin</artifactId>
+                        <version>${yuicompressor-maven-plugin.version}</version>
+                        <configuration>
+                            <!-- recompile on each run -->
+                            <force>true</force>
+                            <excludes>
+                                <exclude>**/*-min.js</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.css</exclude>
+                            </excludes>
+                            <jswarn>false</jswarn>
+                            <nosuffix>true</nosuffix>
+                            <sourceDirectory>${basedir}/target</sourceDirectory>
+                            <outputDirectory>${basedir}/target</outputDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>compress_js_css</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>compress</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
