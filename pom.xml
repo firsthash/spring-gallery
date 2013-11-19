@@ -191,8 +191,6 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
-                            <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
