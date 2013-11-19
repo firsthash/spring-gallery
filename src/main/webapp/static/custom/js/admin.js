@@ -1,4 +1,4 @@
-// warning: to apply editions you made you must disable cachings in chrome dev panel (gear in the bottom right hand corner)
+// warning: to apply editions you made you must disable caching in chrome dev panel (gear in the bottom right hand corner)
 // or use shortcut ctrl + shift + r (google chrome only?)
 
 // editable mode - on
@@ -123,7 +123,7 @@ ContactsView = ContactsView.extend({
 var BaseImageModelView = ImageModelView;
 ImageModelView = ImageModelView.extend({
     _events: {
-        'click .close': 'delete',
+        'click .close': '_delete',
         'posUpdate': 'posUpdate'
     },
     posUpdate: function(event, index) {
@@ -153,7 +153,7 @@ ImageModelView = ImageModelView.extend({
         var close = $('<div class="close delete">&times;</div>');
         this.$el.prepend(close);
     },
-    delete: function() {
+    _delete: function() {
         this.remove();
         this.model.destroy();
     }
@@ -216,7 +216,7 @@ GalleryModelView = GalleryModelView.extend({
         'sortupdate .thumbnails': 'sortupdate',
         'focusout .header': 'focusout',
         'click .upload-btn': 'upload',
-        'click .delete-btn': 'delete'
+        'click .delete-btn': '_delete'
     },
 
     initialize: function() {
@@ -235,7 +235,7 @@ GalleryModelView = GalleryModelView.extend({
         });
     },
 
-    delete: function() {
+    _delete: function() {
         console.log('delete button clicked');
 
         // NOTE: we share images among all galleries
@@ -319,7 +319,7 @@ GalleryModelView = GalleryModelView.extend({
 
             $(newItem).before(carouselItem);
         }
-    },
+     },
 
     // adds big buttons on top of gallery and 'contentEditable' property
     render: function() {

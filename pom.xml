@@ -26,7 +26,7 @@
         <hibernate.version>4.2.7.Final</hibernate.version>
         <hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
         <hsqldb.version>2.3.1</hsqldb.version>
-        <jackson.version>2.0.0-RC2</jackson.version>
+        <jackson.version>2.3.0-rc1</jackson.version>
         <junit.version>4.9</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.5</slf4j.version>
@@ -34,6 +34,7 @@
         <!-- plugins -->
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <tomcat7-maven-plugin.version>2.1</tomcat7-maven-plugin.version>
+        <yuicompressor-maven-plugin.version>1.3.3</yuicompressor-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -190,6 +191,7 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
+                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
@@ -203,7 +205,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
-            <!-- ex: use logging only in home environment -->
+                <!-- ex: use logging only in home environment -->
             </dependencies>
             <build>
                 <finalName>${project.artifactId}</finalName>
@@ -213,12 +215,43 @@
                         <artifactId>tomcat7-maven-plugin</artifactId>
                         <version>${tomcat7-maven-plugin.version}</version>
                         <configuration>
+                            <!-- path to static files, default is ${basedir}/src/main/webapp -->
+                            <!-- if you are using minifier change this to compiler output directory -->
+                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
                             <systemProperties>
                                 <hsqldb.mydbpath>${user.home}\hsqldb\mydb</hsqldb.mydbpath>
                             </systemProperties>
                             <server>tomcat-development-server</server>
                             <path>/</path>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>yuicompressor-maven-plugin</artifactId>
+                        <version>${yuicompressor-maven-plugin.version}</version>
+                        <configuration>
+                            <!-- recompile on each run -->
+                            <force>true</force>
+                            <excludes>
+                                <exclude>**/*-min.js</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.css</exclude>
+                            </excludes>
+                            <jswarn>false</jswarn>
+                            <nosuffix>true</nosuffix>
+                            <sourceDirectory>${basedir}/target</sourceDirectory>
+                            <outputDirectory>${basedir}/target</outputDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>compress_js_css</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>compress</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

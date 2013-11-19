@@ -23,20 +23,20 @@ public class CrudController {
     @Autowired
     private Logger logger;
 
-    @RequestMapping(value = "AutoImageModel/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "testJsonResponse", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
-    public ImageModel testGetImageModel(@PathVariable Long id) {
-        ImageModel image = nikArtService.findOneImage(id);
+    public List<ImageModel> testJsonResponse() {
+        List<ImageModel> image = nikArtService.findAllImages();
         return image;
     }
 
     @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public String getGalleryModel(@PathVariable Long id) throws JSONException {
+    public String getGalleryModelAsJson(@PathVariable Long id) throws JSONException {
         JSONArray jsonArray = new JSONArray();
 
         GalleryModel model = nikArtService.findOneGallery(id);
-        JSONObject jsonObject = galleryToJson(model);
+        JSONObject jsonObject = toJson(model);
         jsonArray.put(jsonObject);
 
         String ret = jsonArray.toString();
@@ -47,12 +47,12 @@ public class CrudController {
 
     @RequestMapping(value = "GalleryModel", method = RequestMethod.GET)
     @ResponseBody
-    public String getGalleryModel() throws JSONException {
+    public String getAllGalleryModelsAsJson() throws JSONException {
         JSONArray jsonArray = new JSONArray();
 
         List<GalleryModel> all = nikArtService.findAllGalleries();
         for (GalleryModel model : all) {
-            JSONObject jsonObject = galleryToJson(model);
+            JSONObject jsonObject = toJson(model);
             jsonArray.put(jsonObject);
         }
 
@@ -90,18 +90,18 @@ public class CrudController {
 
         nikArtService.saveGallery(gallery);
 
-        return galleryToJson(gallery).toString();
+        return toJson(gallery).toString();
     }
 
     @RequestMapping(value = "ImageModel", method = RequestMethod.GET)
     @ResponseBody
-    public String getImageModel() throws JSONException {
+    public String getAllImageModelsAsJson() throws JSONException {
         JSONArray jsonArray = new JSONArray();
 
 
         List<ImageModel> allImages = nikArtService.findAllImages();
         for (ImageModel model : allImages) {
-            JSONObject jsonObject = imageToJson(model);
+            JSONObject jsonObject = toJson(model);
             jsonArray.put(jsonObject);
         }
 
@@ -140,18 +140,18 @@ public class CrudController {
         JSONObject json = new JSONObject(request);
         GalleryModel gallery = nikArtService.findOneGallery(id);
 
-        // FIXME: handle situation gallery not exist...
         if (gallery == null) {
             logger.info("Gallery not exist: " + request);
             gallery = new GalleryModel();
         }
+
         String header = json.getString("header");
         String name = json.getString("name");
         gallery.setHeader(header);
         gallery.setName(name);
 
         // transaction implicitly saves changes
-        // without it you must do save explicitly
+        // without it you must do it yourself
         nikArtService.saveGallery(gallery);
     }
 
@@ -163,8 +163,8 @@ public class CrudController {
     }
 
     // TODO: improve object to json conversion
-    private JSONObject imageToJson(ImageModel model) throws JSONException {
-        JSONObject jsonObject = baseToJson(model);
+    private JSONObject toJson(ImageModel model) throws JSONException {
+        JSONObject jsonObject = toJsonGeneric(model);
 
         Long galleryId = 0L;
         GalleryModel gallery = model.getGallery();
@@ -185,27 +185,27 @@ public class CrudController {
         return jsonObject;
     }
 
-    /**
-     * Converts model's image to data uri format.
-     */
-    private String toDataURI(ImageModel model) {
-        MediaType type = model.getPreviewType();
-        byte[] content = model.getPreview();
-        String res = String.format("data:%s;base64,%s", type.toString(), DatatypeConverter.printBase64Binary(content));
-        return res;
-    }
-
-    private JSONObject galleryToJson(GalleryModel model) throws JSONException {
-        JSONObject jsonObject = baseToJson(model);
+    private JSONObject toJson(GalleryModel model) throws JSONException {
+        JSONObject jsonObject = toJsonGeneric(model);
         return jsonObject;
     }
 
-    private JSONObject baseToJson(BaseModel model) throws JSONException {
+    private JSONObject toJsonGeneric(BaseModel model) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", model.getId());
         jsonObject.put("name", model.getName());
         jsonObject.put("header", model.getHeader());
         jsonObject.put("index", model.getIndex());
         return jsonObject;
+    }
+
+    /**
+     * Converts model's image to data uri (inline) format.
+     */
+    private String toDataUri(ImageModel model) {
+        MediaType type = model.getPreviewType();
+        byte[] content = model.getPreview();
+        String res = String.format("data:%s;base64,%s", type.toString(), DatatypeConverter.printBase64Binary(content));
+        return res;
     }
 }

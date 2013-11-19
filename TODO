@@ -1,3 +1,4 @@
+* maven minify plugin
 * jackson json parser
 * static files, cache headers
 * migrate to bootstrap3

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-public class FrontController {
+public class MainController {
     @Autowired
     private NikArtService nikArtService;
     @Autowired
