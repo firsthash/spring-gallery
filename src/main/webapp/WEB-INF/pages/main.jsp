@@ -11,8 +11,8 @@
     <meta name="author" content=""/>
 
     <!-- bootstrap -->
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/static/vendor/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="/static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/static/vendor/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
 
     <%-- head --%>
 
@@ -225,7 +225,7 @@
 <script src="/static/vendor/jquery.backstretch.min.js"></script>
 
 <!-- bootstrap -->
-<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.js"></script>
 
 <%-- js --%>
 

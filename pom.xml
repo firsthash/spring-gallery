@@ -258,8 +258,6 @@
                         <configuration>
                             <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                             <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
-                            <outputDirectory>webapps</outputDirectory>
-                            <warName>ROOT</warName>
                         </configuration>
                     </plugin>
                 </plugins>
