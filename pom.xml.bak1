@@ -191,47 +191,12 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
-<!--                             <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory> -->
+                            <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>com.samaxes.maven</groupId>
-                        <artifactId>minify-maven-plugin</artifactId>
-                        <version>1.7.2</version>
-                        <executions>
-                            <execution>
-                                    <id>default-minify</id>
-                                    <phase>process-resources</phase>
-                                    <configuration>
-                                            <skipMerge>true</skipMerge>
-                                            <nosuffix>true</nosuffix>
-                                            <cssSourceDir>static</cssSourceDir>
-                                            <cssSourceIncludes>
-                                                    <cssSourceInclude>**/*.css</cssSourceInclude>
-                                            </cssSourceIncludes>
-                                            <cssSourceExcludes>
-                                                    <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                                                    <cssSourceExclude>**/*-min.css</cssSourceExclude>
-                                            </cssSourceExcludes>
-                                            <jsSourceDir>static</jsSourceDir>
-                                            <jsSourceIncludes>
-                                                    <jsSourceInclude>**/*.js</jsSourceInclude>
-                                            </jsSourceIncludes>
-                                            <jsSourceExcludes>
-                                                    <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*-min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*.pack.js</jsSourceExclude>
-                                            </jsSourceExcludes>
-                                    </configuration>
-                                    <goals>
-                                            <goal>minify</goal>
-                                    </goals>
-                            </execution>
-                        </executions>
-                      </plugin>
                 </plugins>
             </build>
         </profile>
@@ -262,48 +227,41 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>com.samaxes.maven</groupId>
-                        <artifactId>minify-maven-plugin</artifactId>
-                        <version>1.7.2</version>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>yuicompressor-maven-plugin</artifactId>
+                        <version>${yuicompressor-maven-plugin.version}</version>
+                        <configuration>
+                            <!-- recompile on each run -->
+                            <force>true</force>
+                            <excludes>
+                                <exclude>**/*-min.js</exclude>
+                                <exclude>**/*.min.js</exclude>
+                                <exclude>**/*-min.css</exclude>
+                                <exclude>**/*.min.css</exclude>
+                            </excludes>
+                            <jswarn>false</jswarn>
+                            <nosuffix>true</nosuffix>
+                            <sourceDirectory>${basedir}/target</sourceDirectory>
+                            <outputDirectory>${basedir}/target</outputDirectory>
+                        </configuration>
                         <executions>
                             <execution>
-                                    <id>default-minify</id>
-                                    <phase>process-resources</phase>
-                                    <configuration>
-                                            <skipMerge>true</skipMerge>
-                                            <nosuffix>true</nosuffix>
-                                            <cssSourceDir>static</cssSourceDir>
-                                            <cssSourceIncludes>
-                                                    <cssSourceInclude>**/*.css</cssSourceInclude>
-                                            </cssSourceIncludes>
-                                            <cssSourceExcludes>
-                                                    <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                                                    <cssSourceExclude>**/*-min.css</cssSourceExclude>
-                                            </cssSourceExcludes>
-                                            <jsSourceDir>static</jsSourceDir>
-                                            <jsSourceIncludes>
-                                                    <jsSourceInclude>**/*.js</jsSourceInclude>
-                                            </jsSourceIncludes>
-                                            <jsSourceExcludes>
-                                                    <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*-min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*.pack.js</jsSourceExclude>
-                                            </jsSourceExcludes>
-                                    </configuration>
-                                    <goals>
-                                            <goal>minify</goal>
-                                    </goals>
+                                <id>compress_js_css</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>compress</goal>
+                                </goals>
                             </execution>
                         </executions>
-                      </plugin>
-                      <plugin>
-                          <artifactId>maven-war-plugin</artifactId>
-                          <version>${maven-war-plugin.version}</version>
-                          <configuration>
-                              <webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml>
-                              <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
-                          </configuration>
-                      </plugin>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>${maven-war-plugin.version}</version>
+                        <configuration>
+                            <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
