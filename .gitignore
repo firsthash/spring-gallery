@@ -13,7 +13,9 @@ test/
 files/
 *.tmp
 *.bak
+*.bak*
 *.old
+*.old*
 
 # output
 target/
