@@ -193,7 +193,7 @@
                         <configuration>
                               <webResources>
                                 <resource>
-                                  <directory>${project.build.directory}/${project.build.finalName}</directory>
+                                  <directory>${project.build.directory}/${project.build.finalName}/static</directory>
                                 </resource>
                               </webResources>
                             <outputDirectory>webapps</outputDirectory>
@@ -209,7 +209,7 @@
                                     <id>default-minify</id>
                                     <phase>process-resources</phase>
                                     <configuration>
-                                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
+                                            <webappTargetDir>${project.build.directory}/${project.build.finalName}/static</webappTargetDir>
                                             <skipMerge>true</skipMerge>
                                             <nosuffix>true</nosuffix>
                                             <cssSourceDir>static</cssSourceDir>
