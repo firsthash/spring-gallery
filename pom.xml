@@ -211,6 +211,7 @@
                                     <id>default-minify</id>
                                     <phase>process-resources</phase>
                                     <configuration>
+                                            <webappTargetDir>${project.build.directory}/${project.build.finalName}/static</webappTargetDir>
                                             <skipMerge>true</skipMerge>
                                             <nosuffix>true</nosuffix>
                                             <cssSourceDir>static</cssSourceDir>
