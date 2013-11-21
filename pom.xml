@@ -191,6 +191,11 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
+                              <webResources>
+                                <resource>
+                                  <directory>${project.build.directory}/${project.build.finalName}</directory>
+                                </resource>
+                              </webResources>
 <!--                             <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
                             <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory> -->
                             <outputDirectory>webapps</outputDirectory>
@@ -300,8 +305,13 @@
                           <artifactId>maven-war-plugin</artifactId>
                           <version>${maven-war-plugin.version}</version>
                           <configuration>
-                              <webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml>
-                              <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
+                              <webResources>
+                                <resource>
+                                  <directory>${project.build.directory}/${project.build.finalName}</directory>
+                                </resource>
+                              </webResources>
+<!--                               <webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml>
+                              <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory> -->
                           </configuration>
                       </plugin>
                 </plugins>
