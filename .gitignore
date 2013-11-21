@@ -19,10 +19,11 @@ files/
 
 # output
 target/
+*.war
 
 # HSQLDB database files
 data/
 
 # dont need this on production server
-run.bat
+*.bat
 snippets.txt
