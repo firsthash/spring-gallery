@@ -193,7 +193,7 @@
                         <configuration>
                               <webResources>
                                 <resource>
-                                  <directory>${project.build.directory}/${project.build.finalName}</directory>
+                                  <directory>${project.build.directory}/${project.build.finalName}/static</directory>
                                 </resource>
                               </webResources>
 <!--                             <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
