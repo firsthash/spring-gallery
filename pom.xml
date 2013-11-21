@@ -191,15 +191,16 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
-                              <webResources>
-                                <resource>
-                                  <directory>${project.build.directory}/${project.build.finalName}/static</directory>
-                                </resource>
-                              </webResources>
+                            <webResources>
+                              <resource>
+                                <!-- openshift requre dirname at end of the path, also you need to do the same in minify plugin -->
+                                <directory>${project.build.directory}/${project.build.finalName}/static</directory>
+                              </resource>
+                            </webResources>
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
-                    </plugin>
+                    </plugin> 
                     <plugin>
                         <groupId>com.samaxes.maven</groupId>
                         <artifactId>minify-maven-plugin</artifactId>
@@ -207,7 +208,8 @@
                         <executions>
                             <execution>
                                     <id>default-minify</id>
-                                    <phase>process-resources</phase>
+                                    <!-- minify only when packaging -->
+                                    <phase>prepare-package</phase>
                                     <configuration>
                                             <webappTargetDir>${project.build.directory}/${project.build.finalName}/static</webappTargetDir>
                                             <skipMerge>true</skipMerge>
@@ -235,7 +237,7 @@
                                     </goals>
                             </execution>
                         </executions>
-                      </plugin>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -245,7 +247,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
-                <!-- ex: use logging only in home environment -->
+            <!-- ex: use logging only in this profile by moving log4j artifact here -->
             </dependencies>
             <build>
                 <finalName>${project.artifactId}</finalName>
@@ -257,7 +259,6 @@
                         <configuration>
                             <!-- path to static files, default is ${basedir}/src/main/webapp -->
                             <!-- if you are using minifier change this to compiler output directory -->
-                            <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
                             <systemProperties>
                                 <hsqldb.mydbpath>${user.home}\hsqldb\mydb</hsqldb.mydbpath>
                             </systemProperties>
@@ -265,54 +266,6 @@
                             <path>/</path>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>com.samaxes.maven</groupId>
-                        <artifactId>minify-maven-plugin</artifactId>
-                        <version>1.7.2</version>
-                        <executions>
-                            <execution>
-                                    <id>default-minify</id>
-                                    <phase>process-resources</phase>
-                                    <configuration>
-                                            <skipMerge>true</skipMerge>
-                                            <nosuffix>true</nosuffix>
-                                            <cssSourceDir>static</cssSourceDir>
-                                            <cssSourceIncludes>
-                                                    <cssSourceInclude>**/*.css</cssSourceInclude>
-                                            </cssSourceIncludes>
-                                            <cssSourceExcludes>
-                                                    <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                                                    <cssSourceExclude>**/*-min.css</cssSourceExclude>
-                                            </cssSourceExcludes>
-                                            <jsSourceDir>static</jsSourceDir>
-                                            <jsSourceIncludes>
-                                                    <jsSourceInclude>**/*.js</jsSourceInclude>
-                                            </jsSourceIncludes>
-                                            <jsSourceExcludes>
-                                                    <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*-min.js</jsSourceExclude>
-                                                    <jsSourceExclude>**/*.pack.js</jsSourceExclude>
-                                            </jsSourceExcludes>
-                                    </configuration>
-                                    <goals>
-                                            <goal>minify</goal>
-                                    </goals>
-                            </execution>
-                        </executions>
-                      </plugin>
-                      <plugin>
-                          <artifactId>maven-war-plugin</artifactId>
-                          <version>${maven-war-plugin.version}</version>
-                          <configuration>
-                              <webResources>
-                                <resource>
-                                  <directory>${project.build.directory}/${project.build.finalName}</directory>
-                                </resource>
-                              </webResources>
-<!--                               <webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml>
-                              <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory> -->
-                          </configuration>
-                      </plugin>
                 </plugins>
             </build>
         </profile>
