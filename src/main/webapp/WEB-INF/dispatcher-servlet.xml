@@ -65,4 +65,13 @@
 
     <mvc:resources location="/static/" mapping="/static/**"/>
 
+    <!-- cache all for 60 seconds -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+                <property name="cacheSeconds" value="3600" />
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
