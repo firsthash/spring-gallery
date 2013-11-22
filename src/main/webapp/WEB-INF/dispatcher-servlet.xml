@@ -63,13 +63,14 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <!-- cache for one day -->
-    <mvc:resources location="/static/" mapping="/static/**" cache-period="86400"/>
+    <mvc:resources location="/static/" mapping="/static/**"/>
 
     <!-- cache for one day -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/image*/*"/>
+            <mvc:mapping path="/**"/>
+            <!-- exclude dynamic parts -->
+            <mvc:exclude-mapping path="/crud/**"/>
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
                 <property name="cacheSeconds" value="86400"/>
             </bean>
