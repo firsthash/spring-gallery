@@ -346,9 +346,12 @@ var ImageModelView = Backbone.View.extend({
 var SectionView = Backbone.View.extend({
     // add chance to override
     events: {},
+    assignContent: function() {
+        this.$el.html(this.model.get('header'));
+    },
+
     initialize: function() {
         if (!this.model) {
-            // TODO: hardcoded stuff
             console.log("id of section is ", this.$el.prop('id'));
             var newModel = new GalleryModel({
                 // TODO: hardcoded stuff
@@ -359,11 +362,19 @@ var SectionView = Backbone.View.extend({
             this.model = this.collection.create(newModel, {wait: true});
         }
 
-        this.$el.html(this.model.get('header'));
+        this.assignContent();
     }
 });
 
 var ContactsView = SectionView;
+
+//var HeaderView = SectionView.extend({
+//    //template: _.template($('#header-template').html()),
+//    assignContent: function() {
+//        //var template = this.template({header: "Home page of Nikita Liskov"});
+//        this.$el.html("Home page of Nikita Liskov");
+//    }
+//});
 
 // The Application
 // ---------------

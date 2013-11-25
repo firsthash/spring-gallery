@@ -41,7 +41,7 @@ SectionView = SectionView.extend({
         return this.$el.html().trim();
     },
     onfocusout: function() {
-        console.log("SectionView.focusout");
+        console.log("SectionView.focusout", this.$el);
 
         var content = this.getContent();
 
@@ -55,6 +55,13 @@ SectionView = SectionView.extend({
     }
 })
 
+
+//var BaseHeaderView = HeaderView;
+//HeaderView = HeaderView.extend({
+//
+//})
+
+
 ContactsView = SectionView;
 
 var BaseContactsView = ContactsView;
@@ -67,12 +74,12 @@ ContactsView = ContactsView.extend({
 
         this.addPlaceholder();
     },
-    // overridden from base class
+    // filter placeholder element from saving to database
     getContent: function() {
         var clone = this.$el.clone();
 
         // rem placeholder
-        clone.find('li>a:last').remove();
+        clone.find('li:last').remove();
 
         var content = clone.html().trim();
         return content;

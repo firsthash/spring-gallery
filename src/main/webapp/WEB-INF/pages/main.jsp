@@ -56,16 +56,16 @@
 
     <!-- Header
     ================================================== -->
-    <div id="header">
-
-    </div>
+    <h3 id="header" contentEditable="true">
+        <%-- do not place anything here so old content will not popup --%>
+    </h3>
 
     <div>
-        <h4>
+        <h5>
             <ul class="nav nav-pills" id="contacts">
 
             </ul>
-        </h4>
+        </h5>
     </div>
 
     <c:if test="${admin}">
@@ -111,7 +111,9 @@
 
     <%-- TODO: bind template to element or use backbone initializers --%>
     <script type="text/template" id="header-template">
-        <h2 contentEditable="true">Home page of Nikita Liskov</h2>
+        <h3 contentEditable="true">
+            {%= header %}
+        </h3>
     </script>
 
     <%-- TODO: bind template to element or use backbone initializers --%>

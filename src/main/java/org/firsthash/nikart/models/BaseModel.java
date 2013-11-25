@@ -46,4 +46,11 @@ public abstract class BaseModel {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    @Override
+    public String toString() {
+        String header = this.header.substring(0, Math.min(this.header.length(), 20));
+        String res = String.format("{id: %d, name: %s, header: %s, index: %d}", id, name, header, index);
+        return res;
+    }
 }

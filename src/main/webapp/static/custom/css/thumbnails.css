@@ -2,6 +2,11 @@
 * remove all spaces between gallery items
 */
 
+/* fine grained thumbnail size */
+.row-fluid .span2 {
+    width: 18%;
+}
+
 .thumbnail {
     padding: 0;
     border: 0;

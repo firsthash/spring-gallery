@@ -40,39 +40,16 @@ public class CrudController {
         return image;
     }
 
-    @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getGalleryModelAsJson(@PathVariable Long id) throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-
+    public GalleryModel getOneGalleryModel(@PathVariable Long id) throws JSONException {
         GalleryModel model = nikArtService.findOneGallery(id);
-        JSONObject jsonObject = toJson(model);
-        jsonArray.put(jsonObject);
-
-        String ret = jsonArray.toString();
-        logger.info("returning one of GalleryModel with id " + id);
-        logger.info(ret);
-        return ret;
+        logger.info("returning one GalleryModel with id " + id);
+        logger.info(model.toString());
+        return model;
     }
 
-    //@RequestMapping(value = "GalleryModel", method = RequestMethod.GET)
-    //@ResponseBody
-    //public String getAllGalleryModels() throws JSONException {
-    //    JSONArray jsonArray = new JSONArray();
-    //
-    //    List<GalleryModel> all = nikArtService.findAllGalleries();
-    //    for (GalleryModel model : all) {
-    //        JSONObject jsonObject = toJson(model);
-    //        jsonArray.put(jsonObject);
-    //    }
-    //
-    //    String ret = jsonArray.toString();
-    //    logger.info("returning array of GalleryModel");
-    //    logger.info(ret);
-    //    return ret;
-    //}
-
-    @RequestMapping(value = "GalleryModel", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "GalleryModel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<GalleryModel> getAllGalleryModels() throws JSONException {
         List<GalleryModel> ret = nikArtService.findAllGalleries();
@@ -84,7 +61,7 @@ public class CrudController {
     @Transactional
     @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteGalleryModel(@PathVariable Long id) throws JSONException {
+    public void deleteOneGalleryModel(@PathVariable Long id) throws JSONException {
         GalleryModel gallery = nikArtService.findOneGallery(id);
         for (ImageModel image : gallery.getImages()) {
             nikArtService.deleteImage(image);
@@ -92,44 +69,19 @@ public class CrudController {
         nikArtService.deleteGallery(gallery);
     }
 
-    @RequestMapping(value = "GalleryModel", method = RequestMethod.POST)
+    @RequestMapping(value = "GalleryModel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String createGalleryModel(@RequestBody String request) throws JSONException {
+    public GalleryModel createGalleryModel(@RequestBody GalleryModel gallery) throws JSONException {
         logger.info("createGalleryModel()");
-
-        JSONObject json = new JSONObject(request);
-
-        GalleryModel gallery = new GalleryModel();
-
-        // TODO: auto initialize all fields
-        String name = json.has("name") ? json.getString("name") : gallery.getName();
-        String header = json.has("header") ? json.getString("header") : gallery.getHeader();
-        gallery.setName(name);
-        gallery.setHeader(header);
 
         nikArtService.saveGallery(gallery);
 
-        return toJson(gallery).toString();
+        assert gallery.getId() != 0: "gallery.getId() != 0";
+
+        return gallery;
     }
 
-    //@RequestMapping(value = "ImageModel", method = RequestMethod.GET)
-    //@ResponseBody
-    //public String getAllImageModels() throws JSONException {
-    //    JSONArray jsonArray = new JSONArray();
-    //
-    //    List<ImageModel> allImages = nikArtService.findAllImages();
-    //    for (ImageModel model : allImages) {
-    //        JSONObject jsonObject = toJson(model);
-    //        jsonArray.put(jsonObject);
-    //    }
-    //
-    //    String ret = jsonArray.toString();
-    //    logger.info("returning array of ImageModel");
-    //    logger.info(ret);
-    //    return ret;
-    //}
-
-    @RequestMapping(value = "ImageModel", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "ImageModel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<ImageModel> getAllImageModels() throws JSONException {
         List<ImageModel> ret = nikArtService.findAllImages();
@@ -187,43 +139,6 @@ public class CrudController {
     public void deleteImageModel(@PathVariable Long id) throws JSONException {
         logger.info("deleting ImageModel...");
         nikArtService.deleteImage(id);
-    }
-
-    // TODO: improve object to json conversion
-    private JSONObject toJson(ImageModel model) throws JSONException {
-        JSONObject jsonObject = toJsonGeneric(model);
-
-        Long galleryId = 0L;
-        GalleryModel gallery = model.getGallery();
-        // cause of this behaviour in unknown
-        if (gallery != null) {
-            galleryId = gallery.getId();
-        }
-        jsonObject.put("gallery_id", galleryId);
-        jsonObject.put("file", "image/" + model.getId());
-
-        //jsonObject.put("_thumbnail", toDataURI(model));
-
-        jsonObject.put("_thumbnail", "image_preview/" + model.getId());
-
-        jsonObject.put("embed", model.getEmbedCode());
-
-        logger.info("imageToJson" + jsonObject);
-        return jsonObject;
-    }
-
-    private JSONObject toJson(GalleryModel model) throws JSONException {
-        JSONObject jsonObject = toJsonGeneric(model);
-        return jsonObject;
-    }
-
-    private JSONObject toJsonGeneric(BaseModel model) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", model.getId());
-        jsonObject.put("name", model.getName());
-        jsonObject.put("header", model.getHeader());
-        jsonObject.put("index", model.getIndex());
-        return jsonObject;
     }
 
     /**
