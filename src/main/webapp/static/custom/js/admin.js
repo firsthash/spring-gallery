@@ -112,7 +112,7 @@ ContactsView = ContactsView.extend({
         // delete link
         if (text == "") {
             // delete 'li'
-            link.parent().remove();
+            link.closest('li').remove();
         }
 
     },
