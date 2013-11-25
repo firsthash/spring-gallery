@@ -40,11 +40,11 @@ public class ImageModel extends BaseModel {
         this.gallery = gallery;
     }
 
-
     @JsonIgnore
     public byte[] getPreview() {
         return bytesPreview;
     }
+
 
     public void setPreview(byte[] preview) {
         this.bytesPreview = preview;
@@ -59,6 +59,7 @@ public class ImageModel extends BaseModel {
         this.bytes = image;
     }
 
+    @JsonProperty("embed")
     public String getEmbedCode() {
         return embedCode == null ? "" : embedCode;
     }
@@ -67,13 +68,35 @@ public class ImageModel extends BaseModel {
         this.embedCode = embedCode;
     }
 
+    @JsonIgnore
     public MediaType getImageType() {
         // TODO: hardcoded image type
         return MediaType.IMAGE_GIF;
     }
 
+    @JsonIgnore
     public MediaType getPreviewType() {
         // TODO: hardcoded image type
         return MediaType.IMAGE_GIF;
+    }
+
+    // properties related to json generation
+
+    @Transient
+    @JsonProperty("file")
+    public String getImageUrl() {
+        return "image/" + getId();
+    }
+
+    @Transient
+    @JsonProperty("_thumbnail")
+    public String getPreviewUrl() {
+        return "image_preview/" + getId();
+    }
+
+    @Transient
+    @JsonProperty("gallery_id")
+    public Long getGalleryId() {
+        return getGallery().getId();
     }
 }

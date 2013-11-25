@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.*;
 import java.util.*;
 
-// example of rest query: http://localhost:8080/crud/GalleryModel
 
+/**
+ * <p>This controller contains only REST methods starting with 'crud'</p>
+ * <p>example of rest query: http://localhost:8080/crud/GalleryModel</p>
+ */
 @Controller
 @RequestMapping(value = "/crud")
 public class CrudController {
@@ -23,10 +26,17 @@ public class CrudController {
     @Autowired
     private Logger logger;
 
-    @RequestMapping(value = "testJsonResponse", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "testImageModel", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
-    public List<ImageModel> testJsonResponse() {
+    public List<ImageModel> testImageModel() {
         List<ImageModel> image = nikArtService.findAllImages();
+        return image;
+    }
+
+    @RequestMapping(value = "testGalleryModel", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    public List<GalleryModel> testGalleryModel() {
+        List<GalleryModel> image = nikArtService.findAllGalleries();
         return image;
     }
 
@@ -45,20 +55,29 @@ public class CrudController {
         return ret;
     }
 
-    @RequestMapping(value = "GalleryModel", method = RequestMethod.GET)
+    //@RequestMapping(value = "GalleryModel", method = RequestMethod.GET)
+    //@ResponseBody
+    //public String getAllGalleryModels() throws JSONException {
+    //    JSONArray jsonArray = new JSONArray();
+    //
+    //    List<GalleryModel> all = nikArtService.findAllGalleries();
+    //    for (GalleryModel model : all) {
+    //        JSONObject jsonObject = toJson(model);
+    //        jsonArray.put(jsonObject);
+    //    }
+    //
+    //    String ret = jsonArray.toString();
+    //    logger.info("returning array of GalleryModel");
+    //    logger.info(ret);
+    //    return ret;
+    //}
+
+    @RequestMapping(value = "GalleryModel", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getAllGalleryModelsAsJson() throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-
-        List<GalleryModel> all = nikArtService.findAllGalleries();
-        for (GalleryModel model : all) {
-            JSONObject jsonObject = toJson(model);
-            jsonArray.put(jsonObject);
-        }
-
-        String ret = jsonArray.toString();
+    public List<GalleryModel> getAllGalleryModels() throws JSONException {
+        List<GalleryModel> ret = nikArtService.findAllGalleries();
         logger.info("returning array of GalleryModel");
-        logger.info(ret);
+        logger.info(ret.toString());
         return ret;
     }
 
@@ -93,21 +112,29 @@ public class CrudController {
         return toJson(gallery).toString();
     }
 
-    @RequestMapping(value = "ImageModel", method = RequestMethod.GET)
+    //@RequestMapping(value = "ImageModel", method = RequestMethod.GET)
+    //@ResponseBody
+    //public String getAllImageModels() throws JSONException {
+    //    JSONArray jsonArray = new JSONArray();
+    //
+    //    List<ImageModel> allImages = nikArtService.findAllImages();
+    //    for (ImageModel model : allImages) {
+    //        JSONObject jsonObject = toJson(model);
+    //        jsonArray.put(jsonObject);
+    //    }
+    //
+    //    String ret = jsonArray.toString();
+    //    logger.info("returning array of ImageModel");
+    //    logger.info(ret);
+    //    return ret;
+    //}
+
+    @RequestMapping(value = "ImageModel", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getAllImageModelsAsJson() throws JSONException {
-        JSONArray jsonArray = new JSONArray();
-
-
-        List<ImageModel> allImages = nikArtService.findAllImages();
-        for (ImageModel model : allImages) {
-            JSONObject jsonObject = toJson(model);
-            jsonArray.put(jsonObject);
-        }
-
-        String ret = jsonArray.toString();
+    public List<ImageModel> getAllImageModels() throws JSONException {
+        List<ImageModel> ret = nikArtService.findAllImages();
         logger.info("returning array of ImageModel");
-        logger.info(ret);
+        logger.info(ret.toString());
         return ret;
     }
 

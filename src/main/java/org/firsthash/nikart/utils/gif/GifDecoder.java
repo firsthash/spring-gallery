@@ -92,7 +92,7 @@ public class GifDecoder {
 	protected byte[] pixelStack;
 	protected byte[] pixels;
 
-	protected ArrayList frames; // frames read from current file
+	protected ArrayList<GifFrame> frames; // frames read from current file
 	protected int frameCount;
 
 	static class GifFrame {
@@ -486,7 +486,7 @@ public class GifDecoder {
 	protected void init() {
 		status = STATUS_OK;
 		frameCount = 0;
-		frames = new ArrayList();
+		frames = new ArrayList<>();
 		gct = null;
 		lct = null;
 	}

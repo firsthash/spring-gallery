@@ -1,5 +1,7 @@
 package org.firsthash.nikart.models;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -9,6 +11,7 @@ public class GalleryModel extends BaseModel {
     @OrderBy("id DESC")
     private List<ImageModel> images;
 
+    @JsonIgnore
     public List<ImageModel> getImages() {
         return images;
     }

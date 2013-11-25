@@ -19,20 +19,22 @@ public class MainController {
     private Logger logger;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getIndexPage(ModelMap model) {
+    public String getHomePage(ModelMap model) {
         logger.info("main page requested");
+        model.addAttribute("admin", false);
         return "main";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String getAdminIndexPage(ModelMap model) {
+    public String getAdminPage(ModelMap model) {
         model.addAttribute("admin", true);
-        return getIndexPage(model);
+        logger.info("admin page requested");
+        return "main";
     }
 
     @Transactional
     @RequestMapping(value = "/images")
-    public String getImagesTestPage(Model model) {
+    public String getAllImagesTestPage(Model model) {
         Iterable<GalleryModel> galleries = nikArtService.findAllGalleries();
         Collection<ImageModel> images = new ArrayList<>();
         // create plain list of images
