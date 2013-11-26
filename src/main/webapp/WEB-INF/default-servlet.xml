@@ -45,7 +45,7 @@
     </bean>
 
     <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg value="myLogger"/>
+        <constructor-arg value="defaultLogger"/>
     </bean>
 
     <!-- other beans -->

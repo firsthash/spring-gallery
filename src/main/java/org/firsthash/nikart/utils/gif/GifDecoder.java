@@ -619,6 +619,7 @@ public class GifDecoder {
                 }
             }
         } catch (OutOfMemoryError e) {
+            // OpenShift fix: too much frames
             e.printStackTrace();
         }
     }
@@ -702,9 +703,6 @@ public class GifDecoder {
 
 		frameCount++;
 
-        String msg = String.format("Image dimensions: width=%d, height=%d, frameCount=%d", width, height, getFrameCount());
-        logger.info(msg);
-
 		// create new image to receive frame data
 		image =
 			new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
@@ -728,12 +726,6 @@ public class GifDecoder {
 		// logical screen size
 		width = readShort();
 		height = readShort();
-
-        int boundary = 2000;
-        if (width > boundary || height > boundary) {
-            String message = String.format("Image resolution out of boundaries: width=%d, height=%d", width, height);
-            throw new RuntimeException(message);
-        }
 
 		// packed fields
 		int packed = read();

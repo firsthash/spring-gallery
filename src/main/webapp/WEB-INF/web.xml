@@ -11,7 +11,7 @@
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
 
-    <!-- asterix is required -->
+    <!-- asterisk is required -->
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
@@ -28,7 +28,6 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- with asterix pattern is not working -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/</url-pattern>

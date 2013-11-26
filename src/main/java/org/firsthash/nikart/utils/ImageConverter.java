@@ -14,7 +14,7 @@ import java.util.*;
 import org.imgscalr.*;
 
 public class ImageConverter {
-    private Logger logger = LoggerFactory.getLogger("myLogger");
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private String inType;
     private String outType;
     private byte[] content;
