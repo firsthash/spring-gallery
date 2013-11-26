@@ -18,6 +18,7 @@ public class ImageConverter {
     private String inType;
     private String outType;
     private byte[] content;
+    private int numFramesRemain = 10;
 
     public ImageConverter(byte[] content) {
         this(content, "image/jpeg", "image/jpeg");
@@ -75,9 +76,12 @@ public class ImageConverter {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         GifDecoder decoder = new GifDecoder();
         decoder.read(new ByteArrayInputStream(content));
-        int frameCount = decoder.getFrameCount();
+        float frameCount = decoder.getFrameCount();
         // without round frame counting isn't precise
-        int framesToSkip = Math.round(frameCount/3f); // remain 2 frame
+        int framesToSkip = Math.round(frameCount/ numFramesRemain); // remain 2 frame
+        if (framesToSkip == 0) {
+            framesToSkip = 1;
+        }
         AnimatedGifEncoder encoder = new AnimatedGifEncoder();
         encoder.start(os);
         int delay = decoder.getDelay(0);  // display duration of frame in milliseconds
