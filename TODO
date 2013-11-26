@@ -1,8 +1,8 @@
-* jackson json parser
 * migrate to bootstrap3
-* end crud urls with *.json extension
 
 done:
+* jackson json parser
+* bug in contacts: blank li's
 * static files, cache headers
 * maven minify plugin
 * github remote repo

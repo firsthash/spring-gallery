@@ -10,6 +10,8 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
+
+    <!-- asterix is required -->
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
@@ -21,13 +23,14 @@
     </listener>
 
     <servlet>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>default</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- with asterix pattern is not working -->
     <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>default</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

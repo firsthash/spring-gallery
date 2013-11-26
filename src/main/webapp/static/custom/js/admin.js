@@ -85,7 +85,7 @@ ContactsView = ContactsView.extend({
         return content;
     },
     addPlaceholder: function() {
-        this.$el.append('<li><a class="editable" contentEditable="true" target="_blank">New Link</a></li>');
+        this.$('ul').append('<li><a class="editable" contentEditable="true" target="_blank">New Link</a></li>');
     },
     onpaste: function(e) {
         var link = $(e.currentTarget);

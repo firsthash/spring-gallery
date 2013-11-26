@@ -142,7 +142,7 @@ public class CrudController {
     }
 
     /**
-     * Converts model's image to data uri (inline) format.
+     * Converts model's image to data uri (inline src) format.
      */
     private String toDataUri(ImageModel model) {
         MediaType type = model.getPreviewType();
