@@ -717,6 +717,12 @@ public class GifDecoder {
 		width = readShort();
 		height = readShort();
 
+        int boundary = 2000;
+        if (width > boundary || height > boundary) {
+            String message = String.format("Image resolution out of boundaries: width=%d, height=%d", width, height);
+            throw new RuntimeException(message);
+        }
+
 		// packed fields
 		int packed = read();
 		gctFlag = (packed & 0x80) != 0; // 1   : global color table flag
