@@ -698,22 +698,30 @@ public class GifDecoder {
 
 		frameCount++;
 
-        String msg = String.format("Image dimensions: width=%d, height=%d", width, height);
+        String msg = String.format("Image dimensions: width=%d, height=%d, frameCount=%d", width, height, getFrameCount());
         logger.info(msg);
 
-		// create new image to receive frame data
-		image =
-			new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
+        try {
+            // create new image to receive frame data
+            image =
+                new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE);
 
-		setPixels(); // transfer pixel data to image
+            setPixels(); // transfer pixel data to image
 
-		frames.add(new GifFrame(image, delay)); // add image to frame list
+            frames.add(new GifFrame(image, delay)); // add image to frame list
+
+        } catch (OutOfMemoryError e) {
+            // OpenShift workaround: too much frames
+            e.printStackTrace();
+
+            GifFrame frame = frames.get(frames.size() - 1);
+            frames.add(frame);
+        }
 
 		if (transparency) {
 			act[transIndex] = save;
 		}
 		resetFrame();
-
 	}
 
 	/**

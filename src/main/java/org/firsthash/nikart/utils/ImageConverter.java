@@ -18,7 +18,7 @@ public class ImageConverter {
     private String inType;
     private String outType;
     private byte[] content;
-    private int numFramesRemain = 10;
+    private int framesToRemain = 10;
 
     public ImageConverter(byte[] content) {
         this(content, "image/jpeg", "image/jpeg");
@@ -78,7 +78,7 @@ public class ImageConverter {
         decoder.read(new ByteArrayInputStream(content));
         float frameCount = decoder.getFrameCount();
         // without round frame counting isn't precise
-        int framesToSkip = Math.round(frameCount/ numFramesRemain); // remain 2 frame
+        int framesToSkip = Math.round(frameCount/framesToRemain); // remain 2 frame
         if (framesToSkip == 0) {
             framesToSkip = 1;
         }
