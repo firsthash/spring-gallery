@@ -1,5 +1,8 @@
 package org.firsthash.nikart.utils.gif;
 
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -29,6 +32,8 @@ import java.awt.image.*;
  */
 
 public class GifDecoder {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * File read status: No errors.
@@ -692,6 +697,9 @@ public class GifDecoder {
 		if (err()) return;
 
 		frameCount++;
+
+        String msg = String.format("Image dimensions: width=%d, height=%d", width, height);
+        logger.info(msg);
 
 		// create new image to receive frame data
 		image =
