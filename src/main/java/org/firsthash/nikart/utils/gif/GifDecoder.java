@@ -571,53 +571,57 @@ public class GifDecoder {
 	 * Main file parser.  Reads GIF content blocks.
 	 */
 	protected void readContents() {
-		// read GIF file content blocks
-		boolean done = false;
-		while (!(done || err())) {
-			int code = read();
-			switch (code) {
+        try {
+            // read GIF file content blocks
+            boolean done = false;
+            while (!(done || err())) {
+                int code = read();
+                switch (code) {
 
-				case 0x2C : // image separator
-					readImage();
-					break;
+                    case 0x2C : // image separator
+                        readImage();
+                        break;
 
-				case 0x21 : // extension
-					code = read();
-					switch (code) {
-						case 0xf9 : // graphics control extension
-							readGraphicControlExt();
-							break;
+                    case 0x21 : // extension
+                        code = read();
+                        switch (code) {
+                            case 0xf9 : // graphics control extension
+                                readGraphicControlExt();
+                                break;
 
-						case 0xff : // application extension
-							readBlock();
-							String app = "";
-							for (int i = 0; i < 11; i++) {
-								app += (char) block[i];
-							}
-							if (app.equals("NETSCAPE2.0")) {
-								readNetscapeExt();
-							}
-							else
-								skip(); // don't care
-							break;
+                            case 0xff : // application extension
+                                readBlock();
+                                String app = "";
+                                for (int i = 0; i < 11; i++) {
+                                    app += (char) block[i];
+                                }
+                                if (app.equals("NETSCAPE2.0")) {
+                                    readNetscapeExt();
+                                }
+                                else
+                                    skip(); // don't care
+                                break;
 
-						default : // uninteresting extension
-							skip();
-					}
-					break;
+                            default : // uninteresting extension
+                                skip();
+                        }
+                        break;
 
-				case 0x3b : // terminator
-					done = true;
-					break;
+                    case 0x3b : // terminator
+                        done = true;
+                        break;
 
-				case 0x00 : // bad byte, but keep going and see what happens
-					break;
+                    case 0x00 : // bad byte, but keep going and see what happens
+                        break;
 
-				default :
-					status = STATUS_FORMAT_ERROR;
-			}
-		}
-	}
+                    default :
+                        status = STATUS_FORMAT_ERROR;
+                }
+            }
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * Reads Graphics Control Extension values
