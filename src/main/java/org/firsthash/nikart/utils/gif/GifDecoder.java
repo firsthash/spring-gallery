@@ -143,7 +143,7 @@ public class GifDecoder {
 
 	/**
 	 * Gets the "Netscape" iteration count, if any.
-	 * A count of 0 means repeat indefinitiely.
+	 * A count of 0 means repeat indefinitely.
 	 *
 	 * @return iteration count if one was specified, else 1.
 	 */
@@ -267,7 +267,7 @@ public class GifDecoder {
 	/**
 	 * Reads GIF image from stream
 	 *
-	 * @param BufferedInputStream containing GIF file.
+	 * @param is <code>BufferedInputStream</code> containing GIF file.
 	 * @return read status code (0 = no errors)
 	 */
 	public int read(BufferedInputStream is) {
@@ -294,7 +294,7 @@ public class GifDecoder {
 	/**
 	 * Reads GIF image from stream
 	 *
-	 * @param InputStream containing GIF file.
+	 * @param is <code>InputStream</code> containing GIF file.
 	 * @return read status code (0 = no errors)
 	 */
 	public int read(InputStream is) {
@@ -619,7 +619,7 @@ public class GifDecoder {
                 }
             }
         } catch (OutOfMemoryError e) {
-            // OpenShift fix: too much frames
+            // OpenShift produces OutOfMemoryError when gif contains too many frames
             e.printStackTrace();
         }
     }

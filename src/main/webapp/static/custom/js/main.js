@@ -205,6 +205,7 @@ var GalleryModelView = Backbone.View.extend({
 
     addOne: function(model, collection) {
         console.log('add item to collection');
+        // accept element that belong to our gallery
         if (this.model.get('id') != model.get('gallery_id')) {
             return this;
         }
@@ -223,11 +224,24 @@ var GalleryModelView = Backbone.View.extend({
 
         return this;
     },
+    addPseudoElems: function() {
+        console.log('loading additional views', this.collection.at(4));
+        // remember about element filter
+        this.addOne(this.collection.at(4), this.collection);
+        //this.addOne(this.collection.at(5), this.collection);
+
+        //var filter = _.bind(function(model) {
+        //    return model.get('gallery_id') == this.model.get('id');
+        //}, this);
+        //var collection = this.collection.filter(filter)
+
+    },
     addAll: function() {
         console.log("add all event");
+
         this.collection.each(this.addOne, this);
 
-        // in this point all collection elements have been created
+        this.addPseudoElems();
     }
 
 });
@@ -368,14 +382,6 @@ var SectionView = Backbone.View.extend({
 
 var ContactsView = SectionView;
 
-//var HeaderView = SectionView.extend({
-//    //template: _.template($('#header-template').html()),
-//    assignContent: function() {
-//        //var template = this.template({header: "Home page of Nikita Liskov"});
-//        this.$el.html("Home page of Nikita Liskov");
-//    }
-//});
-
 // The Application
 // ---------------
 
@@ -487,7 +493,5 @@ var AppView = Backbone.View.extend({
 // give a chance to subclass 'backbone' objects in admin script
 $(function() {
     window.app = new AppView({collection: galleryModelList});
-
-    //$.backstretch("http://localhost:8080/image/98304");
-
+    //watch('.thumbnails');
 });
