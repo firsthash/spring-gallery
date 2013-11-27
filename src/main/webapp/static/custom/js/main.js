@@ -225,16 +225,14 @@ var GalleryModelView = Backbone.View.extend({
         return this;
     },
     addPseudoElems: function() {
-        console.log('loading additional views', this.collection.at(4));
-        // remember about element filter
-        this.addOne(this.collection.at(4), this.collection);
-        //this.addOne(this.collection.at(5), this.collection);
+        // remain only our models
+        var filter = _.bind(function(model) {
+            return model.get('gallery_id') == this.model.get('id');
+        }, this);
+        var collection = this.collection.filter(filter);
 
-        //var filter = _.bind(function(model) {
-        //    return model.get('gallery_id') == this.model.get('id');
-        //}, this);
-        //var collection = this.collection.filter(filter)
-
+        // remember about element filter inside 'addOne' function
+        this.addOne(collection[0], this.collection);
     },
     addAll: function() {
         console.log("add all event");
