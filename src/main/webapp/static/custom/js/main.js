@@ -231,8 +231,13 @@ var GalleryModelView = Backbone.View.extend({
         }, this);
         var collection = this.collection.filter(filter);
 
-        // remember about element filter inside 'addOne' function
-        this.addOne(collection[0], this.collection);
+        var columnsNum = 5;
+        var elemsNum = columnsNum - (collection.length % columnsNum);
+
+        for (var i = 0; i < elemsNum; i++) {
+            // remember about element filter inside 'addOne' function
+            this.addOne(collection[i], this.collection);
+        }
     },
     addAll: function() {
         console.log("add all event");
