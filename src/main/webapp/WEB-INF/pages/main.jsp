@@ -231,8 +231,6 @@
 
 <script src="/static/custom/js/main.js"></script>
 
-<script src="/static/custom/js/watcher.js"></script>
-
 <%-- admin --%>
 <c:if test="${admin}">
     <!-- jquery-ui core -->

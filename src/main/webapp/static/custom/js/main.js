@@ -496,5 +496,4 @@ var AppView = Backbone.View.extend({
 // give a chance to subclass 'backbone' objects in admin script
 $(function() {
     window.app = new AppView({collection: galleryModelList});
-    //watch('.thumbnails');
 });

@@ -226,6 +226,10 @@ GalleryModelView = GalleryModelView.extend({
         'click .delete-btn': '_delete'
     },
 
+    addPseudoElems: function(){
+        // NOP, so pseudo elements don't showed up
+    },
+
     initialize: function() {
         BaseGalleryModelView.prototype.initialize.call(this);
 
