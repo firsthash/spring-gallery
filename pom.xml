@@ -247,7 +247,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
-                <!-- to disable unnessesary logging on server move log4j artifact here -->
+                <!-- to disable unnecessary logging on server move log4j artifact here -->
             </dependencies>
             <build>
                 <finalName>${project.artifactId}</finalName>
@@ -258,7 +258,7 @@
                         <version>${tomcat7-maven-plugin.version}</version>
                         <configuration>
                             <!-- path to static files, default is ${basedir}/src/main/webapp -->
-                            <!-- if you are using minifier change this to compiler output directory -->
+                            <!-- if you are using minimizer change this to compiler output directory -->
                             <systemProperties>
                                 <hsqldb.mydbpath>${user.home}\hsqldb\mydb</hsqldb.mydbpath>
                             </systemProperties>
