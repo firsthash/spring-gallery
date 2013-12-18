@@ -289,7 +289,7 @@ var ImageModelView = Backbone.View.extend({
 
     tagName: "li",
 
-    className: 'thumbnail',
+    className: '',
 
     // Cache the template function for a single item.
     template: _.template($('#item-template').html()),

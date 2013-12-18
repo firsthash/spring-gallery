@@ -13,9 +13,6 @@
     <link rel="shortcut icon" href="/static/custom/img/favicon.ico">
 
     <%@include file="include/styles.jsp" %>
-    <c:if test="${admin}">
-        <%@include file="include/admin_styles.jsp" %>
-    </c:if>
 </head>
 
 <body>
@@ -117,7 +114,7 @@
 
         <script type="text/template" id="item-template">
         <%-- NOTE: name collision: 'embed' function and json var --%>
-        <a id="<<= name >>" href="<<= file >>" title="<<= name >>"
+        <a id="<<= name >>" href="<<= file >>" class="thumbnail" title="<<= name >>"
            data-header="<<= header >>" data-embed="<<- embed >>"><img
                 src="<<= _thumbnail >>" alt=""></a>
         </script>

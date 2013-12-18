@@ -1,1 +1,0 @@
-<link href="/static/custom/css/admin.css" rel="stylesheet">
