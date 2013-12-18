@@ -1,0 +1,26 @@
+/* remove all space between thumbnails */
+.thumbnails .thumbnail {
+    padding: 0;
+    border: 0;
+    margin-bottom: 0;
+}
+
+/* proper align from left */
+.thumbnails {
+    padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* override exactly the same bootstrap style */
+/* set size to slim */
+@media (min-width: 1200px) {
+    .thumbnails {
+        width: 500px;
+    }
+}
+
+/* remove small bottom border */
+img {
+    display: inline-block !important;
+}

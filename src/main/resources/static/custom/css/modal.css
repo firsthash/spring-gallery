@@ -1,0 +1,8 @@
+/* add transparency */
+.modal-content {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-dialog {
+    top: 5em;
+}

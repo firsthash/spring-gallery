@@ -1,0 +1,23 @@
+/* main page block alignment and number of columns */
+.container {
+    text-align: center;
+}
+
+/* align list elements */
+li {
+    display: inline-block !important;
+    *display: inline; /* IE7 refuses to honour inline-block */
+    float: none !important; /* this is the part that makes it work */
+}
+
+/* fix improper aspect ratio */
+.embed video, .embed object {
+    width: 500px;
+    height: 500px;
+}
+
+/* fit youtube player into window */
+iframe {
+    width: 100% !important;
+}
+
