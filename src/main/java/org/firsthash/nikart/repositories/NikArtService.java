@@ -25,4 +25,6 @@ public interface NikArtService {
     void saveImage(ImageModel image);
 
     void deleteImage(Long id);
+    void updateOneImage(ImageModel image);
+    void updateOneGallery(GalleryModel gallery);
 }

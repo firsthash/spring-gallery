@@ -61,7 +61,7 @@ public class CrudController {
     @Transactional
     @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteOneGalleryModel(@PathVariable Long id) throws JSONException {
+    public void deleteOneGalleryModel(@PathVariable Long id) {
         GalleryModel gallery = nikArtService.findOneGallery(id);
         for (ImageModel image : gallery.getImages()) {
             nikArtService.deleteImage(image);
@@ -71,7 +71,7 @@ public class CrudController {
 
     @RequestMapping(value = "GalleryModel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public GalleryModel createGalleryModel(@RequestBody GalleryModel gallery) throws JSONException {
+    public GalleryModel createGalleryModel(@RequestBody GalleryModel gallery) {
         logger.info("createGalleryModel()");
 
         nikArtService.saveGallery(gallery);
@@ -90,48 +90,62 @@ public class CrudController {
         return ret;
     }
 
-    @RequestMapping(value = "ImageModel/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    //@RequestMapping(value = "ImageModel/{id}", method = RequestMethod.PUT)
+    //@ResponseStatus(HttpStatus.OK)
+    //public void updateImageModel(@PathVariable Long id, @RequestBody String request) throws JSONException {
+    //    logger.info("Updating model {}", request);
+    //    JSONObject json = new JSONObject(request);
+    //
+    //    int index = json.getInt("index");
+    //    String embed = json.getString("embed");
+    //
+    //    ImageModel image = nikArtService.findOneImage(id);
+    //
+    //
+    //    // TODO: copy all props automatically
+    //    image.setIndex(index);
+    //    image.setEmbedCode(embed);
+    //
+    //    logger.info("updating image {}", image);
+    //
+    //    nikArtService.saveImage(image);
+    //}
+
+    @RequestMapping(value = "ImageModel/*", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void updateImageModel(@PathVariable Long id, @RequestBody String request) throws JSONException {
-        logger.info("Updating model {}", request);
-        JSONObject json = new JSONObject(request);
-
-        int index = json.getInt("index");
-        String embed = json.getString("embed");
-
-        ImageModel image = nikArtService.findOneImage(id);
-
-
-        // TODO: copy all props automatically
-        image.setIndex(index);
-        image.setEmbedCode(embed);
-
-        logger.info("updated ImageModel: id {}, index {}, embed code {}", id, index, embed);
-
-        nikArtService.saveImage(image);
+    public void updateImageModel(@RequestBody ImageModel image) {
+        logger.info("updating image {}", image);
+        nikArtService.updateOneImage(image);
     }
 
-    @RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    //@RequestMapping(value = "GalleryModel/{id}", method = RequestMethod.PUT, consumes = "application/json")
+    //@ResponseStatus(HttpStatus.OK)
+    //public void updateGalleryModel(@PathVariable Long id, @RequestBody String request) throws JSONException {
+    //    logger.info("Updating model {}", request);
+    //
+    //    JSONObject json = new JSONObject(request);
+    //    GalleryModel gallery = nikArtService.findOneGallery(id);
+    //
+    //    if (gallery == null) {
+    //        logger.info("Gallery not exist: " + request);
+    //        gallery = new GalleryModel();
+    //    }
+    //
+    //    String header = json.getString("header");
+    //    String name = json.getString("name");
+    //    gallery.setHeader(header);
+    //    gallery.setName(name);
+    //
+    //    // transaction implicitly saves changes
+    //    // without it you must do it yourself
+    //    nikArtService.saveGallery(gallery);
+    //}
+
+    @RequestMapping(value = "GalleryModel/*", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void updateGalleryModel(@PathVariable Long id, @RequestBody String request) throws JSONException {
-        logger.info("Updating model {}", request);
-
-        JSONObject json = new JSONObject(request);
-        GalleryModel gallery = nikArtService.findOneGallery(id);
-
-        if (gallery == null) {
-            logger.info("Gallery not exist: " + request);
-            gallery = new GalleryModel();
-        }
-
-        String header = json.getString("header");
-        String name = json.getString("name");
-        gallery.setHeader(header);
-        gallery.setName(name);
-
-        // transaction implicitly saves changes
-        // without it you must do it yourself
-        nikArtService.saveGallery(gallery);
+    public void updateGalleryModel(@RequestBody GalleryModel gallery) {
+        logger.info("updating gallery {}", gallery);
+        nikArtService.updateOneGallery(gallery);
     }
 
     @RequestMapping(value = "ImageModel/{id}", method = RequestMethod.DELETE)

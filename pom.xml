@@ -191,52 +191,9 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
-                            <webResources>
-                                <resource>
-                                    <!-- openshift requre dirname at end of the path, also you need to do the same in minify plugin -->
-                                    <directory>${project.build.directory}/${project.build.finalName}/static</directory>
-                                </resource>
-                            </webResources>
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.samaxes.maven</groupId>
-                        <artifactId>minify-maven-plugin</artifactId>
-                        <version>1.7.2</version>
-                        <executions>
-                            <execution>
-                                <id>default-minify</id>
-                                <!-- minify only when packaging -->
-                                <phase>prepare-package</phase>
-                                <configuration>
-                                    <webappTargetDir>${project.build.directory}/${project.build.finalName}/static</webappTargetDir>
-                                    <skipMerge>true</skipMerge>
-                                    <nosuffix>true</nosuffix>
-                                    <cssSourceDir>static</cssSourceDir>
-                                    <cssSourceIncludes>
-                                        <cssSourceInclude>**/*.css</cssSourceInclude>
-                                    </cssSourceIncludes>
-                                    <cssSourceExcludes>
-                                        <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                                        <cssSourceExclude>**/*-min.css</cssSourceExclude>
-                                    </cssSourceExcludes>
-                                    <jsSourceDir>static</jsSourceDir>
-                                    <jsSourceIncludes>
-                                        <jsSourceInclude>**/*.js</jsSourceInclude>
-                                    </jsSourceIncludes>
-                                    <jsSourceExcludes>
-                                        <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                                        <jsSourceExclude>**/*-min.js</jsSourceExclude>
-                                        <jsSourceExclude>**/*.pack.js</jsSourceExclude>
-                                    </jsSourceExcludes>
-                                </configuration>
-                                <goals>
-                                    <goal>minify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -265,6 +222,44 @@
                             <server>tomcat-development-server</server>
                             <path>/</path>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.samaxes.maven</groupId>
+                        <artifactId>minify-maven-plugin</artifactId>
+                        <version>1.7.2</version>
+                        <executions>
+                            <execution>
+                                <id>default-minify</id>
+                                <!-- minify only when packaging -->
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <webappSourceDir>src/main/resources</webappSourceDir>
+                                    <webappTargetDir>target/classes</webappTargetDir>
+                                    <skipMerge>true</skipMerge>
+                                    <nosuffix>true</nosuffix>
+                                    <cssSourceDir>static</cssSourceDir>
+                                    <cssSourceIncludes>
+                                        <cssSourceInclude>**/*.css</cssSourceInclude>
+                                    </cssSourceIncludes>
+                                    <cssSourceExcludes>
+                                        <cssSourceExclude>**/*.min.css</cssSourceExclude>
+                                        <cssSourceExclude>**/*-min.css</cssSourceExclude>
+                                    </cssSourceExcludes>
+                                    <jsSourceDir>static</jsSourceDir>
+                                    <jsSourceIncludes>
+                                        <jsSourceInclude>**/*.js</jsSourceInclude>
+                                    </jsSourceIncludes>
+                                    <jsSourceExcludes>
+                                        <jsSourceExclude>**/*.min.js</jsSourceExclude>
+                                        <jsSourceExclude>**/*-min.js</jsSourceExclude>
+                                        <jsSourceExclude>**/*.pack.js</jsSourceExclude>
+                                    </jsSourceExcludes>
+                                </configuration>
+                                <goals>
+                                    <goal>minify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

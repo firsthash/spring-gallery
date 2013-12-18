@@ -31,7 +31,6 @@ public class CrudUtilController {
         List<ImageModel> images = gallery.getImages();
 
         // split incoming files to image and preview
-
         List<MultipartFile> previews = UploadUtil.filterPreviews(files);
         List<MultipartFile> originals = UploadUtil.filterOriginals(files);
 

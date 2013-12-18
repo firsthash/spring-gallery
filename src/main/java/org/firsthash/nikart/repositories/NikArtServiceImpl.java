@@ -57,4 +57,26 @@ public class NikArtServiceImpl implements NikArtService {
     public void deleteImage(Long id) {
         imageRepository.delete(id);
     }
+
+    @Override
+    public void updateOneImage(ImageModel newImage) {
+        ImageModel image = findOneImage(newImage.getId());
+        if (image == null) {
+            image = new ImageModel();
+        }
+        image.setIndex(newImage.getIndex());
+        image.setEmbedCode(newImage.getEmbedCode());
+        saveImage(image);
+    }
+
+    @Override
+    public void updateOneGallery(GalleryModel newGallery) {
+        GalleryModel gallery = findOneGallery(newGallery.getId());
+        if (gallery == null) {
+            gallery = new GalleryModel();
+        }
+        gallery.setHeader(newGallery.getHeader());
+        gallery.setIndex(newGallery.getIndex());
+        saveGallery(gallery);
+    }
 }

@@ -22,6 +22,7 @@ public class MainController {
     public String getHomePage(ModelMap model) {
         logger.info("main page requested");
         model.addAttribute("admin", false);
+        logger.debug("class path is: {}", System.getProperty("java.class.path"));
         return "main";
     }
 
@@ -34,7 +35,7 @@ public class MainController {
 
     @Transactional
     @RequestMapping(value = "/images")
-    public String getAllImagesTestPage(Model model) {
+    public String getAllImagesPage(Model model) {
         Iterable<GalleryModel> galleries = nikArtService.findAllGalleries();
         Collection<ImageModel> images = new ArrayList<>();
         // create plain list of images
