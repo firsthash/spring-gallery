@@ -1,4 +1,4 @@
-Personal site with the power of Spring. Preferred web server for running this site is tomcat.
-Currently it is hosted on OpenShift PaaS and using `jbossews` cartridge.
+Personal site running on Spring framework. Preferred web server for this site is tomcat.
+Site currently hosted on OpenShift PaaS. Selected cartridge is `jbossews`.
 Cartridge documentation can be found
-[here](https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-jbossews/README.md)
+[here](http://openshift.github.io/documentation/oo_cartridge_guide.html#tomcat)
