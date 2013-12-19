@@ -1,7 +1,7 @@
-* migrate to bootstrap3
 * migrate to PostgreSql
 
 done:
+* migrate to bootstrap3
 * jackson json parser
 * bug in contacts: blank li's
 * static files, cache headers

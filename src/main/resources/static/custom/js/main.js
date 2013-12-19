@@ -302,10 +302,10 @@ var ImageModelView = Backbone.View.extend({
     render: function() {
         var template = this.template(this.model.toJSON());
         // simple jquery wrapping produce parse error
-        template = $($.parseHTML(template));
-        // show loading placeholder
-        this.addPlaceholder(template);
-        this.$el.append(template);
+        var obj = $($.parseHTML(template));
+        // overlay real image with placeholder
+        this.addPlaceholder(obj);
+        this.$el.append(obj);
         return this;
     },
 
