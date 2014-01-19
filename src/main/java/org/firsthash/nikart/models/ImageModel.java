@@ -10,8 +10,8 @@ import javax.persistence.*;
 import java.util.*;
 
 /**
- * If you got this message: "{@link org.hsqldb.HsqlException}: data exception: string data, right truncation".
- * Follow next steps to get it fixed: 1) specify lob column length 2) delete old database files, so schema will be recreated.
+ * Problem: {@link org.hsqldb.HsqlException}: 'data exception: string data, right truncation.' <p/>
+ * Solution: specify lob column length; delete old database files (or anything to update database schema).
  */
 @Entity
 public class ImageModel extends BaseModel {
