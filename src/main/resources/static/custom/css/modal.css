@@ -3,10 +3,12 @@
     background: rgba(0, 0, 0, 0.3);
 }
 
+/* adjust position */
 .modal-dialog {
     top: 5em;
 }
 
+/* scroll bar visibility */
 .modal {
     overflow: visible;
 }
