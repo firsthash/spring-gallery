@@ -249,7 +249,8 @@ var GalleryModelView = Backbone.View.extend({
 
         this.collection.each(this.addOne, this);
 
-        this.$('.placeholder').remove();
+        // there number of such items inside
+        this.$('.placeholder').first().remove();
 
         this.addPseudoElems();
     }
