@@ -74,7 +74,7 @@ var CarouselItemView = Backbone.View.extend({
     },
     initialize: function() {
         // to avoid image refresh don't bind to 'change' event
-        // TODO: why routine called three times???
+        // TODO: investigate why routine called three times???
         this.listenTo(this.model, 'destroy', function(/*mod, col*/) {
             console.log('CarouselItemView destroy');
             this.remove();
@@ -176,7 +176,7 @@ var GalleryModelView = Backbone.View.extend({
 
         // sort once, right after page load
         this.listenToOnce(this.collection, 'sort', function() {
-            // NOTE: 'add' event fires before 'sort' event
+            // 'add' event fires before 'sort' event
             console.log("collection reset event");
             this.addAll();
             this.listenTo(this.collection, 'add', this.addOne);
@@ -190,7 +190,7 @@ var GalleryModelView = Backbone.View.extend({
     },
 
     removeOne: function(model) {
-        // TODO: dublicated code (see admin.js)
+        // TODO: duplicated code (see admin.js)
         // TODO: move to admin.js
         var models = this.collection.where({'gallery_id': model.get('gallery_id')});
         _.each(models, function(model, index) {
@@ -219,7 +219,7 @@ var GalleryModelView = Backbone.View.extend({
         var thumbnail = new ImageModelView({model: model, collection: collection});
         thumbnail.gallery = this;
         console.log('collection == null', collection == null);
-        // for sorting capability
+        // used for sorting capability
         thumbnail.$el.data('carouselItem', carousel.$el);
 
         var el1 = thumbnail.render().el;
@@ -248,6 +248,8 @@ var GalleryModelView = Backbone.View.extend({
         console.log("add all event");
 
         this.collection.each(this.addOne, this);
+
+        this.$('.placeholder').remove();
 
         this.addPseudoElems();
     }

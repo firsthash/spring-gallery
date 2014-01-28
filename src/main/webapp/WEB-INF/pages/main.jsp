@@ -120,6 +120,7 @@
         </script>
 
         <script type="text/template" id="container-template">
+            <img style="position: relative; top: 5em; width: 15em; z-index: 1000" class="placeholder" src="/static/custom/img/loading.gif"/>
             <div id="<<= name >><<= id >>" class="row">
                 <div class="header">
                     <<= header >>

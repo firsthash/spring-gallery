@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.*;
 import java.util.*;
 
-
 /**
  * <p>This controller contains only REST methods starting with 'crud'</p>
  * <p>example of rest query: http://localhost:8080/crud/GalleryModel</p>
@@ -51,7 +50,9 @@ public class CrudController {
 
     @RequestMapping(value = "GalleryModel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<GalleryModel> getAllGalleryModels() throws JSONException {
+    public List<GalleryModel> getAllGalleryModels() throws JSONException, InterruptedException {
+        //Thread.sleep(5000);
+
         List<GalleryModel> ret = nikArtService.findAllGalleries();
         logger.info("returning array of GalleryModel");
         logger.info(ret.toString());
@@ -76,17 +77,20 @@ public class CrudController {
 
         nikArtService.saveGallery(gallery);
 
-        assert gallery.getId() != 0: "gallery.getId() != 0";
+        assert gallery.getId() != 0 : "gallery.getId() != 0";
 
         return gallery;
     }
 
     @RequestMapping(value = "ImageModel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ImageModel> getAllImageModels() throws JSONException {
+    public List<ImageModel> getAllImageModels() throws JSONException, InterruptedException {
+        //Thread.sleep(10000);
+
         List<ImageModel> ret = nikArtService.findAllImages();
         logger.info("returning array of ImageModel");
         logger.info(ret.toString());
+
         return ret;
     }
 
