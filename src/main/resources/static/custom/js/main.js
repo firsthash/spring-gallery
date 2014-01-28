@@ -320,7 +320,8 @@ var ImageModelView = Backbone.View.extend({
         //var el = '<img class="placeholder" src="/static/custom/img/blank.gif"/>';
         //image.before(el);
 
-        //image.hide();
+        image.hide();
+
         // if you add handler after object has been attached event will not trigger
         image.on('load', _.bind(this.onImageLoad, this, image));
     },
@@ -330,7 +331,7 @@ var ImageModelView = Backbone.View.extend({
         console.log('image loaded');
         this.$('.placeholder').remove();
 
-        //image.fadeIn(500);
+        image.fadeIn(500);
     },
 
     showCarousel: function() {
