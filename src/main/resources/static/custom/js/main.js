@@ -305,34 +305,38 @@ var ImageModelView = Backbone.View.extend({
     render: function() {
         var template = this.template(this.model.toJSON());
         // simple jquery wrapping produce parse error
-        var obj = $($.parseHTML(template));
+        //var obj = $($.parseHTML(template));
+        var obj = $(template);
         // overlay real image with placeholder
-        this.addPlaceholder(obj);
+        this.addHandler(obj);
         this.$el.append(obj);
         return this;
     },
 
-    addPlaceholder: function(obj) {
+    addHandler: function(obj) {
         // add placeholder while image is loading
-        var image = obj.find('img');
-        var el = '<img class="placeholder" src="/static/custom/img/blank.gif"/>';
-        image.before(el);
-        image.hide();
+        var image = obj.find('img').first();
+
+        //var el = '<img class="placeholder" src="/static/custom/img/blank.gif"/>';
+        //image.before(el);
+
+        //image.hide();
         // if you add handler after object has been attached event will not trigger
-        image.on('load', _.bind(this.imageLoaded, this, image));
+        image.on('load', _.bind(this.onImageLoad, this, image));
     },
 
-    imageLoaded: function(image) {
+    onImageLoad: function(image) {
         // hide our placeholder
         console.log('image loaded');
         this.$('.placeholder').remove();
-        image.fadeIn(500);
+
+        //image.fadeIn(500);
     },
 
     showCarousel: function() {
         // showing 'carousel' inside 'modal'
 
-        // TODO: hardcoded identifiers is bad
+        // TODO: avoid hardcoded identifiers
         var galleryId = this.model.get('gallery_id');
         var modal = $('#GalleryModel' + galleryId + 'Modal');
         var carousel = $('#GalleryModel' + galleryId + 'Carousel');

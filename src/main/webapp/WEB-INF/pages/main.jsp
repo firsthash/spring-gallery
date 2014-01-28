@@ -113,7 +113,8 @@
         </script>
 
         <script type="text/template" id="item-template">
-        <%-- NOTE: name collision: 'embed' function and json var --%>
+        <%-- NOTE: name collision on 'embed' function and json var --%>
+        <img style="position: absolute; z-index: 1000" class="placeholder" src="/static/custom/img/blank.gif"/>
         <a id="<<= name >>" href="<<= file >>" class="thumbnail" title="<<= name >>"
            data-header="<<= header >>" data-embed="<<- embed >>"><img
                 src="<<= _thumbnail >>" alt=""></a>
