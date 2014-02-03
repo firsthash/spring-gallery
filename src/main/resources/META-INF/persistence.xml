@@ -10,7 +10,7 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
             <!-- this is system variable, you can define it in pom.xml or in IDE run dialog -->
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:${hsqldb.mydbpath}"/>
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:${hsqldb.mydbpath};shutdown=false"/>
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
             <property name="hibernate.connection.username" value="sa"/>
             <property name="hibernate.connection.password" value=""/>
