@@ -22,9 +22,11 @@ public class ImageModel extends BaseModel {
      * Don't use {@link javax.persistence.Lob} with <em>hsqldb</em>, otherwise database size will grow exponentially.
      * <p>Field names are directly mapped to database column names.</p>
      */
+    @Basic(fetch=FetchType.LAZY)
     @Column(length = 50 * 1024 * 1024) // preferred form for megabytes
     private byte[] bytes;
 
+    @Basic(fetch=FetchType.LAZY)
     @Column(length = 5 * 1024 * 1024)
     private byte[] bytesPreview;
 
