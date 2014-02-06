@@ -1,1 +1,19 @@
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Dhsqldb.mydbpath=$OPENSHIFT_DATA_DIR/hsqldb/mydb"
+########## HSQL ##########
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.driverClassName=org.hsqldb.jdbcDriver"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.url=jdbc:hsqldb:file:$OPENSHIFT_DATA_DIR/hsqldb/mydb;shutdown=false"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.username=sa"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.password="
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.database=HSQL"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.showSql=true"
+
+
+########## PSQL ##########
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.driverClassName=org.postgresql.Driver"
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.url=jdbc:postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT/spring2"
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.username=admin95wjifa"
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.password=ZRqmczDAr1W2"
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.database=POSTGRESQL"
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.showSql=true"
+
+
+########## MYSQL ##########

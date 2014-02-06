@@ -34,13 +34,35 @@
         </div>
 
 
-        <h3 id="header" contentEditable="true">
+        <h3 id="header" contentEditable="true" style="display: none;">
             <%-- Do not place anything here --%>
             <%-- This content will be visible until models are fetched from server --%>
+            Home Page of Nikita Liskov
         </h3>
 
 
-        <h5 id="contacts">
+        <h5 id="contacts" style="display: none;">
+            <ul class="nav nav-pills">
+                <li>
+                    <a href="mailto:nikitaliskov@gmail.com" target="_blank" contentEditable="true">GMail</a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/nikita.liskov" target="_blank" contentEditable="true">Facebook</a>
+                </li>
+                <li>
+                    <a href="http://www.youtube.com/user/Nikitaliskov/videos" target="_blank" contentEditable="true">YouTube</a>
+                </li>
+                <li>
+                    <a href="http://nikita-liskov.livejournal.com/" target="_blank" contentEditable="true">LiveJournal</a>
+                </li>
+                <li>
+                    <a href="http://vk.com/id138248950" target="_blank" contentEditable="true">Vkontakte</a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="http://www.behance.net/gallery/Gif-Animation-Uncommercial/11290749" contentEditable="true">Behance</a>
+                </li>
+            </ul>
         </h5>
 
 
@@ -87,27 +109,6 @@
         </script>
 
         <%-- TODO: bind template to element or use backbone initializers --%>
-        <script type="text/template" id="contacts-template">
-            <ul class="nav nav-pills">
-                <li>
-                    <a contentEditable="true" href="https://www.facebook.com/nikita.liskov" target="_blank">Facebook</a>
-                </li>
-                <li>
-                    <a contentEditable="true" href="http://vk.com/id138248950" target="_blank">Vkontakte</a>
-                </li>
-                <li>
-                    <a contentEditable="true" href="http://www.youtube.com/user/Nikitaliskov" target="_blank">Youtube</a>
-                </li>
-                <li>
-                    <a contentEditable="true" href="http://nikita-liskov.livejournal.com/" target="_blank">LiveJournal</a>
-                </li>
-                <li>
-                    <a contentEditable="true" href="mailto:nikitaliskov@gmail.com" target="_blank">GMail</a>
-                </li>
-            </ul>
-        </script>
-
-        <%-- TODO: bind template to element or use backbone initializers --%>
         <script type="text/template" id="footer-template">
             <p contentEditable="true">All rights reserved, mostly &copy;</p>
         </script>
@@ -121,7 +122,7 @@
         </script>
 
         <script type="text/template" id="container-template">
-            <img style="position: relative; top: 5em; width: 15em; z-index: 1000" class="placeholder" src="/static/custom/img/loading.gif"/>
+            <img style="position: absolute; left: 45%; top: 15em; width: 10%; z-index: 1000" class="placeholder" src="/static/custom/img/loading.gif"/>
             <div id="<<= name >><<= id >>" class="row">
                 <div class="header">
                     <<= header >>

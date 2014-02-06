@@ -370,7 +370,14 @@ var SectionView = Backbone.View.extend({
     // add chance to override
     events: {},
     assignContent: function() {
-        this.$el.html(this.model.get('header'));
+        // display default value instead of empty one
+        var header = this.model.get('header').trim();
+        if (header) {
+            console.log("SectionView header is not empty", header);
+            this.$el.html(header);
+        }
+        // bypass blinking of default content
+        this.$el.fadeIn(1000);
     },
 
     initialize: function() {

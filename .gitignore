@@ -24,6 +24,6 @@ target/
 # HSQLDB database files
 data/
 
-# dont need this on production server
+# win-scripts and personal notes
 *.bat
 snippets.txt
