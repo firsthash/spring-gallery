@@ -15,8 +15,7 @@ import java.util.*;
 public class MainController {
     @Autowired
     private NikArtService nikArtService;
-    @Autowired
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHomePage(ModelMap model) {

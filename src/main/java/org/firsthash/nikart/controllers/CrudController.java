@@ -22,8 +22,8 @@ import java.util.*;
 public class CrudController {
     @Autowired
     private NikArtService nikArtService;
-    @Autowired
-    private Logger logger;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "testImageModel", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
@@ -87,9 +87,14 @@ public class CrudController {
     public List<ImageModel> getAllImageModels() throws JSONException, InterruptedException {
         //Thread.sleep(10000);
 
+        long startTime = System.nanoTime();
+
         List<ImageModel> ret = nikArtService.findAllImages();
         logger.info("returning array of ImageModel");
         logger.info(ret.toString());
+
+        long endTime = System.nanoTime();
+        logger.info("all image models have been loaded in {} nanoseconds", endTime - startTime);
 
         return ret;
     }

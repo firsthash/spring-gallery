@@ -48,7 +48,7 @@
 
     <!-- enable file posting -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="10000000"/>
+        <property name="maxUploadSize" value="#{10*1024*1024}"/>
     </bean>
 
     <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
@@ -72,7 +72,7 @@
         p:dataSource-ref="dataSource" p:persistenceUnitName="nikart" p:packagesToScan="org.firsthash.nikart">
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-                p:database="${jpa.database}" p:showSql="${jpa.showSql}"/>
+                p:database="${jpa.database}" p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"/>
         </property>
     </bean>
 
@@ -85,7 +85,7 @@
             <!-- exclude dynamic parts -->
             <mvc:exclude-mapping path="/crud/**"/>
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-                <property name="cacheSeconds" value="86400"/>
+                <property name="cacheSeconds" value="#{24*60*60}"/>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>

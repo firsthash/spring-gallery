@@ -1,13 +1,9 @@
 package org.firsthash.nikart.models;
 
 import com.fasterxml.jackson.annotation.*;
-import org.firsthash.nikart.repositories.*;
-import org.springframework.beans.factory.*;
 import org.springframework.http.*;
-import org.springframework.web.context.*;
 
 import javax.persistence.*;
-import java.util.*;
 
 /**
  * Problem: {@link org.hsqldb.HsqlException}: 'data exception: string data, right truncation.' <p/>
@@ -18,17 +14,11 @@ public class ImageModel extends BaseModel {
     @ManyToOne
     private GalleryModel gallery;
 
-    /**
-     * Don't use {@link javax.persistence.Lob} with <em>hsqldb</em>, otherwise database size will grow exponentially.
-     * <p>Field names are directly mapped to database column names.</p>
-     */
-    @Basic(fetch=FetchType.LAZY)
-    @Column(length = 50 * 1024 * 1024) // preferred form for megabytes
-    private byte[] bytes;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private BigBytesField image = new BigBytesField();
 
-    @Basic(fetch=FetchType.LAZY)
-    @Column(length = 5 * 1024 * 1024)
-    private byte[] bytesPreview;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private SmallBytesField preview = new SmallBytesField();
 
     private String embedCode = "";
 
@@ -49,20 +39,20 @@ public class ImageModel extends BaseModel {
 
     @JsonIgnore
     public byte[] getPreview() {
-        return bytesPreview;
+        return preview.getBytes();
     }
 
     public void setPreview(byte[] preview) {
-        this.bytesPreview = preview;
+        this.preview.setBytes(preview);
     }
 
     @JsonIgnore
     public byte[] getImage() {
-        return bytes;
+        return image.getBytes();
     }
 
     public void setImage(byte[] image) {
-        this.bytes = image;
+        this.image.setBytes(image);
     }
 
     @JsonProperty("embed")

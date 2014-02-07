@@ -5,4 +5,12 @@ public class ImageUtil {
         ImageConverter converter = new ImageConverter(bytes, type);
         return converter.convert();
     }
+
+    public static ImageSequence splitAnimatedImage() {
+        return null;
+    }
+
+    public static void thumbnailFrom() {
+
+    }
 }
