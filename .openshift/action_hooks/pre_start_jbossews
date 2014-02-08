@@ -1,4 +1,4 @@
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.showSql=false"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.showSql=true"
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.generateDdl=true"
 
 
