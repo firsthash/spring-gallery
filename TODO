@@ -1,3 +1,4 @@
+* running on production environment disable logging and other debug stuff
 * migrate to PostgreSql
 
 done:
