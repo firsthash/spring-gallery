@@ -136,7 +136,7 @@ var GalleryModule = (function() {
         comparator: 'index'
     });
 
-    galleryModelList = new GalleryModelList;
+    var galleryModelList = new GalleryModelList;
 
     module.GalleryModelView = Backbone.View.extend({
         tagName: 'div',
