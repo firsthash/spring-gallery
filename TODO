@@ -1,7 +1,8 @@
-* running on production environment disable logging and other debug stuff
-* migrate to PostgreSql
+* apply javascript module pattern to backbone objects
 
 done:
+* migrate to PostgreSql
+* running on production environment disable logging and other debug stuff
 * migrate to bootstrap3
 * jackson json parser
 * bug in contacts: blank li's
