@@ -13,20 +13,21 @@ public class DomainNameInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String domainName = request.getHeader("Host");
         String[] split = domainName.split("\\.");
+        logger.info("Interceptor.preHandle called on {}", domainName);
 
         // our needs is third level domain
         if (split.length == 3) {
-            String requestPath = request.getRequestURI();
             String subDomainName = split[0];
-            String newRequestPath = "/" + subDomainName + requestPath;
-            logger.info("Interceptor.preHandle new request path is {}", newRequestPath);
-            // route to /{subDomainName}/my/path
-            RequestDispatcher dispatcher = request.getRequestDispatcher(newRequestPath);
-            dispatcher.forward(request, response);
-            return false;
+            if (!subDomainName.equals("www")) {
+                String requestPath = request.getRequestURI();
+                String newRequestPath = "/" + subDomainName + requestPath;
+                logger.info("Interceptor.preHandle new request path is {}", newRequestPath);
+                // route to /{subDomainName}/my/path
+                RequestDispatcher dispatcher = request.getRequestDispatcher(newRequestPath);
+                dispatcher.forward(request, response);
+                return false;
+            }
         }
-
-        logger.info("Interceptor.preHandle called on {}", domainName);
 
         return super.preHandle(request, response, handler);
     }
