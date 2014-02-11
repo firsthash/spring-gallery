@@ -23,7 +23,6 @@ public class MainController {
     public String getHomePage(ModelMap model) {
         logger.info("main page requested");
         model.addAttribute("admin", false);
-        logger.debug("class path is: {}", System.getProperty("java.class.path"));
         return "main";
     }
 
@@ -47,10 +46,10 @@ public class MainController {
         return "images";
     }
 
-    // routed sub-domain request e.g. http://event.my-domain.com
+    // route sub-domain requests e.g. http://name.my-domain.com
     @RequestMapping(value = "/event")
     @ResponseBody
     public String getEventPage() {
-        return "This is an event page.";
+        return "It works!";
     }
 }
