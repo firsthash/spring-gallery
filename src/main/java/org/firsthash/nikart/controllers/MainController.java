@@ -9,15 +9,17 @@ import org.springframework.transaction.annotation.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.*;
 import java.util.*;
 
 @Controller
+@RequestMapping(method = RequestMethod.GET)
 public class MainController {
     @Autowired
     private NikArtService nikArtService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public String getHomePage(ModelMap model) {
         logger.info("main page requested");
         model.addAttribute("admin", false);
@@ -25,7 +27,7 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin")
     public String getAdminPage(ModelMap model) {
         model.addAttribute("admin", true);
         logger.info("admin page requested");
@@ -43,5 +45,12 @@ public class MainController {
         }
         model.addAttribute("images", images);
         return "images";
+    }
+
+    // routed sub-domain request e.g. http://event.my-domain.com
+    @RequestMapping(value = "/event")
+    @ResponseBody
+    public String getEventPage() {
+        return "This is an event page.";
     }
 }

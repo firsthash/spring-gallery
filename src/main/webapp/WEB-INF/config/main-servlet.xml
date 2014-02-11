@@ -88,5 +88,10 @@
                 <property name="cacheSeconds" value="#{24*60*60}"/>
             </bean>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- limit interception to root paths -->
+            <mvc:mapping path="/"/>
+            <bean id="domainNameInterceptor" class="org.firsthash.nikart.utils.DomainNameInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 </beans>
