@@ -11,8 +11,12 @@
             }
         }
 
-        .block, .col-md-4, .col-md-8 {
+        .block {
             padding: 10px;
+        }
+
+        .rows>.row {
+            padding-bottom: 10px;
         }
 
         img {
@@ -31,11 +35,11 @@
 <body>
     <div class="container">
         <div class="row block">
-            <div class="row">
+            <div>
                 <h3 class="centered">Лекция по анимации</h3>
                 <h4>23 января 2014 года, в Днепропетровске, пройдет бесплатная лекция, посвященная анимационному искусству.</h4>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 rows">
                 <div class="row">
                     <div class="col-md-4">
                         Содержание:
@@ -70,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 centered">
                 <img src="https://pp.vk.me/c312228/v312228950/55e8/ki1FQ5w3wdQ.jpg"/>
             </div>
         </div>
