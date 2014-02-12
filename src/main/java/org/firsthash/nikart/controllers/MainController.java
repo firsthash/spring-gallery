@@ -1,8 +1,9 @@
 package org.firsthash.nikart.controllers;
 
-import org.slf4j.*;
+import org.apache.commons.io.*;
 import org.firsthash.nikart.models.*;
 import org.firsthash.nikart.repositories.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.*;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -48,8 +50,12 @@ public class MainController {
 
     // route sub-domain requests e.g. http://name.my-domain.com
     @RequestMapping(value = "/event")
-    @ResponseBody
-    public String getEventPage() {
-        return "It works!";
+    public void getEventPage(HttpServletResponse response) throws IOException {
+        // internally using RedirectView
+        //return "redirect:/static/event.html";
+        InputStream in = this.getClass().getResourceAsStream("/static/event.html");
+        assert in != null: "in != null";
+        OutputStream out = response.getOutputStream();
+        IOUtils.copy(in, out);
     }
 }

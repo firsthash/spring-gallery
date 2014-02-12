@@ -87,7 +87,6 @@ public class CrudUtilController {
         httpHeaders.setContentType(image.getImageType());
         //httpHeaders.setCacheControl("max-age=" + 60*60*24);
         byte[] bytes = image.getImage();
-        assert bytes.length != 0: "bytes.length != 0";
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, httpHeaders, HttpStatus.CREATED);
         return responseEntity;
     }

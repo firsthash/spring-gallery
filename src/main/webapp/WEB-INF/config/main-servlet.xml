@@ -29,9 +29,8 @@
     <!-- enable transaction related annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+        p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <!-- enable caching related annotations -->
     <cache:annotation-driven cache-manager="cacheManager"/>
@@ -47,20 +46,17 @@
     </bean>
 
     <!-- enable file posting -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="#{10*1024*1024}"/>
-    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+        p:maxUploadSize="#{10*1024*1024}"/>
 
-    <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+<!--    <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <constructor-arg value="defaultLogger"/>
-    </bean>
+    </bean>-->
 
     <!-- other beans -->
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:prefix="/WEB-INF/pages/" p:suffix=".jsp"/>
 
     <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
 
@@ -76,7 +72,7 @@
         </property>
     </bean>
 
-    <mvc:resources location="classpath:/static/" mapping="/static/**"/>
+    <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/>
 
     <!-- cache for one day -->
     <mvc:interceptors>
@@ -84,9 +80,8 @@
             <mvc:mapping path="/**"/>
             <!-- exclude dynamic parts -->
             <mvc:exclude-mapping path="/crud/**"/>
-            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-                <property name="cacheSeconds" value="#{24*60*60}"/>
-            </bean>
+            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
+                p:cacheSeconds="#{24*60*60}"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <!-- limit interception to root paths -->
