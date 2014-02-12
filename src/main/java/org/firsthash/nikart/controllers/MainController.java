@@ -57,5 +57,6 @@ public class MainController {
         assert in != null: "in != null";
         OutputStream out = response.getOutputStream();
         IOUtils.copy(in, out);
+        response.setContentType("text/html");
     }
 }
