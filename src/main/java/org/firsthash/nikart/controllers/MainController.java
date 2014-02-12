@@ -3,7 +3,6 @@ package org.firsthash.nikart.controllers;
 import org.apache.commons.io.*;
 import org.firsthash.nikart.models.*;
 import org.firsthash.nikart.repositories.*;
-import org.hsqldb.types.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -12,10 +11,7 @@ import org.springframework.transaction.annotation.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.*;
 import java.io.*;
-import java.nio.charset.*;
-import java.nio.charset.Charset;
 import java.util.*;
 
 @Controller
@@ -59,7 +55,7 @@ public class MainController {
         // internally using RedirectView
         //return "redirect:/static/event.html";
         InputStream in = this.getClass().getResourceAsStream("/static/event.html");
-        assert in != null: "in != null";
+        assert in != null : "in != null";
         return IOUtils.toByteArray(in);
     }
 }

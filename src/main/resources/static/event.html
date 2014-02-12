@@ -11,15 +11,20 @@
             }
         }
 
-        .block {
-            padding: 30px;
+        .block, .col-md-4, .col-md-8 {
+            padding: 10px;
         }
 
         img {
             max-height: 200px;
         }
+
         .toggle {
             width: 100%;
+        }
+
+        .centered {
+            text-align: center;
         }
     </style>
 </head>
@@ -27,8 +32,8 @@
     <div class="container">
         <div class="row block">
             <div class="row">
-                <h3>Лекция по анимации</h3>
-                <span>23 января 2014 года, в Днепропетровске, пройдет бесплатная лекция, посвященная анимационному искусству.</span>
+                <h3 class="centered">Лекция по анимации</h3>
+                <h4>23 января 2014 года, в Днепропетровске, пройдет бесплатная лекция, посвященная анимационному искусству.</h4>
             </div>
             <div class="col-md-8">
                 <div class="row">
@@ -86,7 +91,7 @@
 
                                 Вот что он говорит о предстоящей лекции: «Я выбрал самое интересное за более чем 100-летний период существования
                                 анимационного кино. Будет интересно, смешно и познавательно»</p>
-                            <img src="https://pp.vk.me/c322431/v322431950/4fb4/bu3yA0KvOp8.jpg"/>
+                            <div class="centered"><img src="https://pp.vk.me/c322431/v322431950/4fb4/bu3yA0KvOp8.jpg"/></div>
                         </div>
                     </div>
                 </div>
@@ -98,13 +103,15 @@
                         <div class="panel-body">
                             <p>Лекция пройдет в центре подготовки IT-специалистов LevelUp. По адресу: Днепропетровск, ул. Красная, 21-г, 3 этаж оф.
                                 342 , торговый центр "Новый металлург". Это чуть выше Троицкого рынка.</p>
-                            <img src="https://pp.vk.me/c322431/v322431950/4fd0/IHEuBi42iIs.jpg"/>
+                            <div class="centered">
+                                <img src="https://pp.vk.me/c322431/v322431950/4fd0/IHEuBi42iIs.jpg"/>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a data-parent="#accordion" data-toggle="collapse" href="#collapse3">Содержание лекции</a>
+                        <a data-parent="#accordion" data-toggle="collapse" href="#collapse3">Содержание</a>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
@@ -128,7 +135,7 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a data-parent="#accordion" data-toggle="collapse" href="#collapse4">Регистрация обязательна</a>
+                        <a data-parent="#accordion" data-toggle="collapse" href="#collapse4">Регистрация</a>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
@@ -138,13 +145,13 @@
                                     вы не сможете попасть на лекцию, так как количество мест лимитировано. По этой ссылке находится регистрационная
                                     форма</a>
                             </p>
-                            <img src="https://pp.vk.me/c322431/v322431950/4fe2/zmKp-pedyXs.jpg"/>
+                            <div class="centered"><img src="https://pp.vk.me/c322431/v322431950/4fe2/zmKp-pedyXs.jpg"/></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row block">
+        <div class="row block centered">
             <img src="https://pp.vk.me/c312227/v312227950/7925/yjrLbSY9kwU.jpg"/>
         </div>
         <script src="/static/vendor/jquery.js"></script>
