@@ -156,6 +156,7 @@
             this.$el.prepend(close);
         },
         _delete: function() {
+            // update index
             this.remove();
             this.model.destroy();
         }
@@ -230,15 +231,9 @@
 
             _.extend(this.events, this._events);
 
-            this.listenTo(this.collection, 'sync', function() {
-                var length = this.collection.where({gallery_id: this.model.get('id')}).length;
-                console.log("collection length", length);
-                if (length == 0) {
-                    console.log("prepare to open image select dialog");
-                    // NOTE: direct click is not working
-                    this.upload();
-                }
-            });
+            //this.listenTo(this.collection, 'sync', this.upload);
+
+            this.listenTo(this.collection, 'delete', this.updateImageIndex);
         },
 
         _delete: function() {
@@ -258,6 +253,14 @@
         },
 
         upload: function() {
+            var collection = this.collection.where({gallery_id: this.model.get('id')});
+            var length = collection.length;
+
+            // show upload dialog?
+            //if (length > 0) {
+            //    return false;
+            //}
+
             console.log('upload button clicked');
 
             // update index
@@ -266,8 +269,7 @@
                 console.error('unable to find index field');
             }
 
-            var collection = this.collection.where({gallery_id: this.model.get('id')});
-            var length = collection.length;
+            // set last index
             console.log('collection length', length);
             indexField.val(length);
 
