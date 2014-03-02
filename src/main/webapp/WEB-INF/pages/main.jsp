@@ -161,6 +161,7 @@
                     <form action="/upload_images" method="POST" enctype="multipart/form-data" target="submit-iframe">
 
                         <input type="hidden" name="id" value="<<= id >>"/>
+                        <input type="hidden" name="index" value="0"/>
 
                         <input class="upload-hidden" id="imageUpload<<= id >>" onchange="$(this).closest('form').submit()" type="file"
                                class="input-file"

@@ -260,6 +260,17 @@
         upload: function() {
             console.log('upload button clicked');
 
+            // update index
+            var indexField = this.$('form input[name="index"]');
+            if (!indexField) {
+                console.error('unable to find index field');
+            }
+
+            var collection = this.collection.where({gallery_id: this.model.get('id')});
+            var length = collection.length;
+            console.log('collection length', length);
+            indexField.val(length);
+
             this.$('.upload-hidden').click();
 
             // don't refresh page
@@ -339,7 +350,7 @@
             this.$('.thumbnails').sortable({items: 'li'});
 
             // 'ajax' file upload form
-            var form = _.template($('#upload-template').html(), this.model.toJSON())
+            var form = _.template($('#upload-template').html(), this.model.toJSON());
 
             this.$el.append(form);
 

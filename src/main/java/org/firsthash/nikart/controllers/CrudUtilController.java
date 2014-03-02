@@ -23,7 +23,7 @@ public class CrudUtilController {
     @Transactional
     @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void uploadImages(@RequestParam("id") Long galleryId, @RequestParam("file") MultipartFile[] files) throws IOException {
+    public void uploadImages(@RequestParam("id") Long galleryId, @RequestParam("index") int index, @RequestParam("file") MultipartFile[] files) throws IOException {
         logger.info("upload image(s) to gallery with id {}", galleryId);
         logger.info("galleryId = {}", galleryId);
         GalleryModel gallery = nikArtService.findOneGallery(galleryId);
@@ -33,7 +33,9 @@ public class CrudUtilController {
         List<MultipartFile> previews = UploadUtil.filterPreviews(files);
         List<MultipartFile> originals = UploadUtil.filterOriginals(files);
 
-        int index = getStartIndex(images);
+        logger.info("new upload begins from index {}", index);
+
+        //int index = getStartIndex(images);
         for (MultipartFile file : originals) {
             ImageModel image = new ImageModel();
 

@@ -1,3 +1,4 @@
+* bug: add index to newly uploaded image
 * route sub domain queries (HandlerInterceptor)
 
 done:
