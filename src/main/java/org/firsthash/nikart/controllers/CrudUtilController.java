@@ -55,7 +55,7 @@ public class CrudUtilController {
                 image.setPreview(preview.getBytes());
             }
 
-            // NOTE: running on GAE 'getOriginalFilename' don't returns file mame
+            // running on Google App Engine invocation of 'getOriginalFilename' returns garbage
             String name = file.getOriginalFilename();
             image.setName(UploadUtil.removeExtension(name));
             image.setGallery(gallery);
@@ -79,15 +79,15 @@ public class CrudUtilController {
         return index;
     }
 
+    /**
+     * Images (binary fields) are reason of big slowdowns.
+     */
     @Transactional
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> serveImage(@PathVariable("id") long id) {
         ImageModel image = nikArtService.findOneImage(id);
         HttpHeaders httpHeaders = new HttpHeaders();
-        // TODO: move image type to persistent object
-        // images are cause of big slowdowns
         httpHeaders.setContentType(image.getImageType());
-        //httpHeaders.setCacheControl("max-age=" + 60*60*24);
         byte[] bytes = image.getImage();
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, httpHeaders, HttpStatus.CREATED);
         return responseEntity;
@@ -99,8 +99,6 @@ public class CrudUtilController {
         ImageModel image = nikArtService.findOneImage(id);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(image.getPreviewType());
-        // max-age value in seconds
-        //httpHeaders.setCacheControl("max-age=" + 60*60*24);
         byte[] bytes = image.getPreview();
         ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, httpHeaders, HttpStatus.CREATED);
         return responseEntity;

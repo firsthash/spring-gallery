@@ -113,7 +113,7 @@
         },
         filterName: function(url) {
             var str = url;
-            var match = /(http:\/\/)?(www\.)?(\w*)?/i;
+            var match = /(http.*:\/\/)?(www\.)?(\w*)?/i;
             var res = str.match(match);
 
             if (res[1]) {

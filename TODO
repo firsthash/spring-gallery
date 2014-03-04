@@ -1,7 +1,7 @@
-* bug: add index to newly uploaded image
 * route sub domain queries (HandlerInterceptor)
 
 done:
+* bug: add index to newly uploaded image
 * apply javascript module pattern to backbone objects
 * migrate to PostgreSql
 * running on production environment disable logging and other debug stuff
