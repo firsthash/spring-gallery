@@ -23,6 +23,11 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String getHomePage(ModelMap model) {
+        return "redirect:/static/new_home.html";
+    }    
+
+    @RequestMapping(value = "/old")
+    public String getHomePage(ModelMap model) {
         logger.info("main page requested");
         model.addAttribute("admin", false);   // tmp
         return "main";
