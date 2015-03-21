@@ -22,7 +22,7 @@ public class MainController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/")
-    public String getHomePage(ModelMap model) {
+    public String home(ModelMap model) {
         return "redirect:/static/new_home.html";
     }    
 
