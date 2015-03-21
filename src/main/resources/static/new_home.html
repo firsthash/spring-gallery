@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>M Y K Y T A&nbsp;&nbsp;&nbsp;L Y S K O V</title>
+
+    <!-- Bootstrap -->
+    <link href="js/lib/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/page.css" rel="stylesheet">
+</head>
+<body>
+    <div id="container" class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" role="complementary">
+                <nav class="bs-docs-sidebar bs-docs-sidenav hidden-print hidden-xs hidden-sm affix">
+                    <a href=""><h5>Никита Лыськов</h5></a>
+                    <div id="menu">
+                        <!--
+                        <ul class="nav">
+                            <li>
+                                <a href="#one">One</a>
+                                <ul class="nav">
+                                    <li><a href="#one-one">One</a></li>
+                                    <li><a href="#one-two">Two</a></li>
+                                    <li><a href="#one-three">Three</a></li>
+                                    <li><a href="#one-four">Four</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#two">Two</a></li>
+                            <li><a href="#three">Three</a></li>
+                            <li><a href="#four">Four</a></li>
+                        </ul>
+                        -->
+                    </div>
+                </nav>
+            </div>
+            <div id="contentWrap" class="col-md-8">
+                <div id="contentControls" class="hidden">
+                    <a id="prev" href="javascript:">&lt;</a>
+                    <a id="next" href="javascript:">&gt;</a>
+                </div>
+                <div id="content">
+                        <!--
+                        <div class="embed">
+                            <img src="http://placehold.it/350x350"/>
+                        </div>
+                        <div>
+                            <strong>Default Title</strong> subtitle
+                        </div>        
+                        <div>
+                            Default description
+                        </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/template" id="youtube-template">
+        <!-- https://www.youtube.com/watch?v=Imx52RhczX4
+         https://www.youtube.com/embed/Imx52RhczX4?rel=0 -->
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/<<= videoId >>?rel=0" frameborder="0" allowfullscreen></iframe>
+    </script>
+
+    <script type="text/template" id="vimeo-template">
+        <iframe src="https://player.vimeo.com/video/<<= videoId >>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </script>    
+
+    <script type="text/template" id="image-template">
+        <a href="javascript:">
+            <img src="<<= typeof(url) == 'undefined' ? 'http://placehold.it/350x350' : url >>"/>
+        </a>
+    </script>     
+
+    <script type="text/template" id="menu-item-template">
+        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="blank"><<= title >></a>
+    </script>        
+
+    <script type="text/template" id="content-item-template">
+        <div class="embed">
+            <!--<img src="<<= typeof(image) == 'undefined' ? 'http://placehold.it/350x350' : image >>"/>-->
+        </div>
+        <div>
+            <strong>
+                <<= typeof(title) == 'undefined' ? 'Заголовок по умолчанию' : title >>
+            </strong>
+        </div>        
+        <div>
+            <<= typeof(description) == 'undefined' ? 'Описание по умолчанию' : description >>
+        </div>
+    </script>
+
+
+
+
+
+
+    <script src="js/lib/require.js"></script>
+
+
+    <script>
+        require(['js/common2.js'], function(common) {
+            require(['app/main2'], function(module) {
+                var app = new module.AppView2(module);
+                module.app = app;
+            });
+        });
+    </script>
+</body>
+</html>

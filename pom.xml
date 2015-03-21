@@ -5,7 +5,7 @@
     <artifactId>spring-gallery</artifactId>
     <!-- determine what goals to bind to a particular phase -->
     <packaging>war</packaging>
-    <version>1.2.1</version>
+    <version>1.2.5</version>
     <name>Spring Gallery</name>
     <!-- check actual versions: http://mvnrepository.com/artifact/<groupId> -->
     <properties>

@@ -56,7 +56,7 @@
     <!-- other beans -->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/WEB-INF/pages/" p:suffix=".jsp"/>
+        p:prefix="/WEB-INF/classes/pages/" p:suffix=".jsp" />
 
     <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
 
@@ -74,11 +74,11 @@
 
     <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/>
 
-    <!-- cache for one day -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <!-- exclude dynamic parts -->
+            <!-- cache for one day -->
             <mvc:exclude-mapping path="/crud/**"/>
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
                 p:cacheSeconds="#{24*60*60}"/>

@@ -7,6 +7,7 @@
 # backup/content files
 original/
 bak/
+*bak/
 tmp/
 old/
 test/

@@ -30,8 +30,8 @@ public class CrudUtilController {
         List<ImageModel> images = gallery.getImages();
 
         // split incoming files to image and preview
-        List<MultipartFile> previews = UploadUtil.filterPreviews(files);
-        List<MultipartFile> originals = UploadUtil.filterOriginals(files);
+        List<MultipartFile> previews = UploadedFileUtil.filterByName(files);
+        List<MultipartFile> originals = UploadedFileUtil.filterByNameInverted(files);
 
         logger.info("new upload begins from index {}", index);
 
@@ -46,7 +46,7 @@ public class CrudUtilController {
 
             logger.info("Type of image is  {}", contentType);
 
-            MultipartFile preview = UploadUtil.findPreview(previews, file);
+            MultipartFile preview = UploadedFileUtil.findFile(previews, file);
 
             if (preview == null) {
                 // preview, resize image size
@@ -57,7 +57,7 @@ public class CrudUtilController {
 
             // running on Google App Engine invocation of 'getOriginalFilename' returns garbage
             String name = file.getOriginalFilename();
-            image.setName(UploadUtil.removeExtension(name));
+            image.setName(UploadedFileUtil.removeExtension(name));
             image.setGallery(gallery);
             image.setIndex(index++);
             images.add(image);

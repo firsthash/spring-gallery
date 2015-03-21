@@ -1,3 +1,5 @@
+* button hidden click handler
+* replace SectionView with GalleryView
 * route sub domain queries (HandlerInterceptor)
 
 done:

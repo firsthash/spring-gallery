@@ -10,7 +10,6 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.*;
 import java.util.*;
 
 /**
@@ -120,13 +119,4 @@ public class CrudController {
         nikArtService.deleteImage(id);
     }
 
-    /**
-     * Converts model's image to data uri (inline src) format.
-     */
-    private String toDataUri(ImageModel model) {
-        MediaType type = model.getPreviewType();
-        byte[] content = model.getPreview();
-        String res = String.format("data:%s;base64,%s", type.toString(), DatatypeConverter.printBase64Binary(content));
-        return res;
-    }
 }

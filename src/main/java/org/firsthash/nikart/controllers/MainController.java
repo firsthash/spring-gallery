@@ -24,15 +24,15 @@ public class MainController {
     @RequestMapping(value = "/")
     public String getHomePage(ModelMap model) {
         logger.info("main page requested");
-        model.addAttribute("admin", false);
+        model.addAttribute("admin", false);   // tmp
         return "main";
     }
 
     @RequestMapping(value = "/admin")
     public String getAdminPage(ModelMap model) {
         model.addAttribute("admin", true);
-        logger.info("admin page requested");
-        return "main";
+        logger.info("admin page requested");  // tmp
+        return "admin";
     }
 
     @Transactional
@@ -48,7 +48,7 @@ public class MainController {
         return "images";
     }
 
-    // route sub-domain requests e.g. http://name.my-domain.com
+    // route subdomain requests e.g. http://sub.domain.com, see DomainNameInterceptor.java
     @RequestMapping(value = "/event", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public byte[] getEventPage() throws IOException {
