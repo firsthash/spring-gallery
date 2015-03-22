@@ -45,7 +45,7 @@ li a {
     font-weight: 500;
     /*color: #767676;*/
 }
-.bs-docs-sidebar .nav>li>a:focus,
+/*.bs-docs-sidebar .nav>li>a:focus,*/
 .bs-docs-sidebar .nav>li>a:hover {
     /*padding-left: 19px;*/
     /*color: #563d7c;*/

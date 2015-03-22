@@ -24,8 +24,6 @@ define(['app/AppView2'], function(AppView2){
         getActive: function(){
             var active = -1;
             _.each(this.items, function(item, index){
-                // if (item.submenu)
-                //     console.log('has submenu')
                 if (item.$el.hasClass('active')){
                     console.log(index)
                     active = index;
@@ -38,51 +36,13 @@ define(['app/AppView2'], function(AppView2){
             if (active <= 0) 
                 active = this.items.length;
             this.items[active - 1].doClick();
-            // this.move(function(el){return el.prev();}, function(elems){return elems.last();}, false);
         },
         down: function(){
             var active = this.getActive();
             if (active == (this.items.length - 1))
                 active = -1;
             this.items[active + 1].doClick();
-            // this.move(function(el){return el.next();}, function(elems){return elems.first();}, true);
         },
-        move: function(nearElement, firstChild, isDown){
-            var activeElement = this.$('.active:not(:hidden):last');
-
-            var element = nearElement(activeElement);
-            var child = firstChild(activeElement.find('li'));
-            if (!activeElement.length) { // begin of the list
-                // console.log('starting point');
-                element = firstChild(this.$el.children('li'));
-            }
-
-            if (child.length && isDown) { // has children
-                console.log('has child');
-                element = child;
-            }
-
-            if (!element.length) { // last element
-                console.log('end of the list');
-                var parent = activeElement.parents('.active');
-                if (parent.length != 0) { // has parent
-                    console.log('has parent');
-                    activeElement.removeClass('active');
-                    element = nearElement(parent);
-                }
-            }
-
-            if (!element.length) { // first or last
-                element = activeElement;
-            }
-
-            element.trigger('click');
-
-            newElem = firstChild(element.find('li'));
-            if (element.length) {
-                newElem.trigger('click');
-            }
-        }
     });
 
     module.MenuItem = Backbone.View.extend({
@@ -97,6 +57,8 @@ define(['app/AppView2'], function(AppView2){
             if (this.model.has('children') && this.model.get('children') != '') {
                 var nested = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
                 this.$el.append(nested.render().el);
+                if (!nested.active[0]) // activate by default first gallery
+                    nested.active[0] = nested;
             }
             return this;
         },
@@ -107,10 +69,6 @@ define(['app/AppView2'], function(AppView2){
         doClick: function(e){
             if (typeof(e) == 'undefined' && !this.$el.parents('.active').length){
                 this.$el.parents('li').trigger('click'); // unfold if: 'li li.active li.active'
-            }
-            if (!this.submenu) {
-                console.log('no submenu', this.$el);
-                this.menu.active[0] = this.menu;
             }
             // draw element
             if (this.model.has('content') && this.model.get('content') != ''){
@@ -135,7 +93,7 @@ define(['app/AppView2'], function(AppView2){
             // this.$el.parents('li').addClass('active'); // unfold if: 'li li.active li.active'
 
             var children = this.$('ul>li');
-            children.removeClass('active');
+            // children.removeClass('active');
             if (!this.$el.hasClass('active')) {
                 this.$el.addClass('active');
                 children.css('display', 'none');
