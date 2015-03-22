@@ -21,7 +21,15 @@ public class MainController {
     private NikArtService nikArtService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public byte[] newHomePage() throws IOException {
+        InputStream in = this.getClass().getResourceAsStream("/static/new_home.html");
+        assert in != null : "resource not found";
+        return IOUtils.toByteArray(in);
+    }
+
+    @RequestMapping(value = "/new")
     public String home(ModelMap model) {
         return "redirect:/static/new_home.html";
     }    
