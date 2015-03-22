@@ -56,6 +56,7 @@ define(['app/AppView2'], function(AppView2){
             this.$el.html(el);
             if (this.model.has('children') && this.model.get('children') != '') {
                 var nested = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
+                this.submenu = nested;
                 this.$el.append(nested.render().el);
                 if (!nested.active[0]) // activate by default first gallery
                     nested.active[0] = nested;
@@ -81,25 +82,57 @@ define(['app/AppView2'], function(AppView2){
                 }
             }
             
+            this.$el.siblings().removeClass('active'); // hide other submenus
+
+            var children = this.$('ul>li');
+            // reset previously selected submenu item
+            if (this.menu.active[0] != this.submenu)
+                children.removeClass('active'); 
+            var first = this.$('ul:first');
+
+            if (first.length)
+                first.slideToggle(500, _.bind(function(){this.$el.toggleClass('active');first.css('display', '')}, this));
+            else
+                this.$el.toggleClass('active');
+
+        },
+        doClick2: function(e){
+            if (typeof(e) == 'undefined' && !this.$el.parents('.active').length){
+                this.$el.parents('li').trigger('click'); // unfold if: 'li li.active li.active'
+            }
+            // draw element
+            if (this.model.has('content') && this.model.get('content') != ''){
+                new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
+                if (this.model.has('single')){
+                    module.app.contentControls.hide();
+                } else {
+                    module.app.contentControls.unhide();
+                    this.menu.active[0] = this.menu;
+                }
+            }
+            
             this.$el.siblings().removeClass('active'); // near link
 
-            var fn = _.bind(function(){
+            var hideFn = _.bind(function(){
                 this.$el.removeClass('active');
             }, this);
 
-            // this.$el.siblings().hide(500, fn);
+            // this.$el.siblings().hide(500, hideFn);
             
             // this.$el.toggleClass('active');
             // this.$el.parents('li').addClass('active'); // unfold if: 'li li.active li.active'
 
             var children = this.$('ul>li');
-            // children.removeClass('active');
+            // reset previous selected submenu item
+            if (this.menu.active[0] != this.submenu)
+                children.removeClass('active'); 
             if (!this.$el.hasClass('active')) {
                 this.$el.addClass('active');
                 children.css('display', 'none');
                 children.show(500);
+                children.css('display', '');
             } else {
-                children.hide(500, fn);
+                children.hide(500, hideFn);
             }
 
         },
@@ -111,7 +144,7 @@ define(['app/AppView2'], function(AppView2){
         vimeoTemplate: _.template($('#vimeo-template').html()),
         imageTemplate: _.template($('#image-template').html()),
         events: {
-            'click a': function(){
+            'click .embed a': function(){
                 module.app.contentControls.next();
                 return false;
             },

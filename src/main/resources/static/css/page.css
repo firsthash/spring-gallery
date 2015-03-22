@@ -1,3 +1,16 @@
+#menu ul li:nth-child(2) {
+    width: 120px;
+}
+#menu ul li:nth-child(2) ul li {
+    padding: 5px;
+    margin: auto;
+}
+
+#menu ul li:nth-child(2) ul li, 
+#menu ul li:nth-child(2) ul li a {
+    display: inline;
+}
+
 .bs-docs-sidebar .nav:first-child>li>a {
     text-decoration: underline;
 }
@@ -99,7 +112,7 @@ li a {
     }
     .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
-        width: 213px
+        /*width: 213px*/
     }
 /*    .bs-docs-sidebar.affix {
         position: fixed;
@@ -117,6 +130,6 @@ li a {
 @media (min-width: 1200px) {
     .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
-        width: 263px
+        /*width: 263px*/
     }
 }
