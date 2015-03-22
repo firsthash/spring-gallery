@@ -8,7 +8,7 @@
 
     <script type="text/javascript">
         if (location.protocol != 'file:')
-            document.write('<base href="/static/" target="_blank">');
+            document.write('<base href="/static/">');
     </script>
     
 
@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-2" role="complementary">
                 <nav class="bs-docs-sidebar bs-docs-sidenav hidden-print hidden-xs hidden-sm affix">
-                    <a href=""><h5>Никита Лыськов</h5></a>
+                    <a href="javascript:location.reload(true)"><h5>Никита Лыськов</h5></a>
                     <div id="menu">
                         <!--
                         <ul class="nav">
@@ -83,7 +83,7 @@
     </script>     
 
     <script type="text/template" id="menu-item-template">
-        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="blank"><<= title >></a>
+        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="_blank"><<= title >></a>
     </script>        
 
     <script type="text/template" id="content-item-template">
