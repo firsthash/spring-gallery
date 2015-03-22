@@ -108,10 +108,10 @@ define(['app/AppView2'], function(AppView2){
             if (typeof(e) == 'undefined' && !this.$el.parents('.active').length){
                 this.$el.parents('li').trigger('click'); // unfold if: 'li li.active li.active'
             }
-            // if (!this.submenu) {
-            //     console.log('no submenu', this.$el);
-            //     this.menu.active[0] = this.menu;
-            // }
+            if (!this.submenu) {
+                console.log('no submenu', this.$el);
+                this.menu.active[0] = this.menu;
+            }
             // draw element
             if (this.model.has('content') && this.model.get('content') != ''){
                 new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
