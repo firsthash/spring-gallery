@@ -25,14 +25,16 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
                     this.contentControls.next();
                     return false;
                 case space:
-                    return this.play();
+                    if (this.play())
+                        this.contentControls.next();
+                    return false;
             }
             return true;
         },
 
         play: function(){
             var iframe = this.$('iframe');
-            if (iframe.length){
+            if (iframe.length && !iframe[0].src.contains('autoplay')){
                 var src = iframe[0].src;
                 console.log(src)
                 var query = src.contains('?') ? '&' : '?';
