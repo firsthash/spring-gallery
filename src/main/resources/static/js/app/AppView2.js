@@ -4,7 +4,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
         // Instead of generating a new element, bind to the existing element
         el: $("body"),
         events: {
-            'keydown': 'onkeydown'
+            'keydown': 'onkeydown',
         },
         logos: ['Space'],
         // logos: ['Bird_LQ', 'Dolphin', 'Face', 'God', 'Head-blink', 'Kaceli', 'Nikitaliskovdotcom', 'Space', 'Walk3'],
@@ -14,6 +14,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
             var next = 39;
             var up = 38;
             var down = 40;
+            var space = 32;
             switch (e.which) {
                 case up:
                 case prev:
@@ -23,8 +24,26 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
                 case next:
                     this.contentControls.next();
                     return false;
+                case space:
+                    return this.play();
             }
+            return true;
         },
+
+        play: function(){
+            var iframe = this.$('iframe');
+            if (iframe.length){
+                var src = iframe[0].src;
+                console.log(src)
+                var query = src.contains('?') ? '&' : '?';
+                query += 'autoplay=1';
+                console.log(query);
+                iframe[0].src += query; 
+                return false;
+            }
+            return true;
+        },
+
 
         // bind collection events, when items are added or changed
         initialize: function(options){

@@ -52,9 +52,21 @@ require.config({
 });
 
 // First, checks if it isn't implemented yet.
-if (!String.prototype.startsWith) {
+if (typeof String.prototype.startsWith !== 'function') {
     String.prototype.startsWith = function(needle) {
-        return(this.indexOf(needle) == 0);
+        return (this.indexOf(needle) == 0);
+    };
+}
+
+if (typeof String.prototype.endsWith !== 'function') {
+    String.prototype.endsWith = function(suffix) {
+        return (this.indexOf(suffix, this.length - suffix.length) !== -1);
+    };
+}
+
+if (typeof String.prototype.contains !== 'function') {
+    String.prototype.contains = function(suffix) {
+        return (this.indexOf(suffix) !== -1);
     };
 }
 
