@@ -52,19 +52,19 @@ require.config({
 });
 
 // First, checks if it isn't implemented yet.
-if (typeof String.prototype.startsWith !== 'function') {
+if (!String.prototype.startsWith) {
     String.prototype.startsWith = function(needle) {
         return (this.indexOf(needle) == 0);
     };
 }
 
-if (typeof String.prototype.endsWith !== 'function') {
+if (!String.prototype.endsWith) {
     String.prototype.endsWith = function(suffix) {
         return (this.indexOf(suffix, this.length - suffix.length) !== -1);
     };
 }
 
-if (typeof String.prototype.contains !== 'function') {
+if (!String.prototype.contains) {
     String.prototype.contains = function(suffix) {
         return (this.indexOf(suffix) !== -1);
     };

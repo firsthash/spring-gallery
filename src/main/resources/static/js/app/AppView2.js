@@ -34,8 +34,12 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
 
         play: function(){
             var iframe = this.$('iframe');
-            if (iframe.length && !iframe[0].src.contains('autoplay')){
+            if (iframe.length){
                 var src = iframe[0].src;
+                if (src.contains('autoplay')){
+                    iframe[0].src = src.replace(/autoplay[^&]*[&]*/, '');
+                    return false;
+                }
                 console.log(src)
                 var query = src.contains('?') ? '&' : '?';
                 query += 'autoplay=1';
