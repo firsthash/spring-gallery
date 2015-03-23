@@ -34,7 +34,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
 
         play: function(){
             var iframe = this.$('iframe');
-            if (iframe.length){
+            if (iframe.length && !iframe[0].src.contains('autoplay')){
                 var src = iframe[0].src;
                 if (src.contains('autoplay')){
                     iframe[0].src = src.replace(/autoplay[^&]*[&]*/, '');
