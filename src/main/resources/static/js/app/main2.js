@@ -9,7 +9,13 @@ define(['app/AppView2'], function(AppView2){
         tagName: 'ul',
         className: 'nav',
         active: [null], // static variable
-        // items: [],
+        items: null,
+        active: function(menu){
+            if (menu)
+                this.active[0] = menu;
+            else
+                return this.active[0];
+        },
         render: function(){
             this.items = [];
             this.collection.each(function(model){
@@ -21,27 +27,27 @@ define(['app/AppView2'], function(AppView2){
             }, this);
             return this;
         },
-        getActive: function(){
-            var active = -1;
+        itemIndex: function(){
+            var itemIndex = -1;
             _.each(this.items, function(item, index){
                 if (item.$el.hasClass('active')){
-                    console.log(index)
-                    active = index;
+                    // console.log(index)
+                    itemIndex = index;
                 }
             }, this);
-            return active;   
+            return itemIndex;   
         },
         up: function(){
-            var active = this.getActive();
-            if (active <= 0) 
-                active = this.items.length;
-            this.items[active - 1].doClick();
+            var itemIndex = this.itemIndex();
+            if (itemIndex <= 0) 
+                itemIndex = this.items.length;
+            this.items[itemIndex - 1].doClick();
         },
         down: function(){
-            var active = this.getActive();
-            if (active == (this.items.length - 1))
-                active = -1;
-            this.items[active + 1].doClick();
+            var itemIndex = this.itemIndex();
+            if (itemIndex == (this.items.length - 1))
+                itemIndex = -1;
+            this.items[itemIndex + 1].doClick();
         },
     });
 
@@ -51,15 +57,17 @@ define(['app/AppView2'], function(AppView2){
         },
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
+        submenu: null,
         render: function(){
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
             if (this.model.has('children') && this.model.get('children') != '') {
-                var nested = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
-                this.submenu = nested;
-                this.$el.append(nested.render().el);
-                if (!nested.active[0]) // activate by default first gallery
-                    nested.active[0] = nested;
+                var submenu = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
+                this.submenu = submenu;
+                submenu.parentItem = this;
+                this.$el.append(submenu.render().el);
+                if (!submenu.active()) // activate by default first gallery
+                    submenu.active(submenu);
             }
             return this;
         },
@@ -68,38 +76,26 @@ define(['app/AppView2'], function(AppView2){
             this.doClick(e);
         },
         doClick: function(e){
-            if (typeof(e) == 'undefined' && !this.$el.parents('.active').length){
-                this.$el.parents('li').trigger('click'); // unfold if: 'li li.active li.active'
-            }
             // draw element
-            if (this.model.has('content') && this.model.get('content') != ''){
-                new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
-                if (this.model.has('single')){
-                    module.app.contentControls.hide();
-                } else {
-                    module.app.contentControls.unhide();
-                    this.menu.active[0] = this.menu;
-                }
-            }
-            
+            this.drawContent();
+
+
+            this.animateSubmenu(e);
+
             this.$el.siblings().removeClass('active'); // hide other submenus
 
-            var children = this.$('ul>li');
             // reset previously selected submenu item
-            if (this.menu.active[0] != this.submenu)
-                children.removeClass('active'); 
-            var first = this.$('ul:first');
+            if (this.submenu && this.menu.active() != this.submenu)
+                _.each(this.submenu.items, function(obj){obj.$el.removeClass('active')});
 
-            if (first.length)
-                first.slideToggle(500, _.bind(function(){this.$el.toggleClass('active');first.css('display', '')}, this));
-            else
-                this.$el.toggleClass('active');
-
-        },
-        doClick2: function(e){
-            if (typeof(e) == 'undefined' && !this.$el.parents('.active').length){
-                this.$el.parents('li').trigger('click'); // unfold if: 'li li.active li.active'
+            // detect click on collapsed menu
+            if (this.menu.parentItem && !this.menu.parentItem.$el.hasClass('active')) {
+                console.log('parent menu not active', this.menu.parentItem.$('a:first').html());
+                this.menu.parentItem.doClick();
+                // this.animateSubmenu(this.menu.parentItem);
             }
+        },
+        drawContent: function(){
             // draw element
             if (this.model.has('content') && this.model.get('content') != ''){
                 new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
@@ -107,34 +103,24 @@ define(['app/AppView2'], function(AppView2){
                     module.app.contentControls.hide();
                 } else {
                     module.app.contentControls.unhide();
-                    this.menu.active[0] = this.menu;
                 }
+                this.menu.active(this.menu);
             }
-            
-            this.$el.siblings().removeClass('active'); // near link
-
-            var hideFn = _.bind(function(){
-                this.$el.removeClass('active');
-            }, this);
-
-            // this.$el.siblings().hide(500, hideFn);
-            
-            // this.$el.toggleClass('active');
-            // this.$el.parents('li').addClass('active'); // unfold if: 'li li.active li.active'
-
-            var children = this.$('ul>li');
-            // reset previous selected submenu item
-            if (this.menu.active[0] != this.submenu)
-                children.removeClass('active'); 
-            if (!this.$el.hasClass('active')) {
-                this.$el.addClass('active');
-                children.css('display', 'none');
-                children.show(500);
-                children.css('display', '');
-            } else {
-                children.hide(500, hideFn);
+        },
+        animateSubmenu: function(el){
+            var that = this;
+            if (that.submenu && el)
+                that.submenu.$el.slideToggle(500, _.bind(function(){that.activateSubmenu()}, that));
+            else
+                that.$el.toggleClass('active');
+        },
+        activateSubmenu: function(){
+            this.$el.toggleClass('active');
+            this.submenu.$el.css('display', '');
+            if (this.submenu && this.submenu != this.menu.active()){
+                var item = this.submenu.items[0];
+                item.model.has('content') && item.doClick();
             }
-
         },
     });
 
@@ -197,11 +183,11 @@ define(['app/AppView2'], function(AppView2){
         },
         prev: function(){
             if (!this.isHidden)
-                this.menu.active[0].up();
+                this.menu.active().up();
         },
         next: function(){
             if (!this.isHidden)
-                this.menu.active[0].down();
+                this.menu.active().down();
         },
     });
 
