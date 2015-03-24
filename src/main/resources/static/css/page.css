@@ -1,3 +1,11 @@
+body, h5 {
+    font-family: 'Comfortaa', cursive;
+}
+
+/*#content, #contentControls {
+    text-align: center;
+}*/
+
 #menu ul li:nth-child(2) {
     width: 120px;
 }
@@ -28,9 +36,9 @@ a, a:hover, a:focus {
     padding-top: 40px;
 }
 
-li a {
+/*li a {
     font-family: "Times New Roman";
-}
+}*/
 
 #contentControls {
     font-size: large;

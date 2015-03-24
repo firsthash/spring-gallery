@@ -66,8 +66,8 @@ define(['app/AppView2'], function(AppView2){
                 this.submenu = submenu;
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
-                if (!submenu.active()) // activate by default first gallery
-                    submenu.active(submenu);
+                // if (!submenu.active()) // activate by default first gallery
+                //     submenu.active(submenu);
             }
             return this;
         },
@@ -182,12 +182,14 @@ define(['app/AppView2'], function(AppView2){
             this.isHidden = true;
         },
         prev: function(){
+            var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                this.menu.active().up();
+                menu.up();
         },
         next: function(){
+            var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                this.menu.active().down();
+                menu.down();
         },
     });
 

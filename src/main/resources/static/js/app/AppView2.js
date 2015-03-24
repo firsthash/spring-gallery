@@ -6,7 +6,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
         events: {
             'keydown': 'onkeydown',
         },
-        logos: ['Space'],
+        logos: ['All-Color_LQ_white'],
         // logos: ['Bird_LQ', 'Dolphin', 'Face', 'God', 'Head-blink', 'Kaceli', 'Nikitaliskovdotcom', 'Space', 'Walk3'],
 
         onkeydown: function(e){
