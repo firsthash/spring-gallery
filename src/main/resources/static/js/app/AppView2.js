@@ -1,4 +1,4 @@
-define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
+define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data) {
     // top-level piece of UI
     var AppView = Backbone.View.extend({
         // Instead of generating a new element, bind to the existing element
@@ -71,10 +71,47 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
 
             var logo = new this.options.ContentItem({model: new Backbone.Model({url: url, title: '', description: '', single: ''})});
 
+            // this.animate(logo.$el);
+
             // this.listenToOnce(this.collection, 'sort', function() {this.addAll(); this.listenTo(this.collection, 'add', this.addOne);});
 
 
             // this.collection.fetch();
+        },
+
+        animate: function(el){
+            el.find('.embed img').css({position: 'absolute', top: '300px'});
+            var queue1 = [
+            {
+                selector: '.embed img',
+                prop: {
+                    left: '-1000px',
+                    duration: 5000
+                }
+            },
+            {
+                selector: '.embed img',
+                prop: {
+                    opacity: 0,
+                    duration: 0
+                }
+            },
+            {
+                selector: '.embed img',
+                prop: {
+                    left: '1000px',
+                    duration: 0
+                }
+            },
+            {
+                selector: '.embed img',
+                prop: {
+                    opacity: 1.0,
+                    duration: 0
+                }
+            },
+            ];
+            $.animQueue(queue1, {loop: true});
         },
 
         // add one item

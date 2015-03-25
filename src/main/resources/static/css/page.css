@@ -2,16 +2,20 @@
     font-family: 'Comfortaa', cursive;
 }*/
 
+body {
+    overflow: hidden;
+}
+
 
 /* dash style */
 
-#menu ul:first-child>li {
+#menu ul:first-child>li, .logo {
     background-image: url('dash.png');
     background-repeat: repeat-x;
     background-position: 0 7px; 
 }
 
-#menu ul:first-child>li>a {
+#menu ul:first-child>li>a, .logo a {
     background-color: white;
     display: inline-block;
     /*text-decoration: inherit;*/
@@ -23,16 +27,16 @@
     background-color: white!important;
 }
 
-#menu ul:first-child>li:nth-child(1) {
+#menu ul:first-child>li:nth-child(2), .logo {
     padding-left: 10px;
 }
-#menu ul:first-child>li:nth-child(2) {
+#menu ul:first-child>li:nth-child(3) {
     padding-left: 20px;
 }
-#menu ul:first-child>li:nth-child(3) {
+#menu ul:first-child>li:nth-child(4) {
     padding-left: 30px;
 }
-#menu ul:first-child>li:nth-child(4) {
+#menu ul:first-child>li:nth-child(5) {
     padding-left: 40px;
 }
 
@@ -40,16 +44,16 @@
 
 /* calendar style */
 
-#menu ul li:nth-child(2) ul {
+#menu ul li:nth-child(3) ul {
     width: 120px;
 }
-#menu ul li:nth-child(2) ul li {
+#menu ul li:nth-child(3) ul li {
     padding: 5px;
     margin: auto;
 }
 
-#menu ul li:nth-child(2) ul li, 
-#menu ul li:nth-child(2) ul li a {
+#menu ul li:nth-child(3) ul li, 
+#menu ul li:nth-child(3) ul li a {
     display: inline;
 }
 
