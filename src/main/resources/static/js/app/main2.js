@@ -58,7 +58,15 @@ define(['app/AppView2'], function(AppView2){
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
         submenu: null,
+        busy: [false],
+        busy: function(val){
+            if (typeof val != 'undefined')
+                this.busy[0] = val;
+            else
+                return this.busy[0];
+        },
         render: function(){
+            this.busy(false);
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
             if (this.model.has('children') && this.model.get('children') != '') {
@@ -109,6 +117,11 @@ define(['app/AppView2'], function(AppView2){
             }
         },
         animateOldSubmenu: function(e){
+            if (this.busy())
+                return;
+            this.busy(true);
+            
+            // this.busy(false);
             var that = null;
             _.each(this.menu.items, function(item){
                 if (item.$el.hasClass('active') && item != this) {
@@ -133,15 +146,18 @@ define(['app/AppView2'], function(AppView2){
             this.submenu.$el.css('display', '');
         },
         animateSubmenu: function(e){
-            // console.log(this);
+            // console.log(this.busy());
             var that = this;
             if (that.submenu)
                 that.submenu.$el.slideToggle(500, _.bind(function(){that.activateSubmenu()}, that));
-            else
+            else {
                 that.$el.toggleClass('active');
+                this.busy(false);
+            }
         },
         activateSubmenu: function(){
             this.$el.toggleClass('active');
+            this.busy(false);
             this.submenu.$el.css('display', '');
             // imitate click on old first item
             if (this.submenu && this.submenu != this.menu.active()){
