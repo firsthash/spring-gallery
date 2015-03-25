@@ -164,7 +164,7 @@ define(['app/AppView2'], function(AppView2){
     });
 
     module.ContentControls = Backbone.View.extend({
-        el: $('#contentControls'),
+        el: $('#content-controls'),
         events: {
             'click #prev': 'prev',
             'click #next': 'next'
