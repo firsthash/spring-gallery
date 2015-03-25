@@ -31,6 +31,10 @@ define(['jquery'], function($) {
     };
 
     $.slideQueue = function(queue, options){
+        if ($.busy)
+            return;
+        else
+            $.busy = true;
         var defaults = {
             callback: null
         };
@@ -42,19 +46,16 @@ define(['jquery'], function($) {
                 return;
             }
             step++;
-            if (anim.selector) {
-                $(anim.selector).animate(anim.prop,{
-                    easing: anim.easing || 'swing',
-                    duration: anim.duration || 1000,
-                    complete: function(){
-                        run(step);
-                    }
-                });
+            if (anim.$el) {
+                anim.$el.slideToggle(anim.duration || 500, function(){run(step)});
             } else if (anim.delay) {
                 setTimeout(function(){ run(step); }, anim.delay);
             }
-            if (options.callback) {
+            if (step == queue.length && options.callback) {
                 options.callback();
+            }
+            if (step == queue.length) {
+                $.busy = false;
             }
         } 
         run(step);

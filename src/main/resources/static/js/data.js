@@ -43,9 +43,9 @@ define(function(){
         {"title": "20", "content": {"url": "img/comics/020.jpg", "title": "", "description": ""}},
     ]},  
     {"title": "Кнтакты", "children": [
-        {"title": "vk.com/nikita_liskov", "url": "http://vk.com/nikita_liskov"}, 
-        {"title": "facebook.com/nikita.liskov", "url": "https://www.facebook.com/nikita.liskov"},
-        {"title": "youtube.com/user/NikitaLiskov/videos", "url": "https://www.youtube.com/user/Nikitaliskov"}, 
+        {"title": "vk.com", "url": "http://vk.com/nikita_liskov"}, 
+        {"title": "facebook.com", "url": "https://www.facebook.com/nikita.liskov"},
+        {"title": "youtube.com", "url": "https://www.youtube.com/user/Nikitaliskov/videos"}, 
         {"title": "nikitaliskov@gmail.com", "url": "mailto://nikitaliskov@gmail.com"},
     ]},
     {"title": "О-мне", "single": "", "content": {"title": "", "url": "img/logos/Metamorphose.gif", "description": "<p><strong>Никита Лыськов</strong> - художник-мультипликатор,  родился в 1983 году,  в  Днепропетровске.</p><p>1997-2002  Днепропетровское   Художественное   Училище   (Живопись)</p><p>2004-2006  Днепропетровский   Национальный   Университет  (Дизайн)</p><p>2007-2012  КНУТКиТ  им. Карпенка-Карого  (Режиссура  анимационного  фильма)</p><p>В своем творчестве, Никита  отдает  предпочтение традиционной  рисованной анимации,</p> <p>кадр за кадром, с минимальным применением спецэффектов. Так  же  Никита  проводит</p>  <p>лекции-кинопоказы   по   истории   анимации.  Живет   и   работает   в   Днепропетровске.</p>"}, "children": [
