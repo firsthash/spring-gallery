@@ -6,6 +6,13 @@ body {
     overflow: hidden;
 }
 
+@media (min-width: 768px) {
+    .bs-docs-sidebar, #content-wrap {
+        padding: 5px;
+        padding-top: 20px;
+        /*padding-left: 20px*/
+    }
+}
 
 /* dash style */
 
@@ -76,9 +83,9 @@ a, a:hover, a:focus {
     visibility: hidden;
 }
 
-#content-wrap {
+/*#content-wrap {
     padding-top: 40px;
-}
+}*/
 
 /*li a {
     font-family: "Times New Roman";
@@ -91,13 +98,7 @@ a, a:hover, a:focus {
 .bs-docs-sidebar.affix {
     position: static
 }
-@media (min-width: 768px) {
-    .bs-docs-sidebar {
-        padding: 5px;
-        padding-top: 20px;
-        /*padding-left: 20px*/
-    }
-}
+
 /*.bs-docs-sidenav {
     margin-top: 20px;
     margin-bottom: 20px

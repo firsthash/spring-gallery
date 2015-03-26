@@ -87,9 +87,8 @@ define(['app/AppView2'], function(AppView2){
             // draw element
             this.drawContent();
 
-            this.animateOldSubmenu(e);
-
-            // this.animateSubmenu(e);
+            this.animate();
+            // this.animateOldSubmenu();
 
             //this.$el.siblings().removeClass('active'); // hide other submenus
 
@@ -97,11 +96,10 @@ define(['app/AppView2'], function(AppView2){
             if (this.submenu && this.menu.active() != this.submenu)
                 _.each(this.submenu.items, function(obj){obj.$el.removeClass('active')});
 
-            // detect click on collapsed menu
+            // open parent menu
             if (this.menu.parentItem && !this.menu.parentItem.$el.hasClass('active')) {
-                // console.log('parent menu not active', this.menu.parentItem.$('a:first').html());
+                console.log('open parent')
                 this.menu.parentItem.doClick();
-                // this.animateSubmenu(this.menu.parentItem);
             }
         },
         drawContent: function(){
@@ -116,7 +114,44 @@ define(['app/AppView2'], function(AppView2){
                 this.menu.active(this.menu);
             }
         },
-        animateOldSubmenu: function(e){
+        animate: function(){
+            var that = null;
+            _.each(this.menu.items, function(item){
+                if (item.$el.hasClass('active') && item != this) {
+                    that = item;
+                }
+            }, this);
+            var el1 = that && that.submenu ? that.submenu.$el : null;
+            var el2 = this.submenu ? this.submenu.$el : null;
+            if (!el1 && !el2){
+                this && this.$el.toggleClass('active');
+                that && that.$el.toggleClass('active');
+                return;
+            }
+            var queue = [
+                {
+                    el: el1,
+                },
+                {
+                    el: el2,
+                },
+            ];
+
+            console.log(queue)
+
+            $.slideQueue(queue, {callback: function(opt){
+                _.each(opt.arr, function(that, index){
+                    that && that.$el.toggleClass('active');
+                    that && that.submenu && that.submenu.$el.css('display', '');
+                    // imitate click on first submenu item
+                    if (index == 0 && that.submenu && that.submenu != that.menu.active()){
+                        var item = that.submenu.items[0];
+                        item.model.has('content') && item.doClick();
+                    }
+                })
+            }, arr: [this, that]});
+        },
+        animateOldSubmenu: function(){
             if (this.busy())
                 return;
             this.busy(true);
@@ -129,23 +164,23 @@ define(['app/AppView2'], function(AppView2){
                 }
             }, this);
             if (!that){
-                this.animateSubmenu(e);
+                this.animateSubmenu();
                 return;
             }
             if (that.submenu) {
                 var fn1 = _.bind(that.activateOldSubmenu, that);
                 var fn2 = _.bind(this.animateSubmenu, this);
-                that.submenu.$el.slideToggle(500, function(){fn1();fn2(e)});
+                that.submenu.$el.slideToggle(500, function(){fn1();fn2()});
             } else {
                 that.$el.toggleClass('active');
-                this.animateSubmenu(e);
+                this.animateSubmenu();
             }
         },
         activateOldSubmenu: function(){
             this.$el.toggleClass('active');
             this.submenu.$el.css('display', '');
         },
-        animateSubmenu: function(e){
+        animateSubmenu: function(){
             // console.log(this.busy());
             var that = this;
             if (that.submenu)
@@ -159,7 +194,7 @@ define(['app/AppView2'], function(AppView2){
             this.$el.toggleClass('active');
             this.busy(false);
             this.submenu.$el.css('display', '');
-            // imitate click on old first item
+            // imitate click on first submenu item
             if (this.submenu && this.submenu != this.menu.active()){
                 var item = this.submenu.items[0];
                 item.model.has('content') && item.doClick();

@@ -40,23 +40,23 @@ define(['jquery'], function($) {
         };
         options = $.extend({}, defaults, options);
         var step = 0;
-        var run = function(step) {            
+        var run = function(step) {
             var anim = queue[step];
-            if (typeof anim === "undefined") {
+            if (typeof anim === "undefined") { // end of loop
+                options.callback && options.callback(options);
+                $.busy = false;
                 return;
             }
             step++;
-            if (anim.$el) {
-                anim.$el.slideToggle(anim.duration || 500, function(){run(step)});
+            console.log('step', queue)
+            if (anim.el) {
+                console.log('doing animation', anim.obj)
+                anim.el.slideToggle(anim.duration || 500, function(){run(step)});
             } else if (anim.delay) {
                 setTimeout(function(){ run(step); }, anim.delay);
-            }
-            if (step == queue.length && options.callback) {
-                options.callback();
-            }
-            if (step == queue.length) {
-                $.busy = false;
-            }
+                return;
+            } else
+                run(step);
         } 
         run(step);
     };
