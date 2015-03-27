@@ -66,11 +66,11 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
 
             this.contentControls = contentControls;
 
-            var name = this.logos[_.random(this.logos.length - 1)];
-            var url = "img/logos/" + name + ".gif";
+            // var name = this.logos[_.random(this.logos.length - 1)];
+            // var url = "img/logos/" + name + ".gif";
+            // var logo = new this.options.ContentItem({model: new Backbone.Model({url: url, title: '', description: '', single: ''})});
 
-            var logo = new this.options.ContentItem({model: new Backbone.Model({url: url, title: '', description: '', single: ''})});
-
+            
             // this.animate(logo.$el);
 
             // this.listenToOnce(this.collection, 'sort', function() {this.addAll(); this.listenTo(this.collection, 'add', this.addOne);});

@@ -13,10 +13,25 @@ body {
 
 /* pyramid style */
 
+.bs-docs-sidebar nav {
+    width: 51%;
+    margin: auto;
+}
+
 /*.bs-docs-sidebar {
-    background-image: url('bg.png');
-    background-position: left bottom;
+    width: 28%;
 }*/
+
+.bs-docs-sidebar {
+    background-image: url('bg1.png');
+    background-position: left bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.bs-docs-sidebar img {
+    width: 100%;
+}
 
 
 /* pyramid style end */
@@ -27,7 +42,14 @@ body {
 /* dash style */
 
 
-.bs-docs-sidebar ul:first-child>li, .logo {
+/*.bs-docs-sidebar ul:first-child>li, .logo {
+    background-image: url('dash.png');
+    background-repeat: repeat-x;
+    background-position: 0 7px; 
+}*/
+
+
+/*.bs-docs-sidebar ul:first-child>li {
     background-image: url('dash.png');
     background-repeat: repeat-x;
     background-position: 0 7px; 
@@ -50,7 +72,9 @@ body {
 
 .bs-docs-sidebar ul:first-child>li {
     padding-left: 10px;
-}
+}*/
+
+
 /*#menu ul:first-child>li:nth-child(3) {
     padding-left: 20px;
 }
@@ -164,36 +188,36 @@ a, a:hover, a:focus {
     font-weight: 500
 }
 
-/*@media (min-width: 768px) {
-    .back-to-top,
+@media (min-width: 768px) {
+/*    .back-to-top,
     .bs-docs-theme-toggle {
         display: block
-    }
-}*/
+    }*/
+}
 @media (min-width: 992px) {
     .bs-docs-sidebar .nav>.active>ul {
         display: block
     }
-    .bs-docs-sidebar.affix,
+/*    .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
-        /*width: 213px*/
+        width: 213px
     }
-/*    .bs-docs-sidebar.affix {
+    .bs-docs-sidebar.affix {
         position: fixed;
         top: 20px
-    }*/
+    }
     .bs-docs-sidebar.affix-bottom {
         position: absolute
     }
-/*    .bs-docs-sidebar.affix .bs-docs-sidenav,
+    .bs-docs-sidebar.affix .bs-docs-sidenav,
     .bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
         margin-top: 0;
         margin-bottom: 0
     }*/
 }
 @media (min-width: 1200px) {
-    .bs-docs-sidebar.affix,
+/*    .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
-        /*width: 263px*/
-    }
+        width: 263px
+    }*/
 }

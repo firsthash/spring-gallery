@@ -138,17 +138,19 @@ define(['app/AppView2'], function(AppView2){
                 },
             ];
 
-            // console.log(queue)
-
             $.slideQueue(queue, {callback: function(arr){
                 _.each(arr, function(that, index){
-                    that && that.$el.toggleClass('active') && console.log('toggle');
-                    that && that.submenu && that.submenu.$el.css('display', '');
-                    // imitate click on first submenu item
-                    if (index == 0 && that.submenu && that.submenu != that.menu.active()){
+                    // menu is collapsing... display nothing
+                    if (index == 0 && that.submenu && that.$el.hasClass('active')){
+                        new module.ContentItem({model: new Backbone.Model({})});
+                        module.app.contentControls.hide();
+                    // } else if (index == 0 && that.submenu && that.submenu != that.menu.active()){
+                    } else if (index == 0 && that.submenu){ // menu is opening... imitate click on first submenu item
                         var item = that.submenu.items[0];
                         item.model.has('content') && item.doClick();
                     }
+                    that && that.$el.toggleClass('active') && console.log('toggle');
+                    that && that.submenu && that.submenu.$el.css('display', '');
                 })
             }}, [this, that]);
         },

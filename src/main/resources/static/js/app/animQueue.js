@@ -48,9 +48,9 @@ define(['jquery'], function($) {
                 return;
             }
             step++;
-            console.log('step', queue)
+            // console.log('step', queue)
             if (anim.el) {
-                console.log('doing animation', anim.obj)
+                // console.log('doing animation', anim.obj)
                 anim.el.slideToggle(anim.duration || 500, function(){run(step)});
             } else if (anim.delay) {
                 setTimeout(function(){ run(step); }, anim.delay);
