@@ -116,6 +116,7 @@ define(['app/AppView2'], function(AppView2){
         },
         animate: function(){
             var that = null;
+            // find previously clicked item
             _.each(this.menu.items, function(item){
                 if (item.$el.hasClass('active') && item != this) {
                     that = item;
@@ -137,11 +138,11 @@ define(['app/AppView2'], function(AppView2){
                 },
             ];
 
-            console.log(queue)
+            // console.log(queue)
 
-            $.slideQueue(queue, {callback: function(opt){
-                _.each(opt.arr, function(that, index){
-                    that && that.$el.toggleClass('active');
+            $.slideQueue(queue, {callback: function(arr){
+                _.each(arr, function(that, index){
+                    that && that.$el.toggleClass('active') && console.log('toggle');
                     that && that.submenu && that.submenu.$el.css('display', '');
                     // imitate click on first submenu item
                     if (index == 0 && that.submenu && that.submenu != that.menu.active()){
@@ -149,57 +150,57 @@ define(['app/AppView2'], function(AppView2){
                         item.model.has('content') && item.doClick();
                     }
                 })
-            }, arr: [this, that]});
+            }}, [this, that]);
         },
-        animateOldSubmenu: function(){
-            if (this.busy())
-                return;
-            this.busy(true);
+        // animateOldSubmenu: function(){
+        //     if (this.busy())
+        //         return;
+        //     this.busy(true);
             
-            // this.busy(false);
-            var that = null;
-            _.each(this.menu.items, function(item){
-                if (item.$el.hasClass('active') && item != this) {
-                    that = item;
-                }
-            }, this);
-            if (!that){
-                this.animateSubmenu();
-                return;
-            }
-            if (that.submenu) {
-                var fn1 = _.bind(that.activateOldSubmenu, that);
-                var fn2 = _.bind(this.animateSubmenu, this);
-                that.submenu.$el.slideToggle(500, function(){fn1();fn2()});
-            } else {
-                that.$el.toggleClass('active');
-                this.animateSubmenu();
-            }
-        },
-        activateOldSubmenu: function(){
-            this.$el.toggleClass('active');
-            this.submenu.$el.css('display', '');
-        },
-        animateSubmenu: function(){
-            // console.log(this.busy());
-            var that = this;
-            if (that.submenu)
-                that.submenu.$el.slideToggle(500, _.bind(function(){that.activateSubmenu()}, that));
-            else {
-                that.$el.toggleClass('active');
-                this.busy(false);
-            }
-        },
-        activateSubmenu: function(){
-            this.$el.toggleClass('active');
-            this.busy(false);
-            this.submenu.$el.css('display', '');
-            // imitate click on first submenu item
-            if (this.submenu && this.submenu != this.menu.active()){
-                var item = this.submenu.items[0];
-                item.model.has('content') && item.doClick();
-            }
-        },
+        //     // this.busy(false);
+        //     var that = null;
+        //     _.each(this.menu.items, function(item){
+        //         if (item.$el.hasClass('active') && item != this) {
+        //             that = item;
+        //         }
+        //     }, this);
+        //     if (!that){
+        //         this.animateSubmenu();
+        //         return;
+        //     }
+        //     if (that.submenu) {
+        //         var fn1 = _.bind(that.activateOldSubmenu, that);
+        //         var fn2 = _.bind(this.animateSubmenu, this);
+        //         that.submenu.$el.slideToggle(500, function(){fn1();fn2()});
+        //     } else {
+        //         that.$el.toggleClass('active');
+        //         this.animateSubmenu();
+        //     }
+        // },
+        // activateOldSubmenu: function(){
+        //     this.$el.toggleClass('active');
+        //     this.submenu.$el.css('display', '');
+        // },
+        // animateSubmenu: function(){
+        //     // console.log(this.busy());
+        //     var that = this;
+        //     if (that.submenu)
+        //         that.submenu.$el.slideToggle(500, _.bind(function(){that.activateSubmenu()}, that));
+        //     else {
+        //         that.$el.toggleClass('active');
+        //         this.busy(false);
+        //     }
+        // },
+        // activateSubmenu: function(){
+        //     this.$el.toggleClass('active');
+        //     this.busy(false);
+        //     this.submenu.$el.css('display', '');
+        //     // imitate click on first submenu item
+        //     if (this.submenu && this.submenu != this.menu.active()){
+        //         var item = this.submenu.items[0];
+        //         item.model.has('content') && item.doClick();
+        //     }
+        // },
     });
 
     module.ContentItem = Backbone.View.extend({

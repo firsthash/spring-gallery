@@ -30,7 +30,7 @@ define(['jquery'], function($) {
         run(step);
     };
 
-    $.slideQueue = function(queue, options){
+    $.slideQueue = function(queue, options, obj){
         if ($.busy)
             return;
         else
@@ -43,7 +43,7 @@ define(['jquery'], function($) {
         var run = function(step) {
             var anim = queue[step];
             if (typeof anim === "undefined") { // end of loop
-                options.callback && options.callback(options);
+                options.callback && options.callback(obj);
                 $.busy = false;
                 return;
             }

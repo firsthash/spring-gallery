@@ -2,7 +2,7 @@ define(function(){
     // title, url, description
     var data = [
     {"title": ""},
-    {"title": "Анмация", "children": [
+    {"title": "Анимация", "children": [
         {"title": "Трейлер", "content": {"url": "https://vimeo.com/118504449", "title": "Трейлер", "description": "Свежий трейлер из коммерческих и некоммерческих работ"}}, 
         {"title": "Я купил велосипед", "content": {"url": "https://vimeo.com/93370126?from=outro-local", "title": "Я купил велосипед", "description": "Фильм о велоспорте"}}, 
         {"title": "В море никого нет", "content": {"url": "https://vimeo.com/93370514", "title": "В море никого нет", "description": "Анимация на стихи Саши Лукьяненко"}}, 
@@ -20,7 +20,7 @@ define(function(){
         {"title": "The Gerogerigegege", "content": {"url": "https://www.youtube.com/watch?v=NcQSnGKnh48", "title": "The Gerogerigegege - Her Name's On My Cock", "description": "Неоффициальное музыкальное видео, для группы The Gerogerigegege. Осторожно! Экспериментальная анимация!"}}, 
         {"title": "Двери", "content": {"url": "https://vimeo.com/122637055", "title": "Двери", "description": "2008 год, мой первый анимационный фильм"}}, 
     ]},
-    {"title": "Рсунки", "children": [
+    {"title": "Рисунки", "children": [
         {"title": "1&ensp;", "content": {"url": "img/comics/001.jpg", "title": "", "description": ""}}, 
         {"title": "2&ensp;", "content": {"url": "img/comics/002.jpg", "title": "", "description": ""}}, 
         {"title": "3&ensp;", "content": {"url": "img/comics/003.jpg", "title": "", "description": ""}}, 
@@ -42,13 +42,13 @@ define(function(){
         {"title": "19", "content": {"url": "img/comics/019.jpg", "title": "", "description": ""}},
         {"title": "20", "content": {"url": "img/comics/020.jpg", "title": "", "description": ""}},
     ]},  
-    {"title": "Кнтакты", "children": [
+    {"title": "Контакты", "children": [
         {"title": "vk.com", "url": "http://vk.com/nikita_liskov"}, 
         {"title": "facebook.com", "url": "https://www.facebook.com/nikita.liskov"},
         {"title": "youtube.com", "url": "https://www.youtube.com/user/Nikitaliskov/videos"}, 
         {"title": "nikitaliskov@gmail.com", "url": "mailto://nikitaliskov@gmail.com"},
     ]},
-    {"title": "О-мне", "single": "", "content": {"title": "", "url": "img/logos/Metamorphose.gif", "description": "<p><strong>Никита Лыськов</strong> - художник-мультипликатор,  родился в 1983 году,  в  Днепропетровске.</p><p>1997-2002  Днепропетровское   Художественное   Училище   (Живопись)</p><p>2004-2006  Днепропетровский   Национальный   Университет  (Дизайн)</p><p>2007-2012  КНУТКиТ  им. Карпенка-Карого  (Режиссура  анимационного  фильма)</p><p>В своем творчестве, Никита  отдает  предпочтение традиционной  рисованной анимации,</p> <p>кадр за кадром, с минимальным применением спецэффектов. Так  же  Никита  проводит</p>  <p>лекции-кинопоказы   по   истории   анимации.  Живет   и   работает   в   Днепропетровске.</p>"}, "children": [
+    {"title": "Обо-мне", "single": "", "content": {"title": "", "url": "img/logos/Metamorphose.gif", "description": "<p><strong>Никита Лыськов</strong> - художник-мультипликатор,  родился в 1983 году,  в  Днепропетровске.</p><p>1997-2002  Днепропетровское   Художественное   Училище   (Живопись)</p><p>2004-2006  Днепропетровский   Национальный   Университет  (Дизайн)</p><p>2007-2012  КНУТКиТ  им. Карпенка-Карого  (Режиссура  анимационного  фильма)</p><p>В своем творчестве, Никита  отдает  предпочтение традиционной  рисованной анимации,</p> <p>кадр за кадром, с минимальным применением спецэффектов. Так  же  Никита  проводит</p>  <p>лекции-кинопоказы   по   истории   анимации.  Живет   и   работает   в   Днепропетровске.</p>"}, "children": [
             {"title": "&ensp;"},
             {"title": "&ensp;"},
             {"title": "&ensp;"},

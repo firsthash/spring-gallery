@@ -1,6 +1,3 @@
-/*h5, ul:first-child>li>a {
-    font-family: 'Comfortaa', cursive;
-}*/
 
 body {
     overflow: hidden;
@@ -14,18 +11,31 @@ body {
     }
 }
 
+/* pyramid style */
+
+/*.bs-docs-sidebar {
+    background-image: url('bg.png');
+    background-position: left bottom;
+}*/
+
+
+/* pyramid style end */
+
+
+
+
 /* dash style */
 
-#menu ul:first-child>li, .logo {
+
+.bs-docs-sidebar ul:first-child>li, .logo {
     background-image: url('dash.png');
     background-repeat: repeat-x;
     background-position: 0 7px; 
 }
 
-#menu ul:first-child>li>a, .logo a {
+.bs-docs-sidebar ul li a, .logo a {
     background-color: white;
     display: inline-block;
-    /*text-decoration: inherit;*/
 }
 
 .bs-docs-sidebar .nav>li>a:hover,
@@ -38,7 +48,7 @@ body {
     text-align: center;
 }
 
-#menu ul:first-child>li {
+.bs-docs-sidebar ul:first-child>li {
     padding-left: 10px;
 }
 /*#menu ul:first-child>li:nth-child(3) {
@@ -55,16 +65,16 @@ body {
 
 /* calendar style */
 
-#menu ul li:nth-child(3) ul {
+.bs-docs-sidebar ul li:nth-child(3) ul {
     width: 120px;
 }
-#menu ul li:nth-child(3) ul li {
+.bs-docs-sidebar ul li:nth-child(3) ul li {
     padding: 5px;
     margin: auto;
 }
 
-#menu ul li:nth-child(3) ul li, 
-#menu ul li:nth-child(3) ul li a {
+.bs-docs-sidebar ul li:nth-child(3) ul li, 
+.bs-docs-sidebar ul li:nth-child(3) ul li a {
     display: inline;
 }
 
