@@ -18,7 +18,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/applicationContext.xml</param-value>
+        <param-value>/WEB-INF/config/globalContext.xml</param-value>
     </context-param>
 
     <!-- required by spring-security -->
@@ -32,7 +32,7 @@
         <load-on-startup>1</load-on-startup>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/config/main-servlet.xml</param-value>
+            <param-value>/WEB-INF/config/servletContext.xml</param-value>
         </init-param>
     </servlet>
 

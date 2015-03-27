@@ -75,16 +75,16 @@
     <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/>
 
     <mvc:interceptors>
-        <mvc:interceptor>
+        <!-- cache all for one day -->
+        <!-- exclude dynamic parts -->
+<!--         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <!-- exclude dynamic parts -->
-            <!-- cache for one day -->
             <mvc:exclude-mapping path="/crud/**"/>
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
                 p:cacheSeconds="#{24*60*60}"/>
-        </mvc:interceptor>
+        </mvc:interceptor> -->
+        <!-- limit interception to root paths -->
         <mvc:interceptor>
-            <!-- limit interception to root paths -->
             <mvc:mapping path="/"/>
             <bean id="domainNameInterceptor" class="org.firsthash.nikart.utils.DomainNameInterceptor"/>
         </mvc:interceptor>
