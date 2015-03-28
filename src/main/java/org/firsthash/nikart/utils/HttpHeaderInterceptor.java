@@ -10,7 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 
-public class DomainNameInterceptor extends HandlerInterceptorAdapter {
+public class HttpHeaderInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request,
                      HttpServletResponse response,
