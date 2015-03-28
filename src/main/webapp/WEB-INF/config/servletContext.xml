@@ -86,7 +86,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
-                p:cacheSeconds="#{0}"/>
+                p:cacheSeconds="0"/>
         </mvc:interceptor>
 <!--         <mvc:interceptor>
             <mvc:mapping path="/**"/>
