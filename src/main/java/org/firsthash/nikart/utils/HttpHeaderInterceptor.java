@@ -1,19 +1,24 @@
 package org.firsthash.nikart.utils;
 
-import java.io.IOException;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.servlet.handler.*;
+import org.springframework.web.servlet.mvc.method.*;
+import org.springframework.web.servlet.mvc.method.annotation.*;
 
-public class HttpHeaderInterceptor implements ClientHttpRequestInterceptor {
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+
+public class DomainNameInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        HttpHeaders headers = request.getHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        return execution.execute(request, body);
+    public void afterCompletion(HttpServletRequest request,
+                     HttpServletResponse response,
+                     Object handler,
+                     Exception ex)
+              throws Exception {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
     }
 }
