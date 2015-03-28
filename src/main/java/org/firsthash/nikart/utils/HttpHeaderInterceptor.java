@@ -12,11 +12,11 @@ import java.util.*;
 
 public class HttpHeaderInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public void afterCompletion(HttpServletRequest request,
-                     HttpServletResponse response,
-                     Object handler,
-                     Exception ex)
-              throws Exception {
+    public void postHandle(HttpServletRequest request,
+                HttpServletResponse response,
+                Object handler,
+                ModelAndView modelAndView)
+         throws Exception {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Expires", "0");
