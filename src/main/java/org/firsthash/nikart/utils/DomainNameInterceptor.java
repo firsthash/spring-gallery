@@ -29,17 +29,6 @@ public class DomainNameInterceptor extends HandlerInterceptorAdapter {
         logger.info("Mapping output: {}", handlerSet);
     }
 
-    @Override
-    public void afterCompletion(HttpServletRequest request,
-                     HttpServletResponse response,
-                     Object handler,
-                     Exception ex)
-              throws Exception {
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "0");
-    }
-
     /**
      * Treat domain name part as additional path component <br/>
      * Ex.: event.name.com ==> name.com/event <br/>
@@ -50,10 +39,6 @@ public class DomainNameInterceptor extends HandlerInterceptorAdapter {
         //        if (handlerSet == null) {
         //            initHandlerMap();
         //        }
-
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "0");
 
         String domainName = request.getHeader("Host");
         String domainPrefix = findDomainPrefix(domainName);
