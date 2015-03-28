@@ -83,11 +83,16 @@
             <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
                 p:cacheSeconds="#{24*60*60}"/>
         </mvc:interceptor> -->
-        <!-- limit interception to root paths -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean id="httpHeaderInterceptor" class="org.firsthash.nikart.utils.HttpHeaderInterceptor"/>
+            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
+                p:cacheSeconds="#{0}"/>
         </mvc:interceptor>
+<!--         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="httpHeaderInterceptor" class="org.firsthash.nikart.utils.HttpHeaderInterceptor"/>
+        </mvc:interceptor> -->
+        <!-- limit interception to root paths -->
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <bean id="domainNameInterceptor" class="org.firsthash.nikart.utils.DomainNameInterceptor"/>
