@@ -84,10 +84,10 @@
                 p:cacheSeconds="#{24*60*60}"/>
         </mvc:interceptor> -->
         <!-- limit interception to root paths -->
-        <mvc:interceptor>
+<!--         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean id="httpHeaderInterceptor" class="org.firsthash.nikart.utils.HttpHeaderInterceptor"/>
-        </mvc:interceptor>
+        </mvc:interceptor> -->
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <bean id="domainNameInterceptor" class="org.firsthash.nikart.utils.DomainNameInterceptor"/>

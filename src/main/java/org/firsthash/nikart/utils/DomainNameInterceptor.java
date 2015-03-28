@@ -51,6 +51,10 @@ public class DomainNameInterceptor extends HandlerInterceptorAdapter {
         //            initHandlerMap();
         //        }
 
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
+
         String domainName = request.getHeader("Host");
         String domainPrefix = findDomainPrefix(domainName);
 
