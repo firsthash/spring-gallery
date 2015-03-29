@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="container" class="container-fluid">
-        <div class="bs-docs-sidebar affix col-md-3" role="complementary">
+        <div class="bs-docs-sidebar affix col-md-2" role="complementary">
             <nav>
                 <!-- <div class="logo"><a href="javascript:location.reload(true)"><img src="img/top.png"/></a></div> -->
                 <div id="menu">
@@ -41,6 +41,7 @@
                         </ul>
                     -->
                 </div>
+                <div class="nav-bottom">&nbsp;</div>
             </nav>
         </div>
         <div id="content-wrap" class="col-md-8">
@@ -87,7 +88,7 @@
     </script>     
 
     <script type="text/template" id="menu-item-template">
-        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="blank"><<= title >></a>
+        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="blank"><span><<= title >></span></a>
     </script>        
 
     <script type="text/template" id="content-item-template">

@@ -7,20 +7,16 @@ body {
     .bs-docs-sidebar, #content-wrap {
         padding: 5px;
         padding-top: 20px;
-        /*padding-left: 20px*/
+        padding-left: 20px
     }
 }
 
 /* pyramid style */
 
-.bs-docs-sidebar nav {
+/*.bs-docs-sidebar nav {
     width: 51%;
     margin: auto;
 }
-
-/*.bs-docs-sidebar {
-    width: 28%;
-}*/
 
 .bs-docs-sidebar {
     background-image: url('bg1.png');
@@ -31,7 +27,7 @@ body {
 
 .bs-docs-sidebar img {
     width: 100%;
-}
+}*/
 
 
 /* pyramid style end */
@@ -49,15 +45,29 @@ body {
 }*/
 
 
-/*.bs-docs-sidebar ul:first-child>li {
+/* logo */
+/* FIXME: eleminate specific dash style */
+.bs-docs-sidebar .nav:first-child>li:first-child {
+    height: 28px;
     background-image: url('dash.png');
+    background-position: bottom;
     background-repeat: repeat-x;
-    background-position: 0 7px; 
 }
 
-.bs-docs-sidebar ul li a, .logo a {
+.bs-docs-sidebar .nav:first-child>li:first-child>a {
+    text-decoration: none;
+}
+
+
+.bs-docs-sidebar ul:first-child>li>a, .nav-bottom {
+    background-image: url('dash.png');
+    background-repeat: repeat-x;
+    background-position: center; 
+    padding-left: 10px;
+}
+
+.bs-docs-sidebar ul:first-child>li>a>span {
     background-color: white;
-    display: inline-block;
 }
 
 .bs-docs-sidebar .nav>li>a:hover,
@@ -70,20 +80,13 @@ body {
     text-align: center;
 }
 
-.bs-docs-sidebar ul:first-child>li {
-    padding-left: 10px;
-}*/
-
-
-/*#menu ul:first-child>li:nth-child(3) {
-    padding-left: 20px;
+.bs-docs-sidebar .nav .nav {
+    padding-left: 15px!important;
 }
-#menu ul:first-child>li:nth-child(4) {
-    padding-left: 30px;
+
+.bs-docs-sidebar ul li:nth-child(3) ul {
+  width: 130px!important;
 }
-#menu ul:first-child>li:nth-child(5) {
-    padding-left: 40px;
-}*/
 
 /* dash style end */
 
