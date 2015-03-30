@@ -1,7 +1,7 @@
 define(function(){
     // fields: title, url, description
     var data = [
-    {"title": "никита-лыськов-home", "single": "", "content": {}},
+    {"title": "никита-лыськов-home", "single": "", "content": {"url": "img/logos/Transformation.gif"}},
     {"title": "анимация", "children": [
         {"title": "Трейлер", "content": {"url": "https://vimeo.com/118504449", "title": "Трейлер", "description": "Свежий трейлер из коммерческих и некоммерческих работ"}}, 
         {"title": "Я купил велосипед", "content": {"url": "https://vimeo.com/93370126?from=outro-local", "title": "Я купил велосипед", "description": "Фильм о велоспорте"}}, 

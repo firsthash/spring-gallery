@@ -52,6 +52,7 @@
         background-repeat: repeat-x;
     }
 
+    /* clearup logo */
     .bs-docs-sidebar .nav:first-child>li:first-child>a {
         text-decoration: none;
     }
@@ -60,8 +61,9 @@
     .bs-docs-sidebar ul:first-child>li>a, .nav-bottom {
         background-image: url('dash.png');
         background-repeat: repeat-x;
-        background-position: center; 
+        background-position: center left; 
         padding-left: 10px;
+        /*background-attachment: fixed;*/
     }
 
     .bs-docs-sidebar ul:first-child>li>a>span {

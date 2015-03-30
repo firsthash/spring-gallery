@@ -19,8 +19,8 @@ define(['app/AppView2'], function(AppView2){
         render: function(){
             this.items = [];
             this.collection.each(function(model){
-                var menuItem = new module.MenuItem({model: model});
-                menuItem.menu = this;
+                var menuItem = new module.MenuItem({model: model, menu: this});
+                // menuItem.menu = this;
                 this.items.push(menuItem);
                 var menuItemElem = menuItem.render().el;
                 this.$el.append(menuItemElem);
@@ -58,6 +58,13 @@ define(['app/AppView2'], function(AppView2){
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
         submenu: null,
+        menu: null,
+        initialize: function(options){
+            this.menu = options.menu;
+            if (this.model.has('content')) {
+                this.menu.active(this.menu);
+            }
+        },
         className: function(){
             var className = '';
             if (this.model.has('style'))
@@ -97,7 +104,7 @@ define(['app/AppView2'], function(AppView2){
 
             // open parent menu
             if (this.menu.parentItem && !this.menu.parentItem.$el.hasClass('active')) {
-                console.log('open parent')
+                // console.log('open parent')
                 this.menu.parentItem.doClick();
             }
         },
@@ -148,7 +155,7 @@ define(['app/AppView2'], function(AppView2){
                         var item = that.submenu.items[0];
                         item.model.has('content') && item.doClick();
                     }
-                    that && that.$el.toggleClass('active') && console.log('toggle');
+                    that && that.$el.toggleClass('active');
                     that && that.submenu && that.submenu.$el.css('display', '');
                 })
             }}, [this, that]);

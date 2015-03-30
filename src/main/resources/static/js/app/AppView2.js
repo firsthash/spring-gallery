@@ -53,8 +53,9 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
 
 
         // bind collection events, when items are added or changed
-        initialize: function(options){
-            this.options = options;
+        initialize: function(module){
+            module.app = this;
+            this.options = module;
 
             var menuItems = new this.options.MenuItems(data);
 
@@ -65,6 +66,10 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
             var contentControls = new this.options.ContentControls({menu: menu});
 
             this.contentControls = contentControls;
+            // contentControls.next();
+
+            // imitate click on first elem
+            menu.down();
 
             // var name = this.logos[_.random(this.logos.length - 1)];
             // var url = "img/logos/" + name + ".gif";
