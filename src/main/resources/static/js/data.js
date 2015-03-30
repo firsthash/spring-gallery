@@ -1,28 +1,26 @@
 define(function(){
-    // title, url, description
+    // fields: title, url, description
     var data = [
-    // {"title": ""},
     {"title": "никита-лыськов-home", "single": "", "content": {}},
-    // {"title": "&nbsp;"},
     {"title": "анимация", "children": [
         {"title": "Трейлер", "content": {"url": "https://vimeo.com/118504449", "title": "Трейлер", "description": "Свежий трейлер из коммерческих и некоммерческих работ"}}, 
         {"title": "Я купил велосипед", "content": {"url": "https://vimeo.com/93370126?from=outro-local", "title": "Я купил велосипед", "description": "Фильм о велоспорте"}}, 
         {"title": "В море никого нет", "content": {"url": "https://vimeo.com/93370514", "title": "В море никого нет", "description": "Анимация на стихи Саши Лукьяненко"}}, 
         {"title": "Мальчик", "content": {"url": "https://vimeo.com/93370882", "title": "Мальчик", "description": "Фильм о мальчике, который много мечтал"}}, 
-        {"title": "Virgo Four - Untitled", "content": {"url": "https://www.youtube.com/watch?v=Imx52RhczX4", "title": "Virgo Four - Untitled", "description": "Не всегда хватает сил  закончить начатое"}}, 
+        {"title": "Untitled", "content": {"url": "https://www.youtube.com/watch?v=Imx52RhczX4", "title": "Virgo Four - Untitled", "description": "Не всегда хватает сил  закончить начатое"}}, 
         {"title": "Червяк (Серия-1)", "content": {"url": "https://www.youtube.com/watch?v=ve7_J4QAXuU", "title": "Червяк (Серия-1)", "description": "Червивая жизнь"}}, 
         {"title": "Червяк (Серия-2)", "content": {"url": "https://www.youtube.com/watch?v=V_XWBBNwAWc", "title": "Червяк (Серия-2)", "description": "Червивая жизнь продолжается"}}, 
         {"title": "Это птицы", "content": {"url": "https://www.youtube.com/watch?v=2mrcfL9zmG4", "title": "Это птицы", "description": "Мультфильм о любви к братьям нашим меньшим"}}, 
         {"title": "Это Я", "content": {"url": "https://www.youtube.com/watch?v=5jwcw8uDaUU", "title": "Это Я", "description": "Краткая биография человечества"}}, 
-        {"title": "Deerhoof - There's That Grin", "content": {"url": "https://www.youtube.com/watch?v=bNGt0vMkvn8", "title": "Deerhoof - There's That Grin", "description": "Неофициальное музыкальное видео на музыку Deerhoof - There's That Grin"}}, 
-        {"title": "Euphoria - Close your eyes", "content": {"url": "https://www.youtube.com/watch?v=G4HDIheB8sk", "title": "Euphoria - Close your eyes", "description": "Оффициальное видео для коллектива Euphoria из Днепропетровска"}}, 
-        {"title": "Дельфин - Частицы", "content": {"url": "https://www.youtube.com/watch?v=iPGRr7kxLZg", "title": "Дельфин - Частицы", "description": "Неоффициальное музыкальное видео, музыка: Дельфин - Частицы"}}, 
-        {"title": "Дельфин - Темно", "content": {"url": "https://vimeo.com/122636447", "title": "Дельфин - Темно", "description": "Неоффициальное музыкальное видео, музыка: Дельфин - Темно"}}, 
-        {"title": "KRAKATAU - МирМайТру...", "content": {"url": "https://www.youtube.com/watch?v=GDk57j7tgiM", "title": "KRAKATAU - МирМайТру...", "description": "Оффициальное видео для группы KRAKATAU"}}, 
+        {"title": "There's That Grin", "content": {"url": "https://www.youtube.com/watch?v=bNGt0vMkvn8", "title": "Deerhoof - There's That Grin", "description": "Неофициальное музыкальное видео на музыку Deerhoof - There's That Grin"}}, 
+        {"title": "Close your eyes", "content": {"url": "https://www.youtube.com/watch?v=G4HDIheB8sk", "title": "Euphoria - Close your eyes", "description": "Оффициальное видео для коллектива Euphoria из Днепропетровска"}}, 
+        {"title": "Частицы", "content": {"url": "https://www.youtube.com/watch?v=iPGRr7kxLZg", "title": "Дельфин - Частицы", "description": "Неоффициальное музыкальное видео, музыка: Дельфин - Частицы"}}, 
+        {"title": "Темно", "content": {"url": "https://vimeo.com/122636447", "title": "Дельфин - Темно", "description": "Неоффициальное музыкальное видео, музыка: Дельфин - Темно"}}, 
+        {"title": "МирМайТру...", "content": {"url": "https://www.youtube.com/watch?v=GDk57j7tgiM", "title": "KRAKATAU - МирМайТру...", "description": "Оффициальное видео для группы KRAKATAU"}}, 
         {"title": "The Gerogerigegege", "content": {"url": "https://www.youtube.com/watch?v=NcQSnGKnh48", "title": "The Gerogerigegege - Her Name's On My Cock", "description": "Неоффициальное музыкальное видео, для группы The Gerogerigegege. Осторожно! Экспериментальная анимация!"}}, 
         {"title": "Двери", "content": {"url": "https://vimeo.com/122637055", "title": "Двери", "description": "2008 год, мой первый анимационный фильм"}}, 
     ]},
-    {"title": "рисунки", "children": [
+    {"title": "рисунки", "style": "calendar", "children": [
         {"title": "1&ensp;", "content": {"url": "img/comics/001.jpg", "title": "", "description": ""}}, 
         {"title": "2&ensp;", "content": {"url": "img/comics/002.jpg", "title": "", "description": ""}}, 
         {"title": "3&ensp;", "content": {"url": "img/comics/003.jpg", "title": "", "description": ""}}, 
@@ -57,7 +55,6 @@ define(function(){
             {"title": "&ensp;"},
 
     ]},
-    // {"title": "&nbsp;"}
     ];
     return data;
 })

@@ -58,15 +58,14 @@ define(['app/AppView2'], function(AppView2){
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
         submenu: null,
-        busy: [false],
-        busy: function(val){
-            if (typeof val != 'undefined')
-                this.busy[0] = val;
-            else
-                return this.busy[0];
+        className: function(){
+            var className = '';
+            if (this.model.has('style'))
+                className = this.model.get('style');
+            return className;
         },
         render: function(){
-            this.busy(false);
+            // this.busy(false);
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
             if (this.model.has('children') && this.model.get('children') != '') {
@@ -125,8 +124,8 @@ define(['app/AppView2'], function(AppView2){
             var el1 = that && that.submenu ? that.submenu.$el : null;
             var el2 = this.submenu ? this.submenu.$el : null;
             if (!el1 && !el2){
-                this && this.$el.toggleClass('active');
-                that && that.$el.toggleClass('active');
+                this && this.$el.addClass('active');
+                that && that.$el.removeClass('active');
                 return;
             }
             var queue = [
@@ -154,55 +153,6 @@ define(['app/AppView2'], function(AppView2){
                 })
             }}, [this, that]);
         },
-        // animateOldSubmenu: function(){
-        //     if (this.busy())
-        //         return;
-        //     this.busy(true);
-            
-        //     // this.busy(false);
-        //     var that = null;
-        //     _.each(this.menu.items, function(item){
-        //         if (item.$el.hasClass('active') && item != this) {
-        //             that = item;
-        //         }
-        //     }, this);
-        //     if (!that){
-        //         this.animateSubmenu();
-        //         return;
-        //     }
-        //     if (that.submenu) {
-        //         var fn1 = _.bind(that.activateOldSubmenu, that);
-        //         var fn2 = _.bind(this.animateSubmenu, this);
-        //         that.submenu.$el.slideToggle(500, function(){fn1();fn2()});
-        //     } else {
-        //         that.$el.toggleClass('active');
-        //         this.animateSubmenu();
-        //     }
-        // },
-        // activateOldSubmenu: function(){
-        //     this.$el.toggleClass('active');
-        //     this.submenu.$el.css('display', '');
-        // },
-        // animateSubmenu: function(){
-        //     // console.log(this.busy());
-        //     var that = this;
-        //     if (that.submenu)
-        //         that.submenu.$el.slideToggle(500, _.bind(function(){that.activateSubmenu()}, that));
-        //     else {
-        //         that.$el.toggleClass('active');
-        //         this.busy(false);
-        //     }
-        // },
-        // activateSubmenu: function(){
-        //     this.$el.toggleClass('active');
-        //     this.busy(false);
-        //     this.submenu.$el.css('display', '');
-        //     // imitate click on first submenu item
-        //     if (this.submenu && this.submenu != this.menu.active()){
-        //         var item = this.submenu.items[0];
-        //         item.model.has('content') && item.doClick();
-        //     }
-        // },
     });
 
     module.ContentItem = Backbone.View.extend({

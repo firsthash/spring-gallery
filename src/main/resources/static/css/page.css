@@ -1,13 +1,17 @@
 
-body {
-    overflow: hidden;
-}
 
 @media (min-width: 768px) {
+    body {
+        overflow: hidden;
+    }
     .bs-docs-sidebar, #content-wrap {
         padding: 5px;
         padding-top: 20px;
         padding-left: 20px
+    }
+    .bs-docs-sidebar {
+        width: 12%;
+        /*margin-right: 4%;*/
     }
 }
 
@@ -35,77 +39,72 @@ body {
 
 
 
-/* dash style */
+/* DASH STYLE */
 
 
-/*.bs-docs-sidebar ul:first-child>li, .logo {
-    background-image: url('dash.png');
-    background-repeat: repeat-x;
-    background-position: 0 7px; 
-}*/
+@media (min-width: 768px) {
+    /* logo */
+    /* FIXME: eleminate specific dash style */
+    .bs-docs-sidebar .nav:first-child>li:first-child {
+        height: 28px;
+        background-image: url('dash.png');
+        background-position: bottom;
+        background-repeat: repeat-x;
+    }
+
+    .bs-docs-sidebar .nav:first-child>li:first-child>a {
+        text-decoration: none;
+    }
 
 
-/* logo */
-/* FIXME: eleminate specific dash style */
-.bs-docs-sidebar .nav:first-child>li:first-child {
-    height: 28px;
-    background-image: url('dash.png');
-    background-position: bottom;
-    background-repeat: repeat-x;
+    .bs-docs-sidebar ul:first-child>li>a, .nav-bottom {
+        background-image: url('dash.png');
+        background-repeat: repeat-x;
+        background-position: center; 
+        padding-left: 10px;
+    }
+
+    .bs-docs-sidebar ul:first-child>li>a>span {
+        background-color: white;
+    }
+
+    .bs-docs-sidebar .nav>li>a:hover,
+    .bs-docs-sidebar .nav>li>a:focus,
+    .bs-docs-sidebar .nav .active a {
+        background-color: white!important;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .bs-docs-sidebar .nav .nav {
+        padding-left: 15px!important;
+    }
+
+    .bs-docs-sidebar ul li:nth-child(3) ul {
+      width: 130px!important;
+    }
 }
 
-.bs-docs-sidebar .nav:first-child>li:first-child>a {
-    text-decoration: none;
-}
+/* DASH STYLE END */
 
+/* CALENDAR STYLE */
 
-.bs-docs-sidebar ul:first-child>li>a, .nav-bottom {
-    background-image: url('dash.png');
-    background-repeat: repeat-x;
-    background-position: center; 
-    padding-left: 10px;
-}
-
-.bs-docs-sidebar ul:first-child>li>a>span {
-    background-color: white;
-}
-
-.bs-docs-sidebar .nav>li>a:hover,
-.bs-docs-sidebar .nav>li>a:focus,
-.bs-docs-sidebar .nav .active a {
-    background-color: white!important;
-}
-
-.logo {
-    text-align: center;
-}
-
-.bs-docs-sidebar .nav .nav {
-    padding-left: 15px!important;
-}
-
-.bs-docs-sidebar ul li:nth-child(3) ul {
-  width: 130px!important;
-}
-
-/* dash style end */
-
-/* calendar style */
-
-.bs-docs-sidebar ul li:nth-child(3) ul {
+.bs-docs-sidebar ul li.calendar ul {
     width: 120px;
 }
-.bs-docs-sidebar ul li:nth-child(3) ul li {
+.bs-docs-sidebar ul li.calendar ul li {
     padding: 5px;
     margin: auto;
 }
 
-.bs-docs-sidebar ul li:nth-child(3) ul li, 
-.bs-docs-sidebar ul li:nth-child(3) ul li a {
+.bs-docs-sidebar ul li.calendar ul li, 
+.bs-docs-sidebar ul li.calendar ul li a {
     display: inline;
 }
 
-/* calendar style end */
+/* CALENDAR STYLE END */
 
 /*.bs-docs-sidebar .nav:first-child>li>a {
     text-decoration: underline;
