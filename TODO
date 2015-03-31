@@ -1,8 +1,9 @@
+hide 'description' and 'url' from 2 level menu???
+
+done:
 * button hidden click handler
 * replace SectionView with GalleryView
 * route sub domain queries (HandlerInterceptor)
-
-done:
 * bug: add index to newly uploaded image
 * apply javascript module pattern to backbone objects
 * migrate to PostgreSql

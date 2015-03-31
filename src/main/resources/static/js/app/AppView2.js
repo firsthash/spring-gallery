@@ -60,6 +60,7 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
             var menuItems = new this.options.MenuItems(data);
 
             var menu = new this.options.Menu({collection: menuItems});
+            menu.isRoot = true;
             var menuElem = menu.render().el;
             this.$('#menu').append(menuElem);
 
@@ -69,7 +70,7 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
             // contentControls.next();
 
             // imitate click on first elem
-            menu.down();
+            contentControls.next();
 
             // var name = this.logos[_.random(this.logos.length - 1)];
             // var url = "img/logos/" + name + ".gif";

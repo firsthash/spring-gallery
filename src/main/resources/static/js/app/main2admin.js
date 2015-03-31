@@ -13,7 +13,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             this.collection.each(function(model){
                 var menuItem = new module.MenuItem({model: model});
                 if (this.isRoot) {
-                    menuItem.template = _.template($('#root-list-item-template').html());
+                    menuItem.template = _.template($('#root-menu-item-template').html());
                 }
                 var menuItemElem = menuItem.render().el;
                 this.$el.append(menuItemElem);
@@ -24,7 +24,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
 
     module.MenuItem = Backbone.View.extend({
         tagName: 'li',
-        template: _.template($('#list-item-template').html()),
+        template: _.template($('#menu-item-template').html()),
         render: function(){
             // var template = _.template($('#input-item-template').html());
             // _.each(this.model.toJSON(), function(value, key){
@@ -32,13 +32,22 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             // }, this);
             this.$el.append(this.template(this.model.toJSON()));
             if (this.model.has('content')){
-                var menu = new module.Menu({collection: new module.MenuItems(this.model.get('content'))});
-                this.$el.append(menu.render().el);
+                var contentItem = new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
+                this.$el.append(contentItem.render().el);
             }
             if (this.model.has('children') && this.model.get('children') != '') {
                 var menu = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
                 this.$el.append(menu.render().el);
             }
+            return this;
+        },
+    });
+
+    module.ContentItem = Backbone.View.extend({
+        className: 'form-group',
+        template: _.template($('#content-item-template').html()),
+        render: function(){
+            this.$el.append(this.template(this.model.toJSON()));
             return this;
         },
     });

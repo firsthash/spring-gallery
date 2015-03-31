@@ -10,6 +10,7 @@ define(['app/AppView2'], function(AppView2){
         className: 'nav',
         active: [null], // static variable
         items: null,
+        isRoot: false,
         active: function(menu){
             if (menu)
                 this.active[0] = menu;
@@ -37,17 +38,23 @@ define(['app/AppView2'], function(AppView2){
             }, this);
             return itemIndex;   
         },
-        up: function(){
+        prev: function(){
             var itemIndex = this.itemIndex();
             if (itemIndex <= 0) 
                 itemIndex = this.items.length;
             this.items[itemIndex - 1].doClick();
         },
-        down: function(){
+        next: function(){
             var itemIndex = this.itemIndex();
             if (itemIndex == (this.items.length - 1))
                 itemIndex = -1;
             this.items[itemIndex + 1].doClick();
+        },
+        hasNext: function(){
+            var ret = true;
+            if (this.items.length == 1 || this.isRoot)
+                ret = false;
+            return ret;
         },
     });
 
@@ -107,16 +114,18 @@ define(['app/AppView2'], function(AppView2){
                 // console.log('open parent')
                 this.menu.parentItem.doClick();
             }
+
+            module.app.contentControls.toggle();
         },
         drawContent: function(){
             // draw element
             if (this.model.has('content') && this.model.get('content') != ''){
                 new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
-                if (this.model.has('single')){
-                    module.app.contentControls.hide();
-                } else {
-                    module.app.contentControls.unhide();
-                }
+                // if (this.model.has('single')){
+                //     module.app.contentControls.hide();
+                // } else {
+                //     module.app.contentControls.unhide();
+                // }
                 this.menu.active(this.menu);
             }
         },
@@ -211,6 +220,13 @@ define(['app/AppView2'], function(AppView2){
         initialize: function(options){
             this.menu = options.menu;
         },
+        toggle: function(){
+            // console.log(this.menu.active().hasNext())
+            if (this.menu.active().hasNext())
+                this.unhide();
+            else
+                this.hide();
+        },
         unhide: function(){
             this.$el.removeClass('hidden');
             this.isHidden = false;
@@ -222,12 +238,12 @@ define(['app/AppView2'], function(AppView2){
         prev: function(){
             var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                menu.up();
+                menu.prev();
         },
         next: function(){
             var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                menu.down();
+                menu.next();
         },
     });
 

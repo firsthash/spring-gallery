@@ -18,19 +18,19 @@
             display: inline;
         }
     </style>
+    <script type="text/javascript">
+        if (location.protocol == 'http:' && location.port == '')
+            document.write('<base href="/static/">');
+    </script>
 </head>
 <body>
-    <div class="container-fluid">
-        <div id="list" class="row">
-            <ul>
-                <li><label>title</label><input type="text" value="title" /><label>url</label><input type="text" value="url" /><label>description</label><input type="text" value="description" />
-                    <ul>
-                        <li><label>title</label><input type="text" value="title" /><label>url</label><input type="text" value="url" /><label>description</label><input type="text" value="description" /></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <button>Save</button>
+    <div class="container-fluid well">
+        <form class="form-inline">
+            <div id="list" class="row">
+                <!-- content -->
+            </div>
+            <button class="btn btn-primary btn-lg col-md-offset-8" type="button">Save All</button>
+        </form>
     </div>
 
 
@@ -38,17 +38,27 @@
         <label><<= name >></label><input type="text" value="<<= value >>" />
     </script>    
 
-    <script type="text/template" id="list-item-template">
-        <form class="form-inline">
-            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="from-control"/>
-            <input type="file" class="from-control"/>
-            <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="from-control"/>
-            <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="description" class="from-control"/>
-            <input type="checkbox" <<= typeof(single) == 'undefined' ? '' : 'checked' >>  class="from-control"/>
-        </form>
+    <script type="text/template" id="menu-item-template-bak">
+        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
+        <label class="control-label">Single</label>
+        <input type="checkbox" <<= typeof(single) == 'undefined' ? '' : 'checked' >>  class="form-control"/>
+        <button class="btn btn-default" type="button" class="form-control">Удалить</button>
+    </script>    
+
+    <script type="text/template" id="menu-item-template">
+        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
+        <button class="btn btn-default" type="button" class="form-control">Удалить</button>
     </script>
-    <script type="text/template" id="root-list-item-template">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title"/>
+
+    <script type="text/template" id="content-item-template">
+            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
+            <input type="file" name="upload" class="form-control"/>
+            <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control"/>
+            <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="description" class="form-control"/>
+    </script>
+    <script type="text/template" id="root-menu-item-template">
+        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
+        <button class="btn btn-default" type="button" class="form-control">Добавить</button>
     </script>
 
 
