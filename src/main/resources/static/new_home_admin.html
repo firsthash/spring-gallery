@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin</title>
+    <script type="text/javascript">
+        if (location.protocol == 'http:' && location.port == '')
+            document.write('<base href="/static/">');
+    </script>
 
     <!-- Bootstrap -->
-    <link href="js/lib/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="js/lib/bootstrap3/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
 
     <style type="text/css">
         li {
@@ -25,10 +29,6 @@
             display: none;
         }
     </style>
-    <script type="text/javascript">
-        if (location.protocol == 'http:' && location.port == '')
-            document.write('<base href="/static/">');
-    </script>
 </head>
 <body>
     <div class="container-fluid well">
