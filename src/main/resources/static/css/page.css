@@ -1,9 +1,9 @@
 
 
 @media (min-width: 768px) {
-    body {
+/*    body {
         overflow: hidden;
-    }
+    }*/
     .bs-docs-sidebar, #content-wrap {
         padding: 5px;
         padding-top: 20px;
@@ -192,17 +192,22 @@ a, a:hover, a:focus {
     font-weight: 500
 }
 
-@media (min-width: 768px) {
-/*    .back-to-top,
+.bs-docs-sidebar .nav>.active>ul {
+    display: block
+}
+
+/*@media (min-width: 768px) {
+    .back-to-top,
     .bs-docs-theme-toggle {
         display: block
-    }*/
+    }
 }
+
 @media (min-width: 992px) {
     .bs-docs-sidebar .nav>.active>ul {
         display: block
     }
-/*    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
         width: 213px
     }
@@ -217,11 +222,12 @@ a, a:hover, a:focus {
     .bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
         margin-top: 0;
         margin-bottom: 0
-    }*/
+    }
 }
+
 @media (min-width: 1200px) {
-/*    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix,
     .bs-docs-sidebar.affix-bottom {
         width: 263px
-    }*/
-}
+    }
+}*/

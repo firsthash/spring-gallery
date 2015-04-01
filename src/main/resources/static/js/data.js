@@ -21,7 +21,7 @@ define(function(){
         {"title": "The Gerogerigegege", "content": {"url": "https://www.youtube.com/watch?v=NcQSnGKnh48", "title": "The Gerogerigegege - Her Name's On My Cock", "description": "Неоффициальное музыкальное видео, для группы The Gerogerigegege. Осторожно! Экспериментальная анимация!"}}, 
         {"title": "Двери", "content": {"url": "https://vimeo.com/122637055", "title": "Двери", "description": "2008 год, мой первый анимационный фильм"}}, 
     ]},
-    {"title": "рисунки", "style": "calendar", "hide": "url content-title content-description", "children": [
+    {"title": "рисунки", "style": "calendar", "hide": "url content-url content-title content-description", "children": [
         {"title": "1&ensp;", "content": {"url": "img/comics/001.jpg", "title": "", "description": ""}}, 
         {"title": "2&ensp;", "content": {"url": "img/comics/002.jpg", "title": "", "description": ""}}, 
         {"title": "3&ensp;", "content": {"url": "img/comics/003.jpg", "title": "", "description": ""}}, 
