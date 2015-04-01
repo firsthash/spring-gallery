@@ -11,6 +11,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
             var menuItems = new this.options.MenuItems(data);
 
             var menu = new this.options.Menu({collection: menuItems});
+            // menu.hideFields = "content-title content-url";
             menu.isRoot = true;
             var menuElem = menu.render().el;
             this.$('#list').html(menuElem);

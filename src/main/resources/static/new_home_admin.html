@@ -17,6 +17,13 @@
         input[type=file] {
             display: inline;
         }
+        .panel {
+            background-color: initial;
+            margin-bottom: initial;
+        }
+        #list>ul>.btn-add {
+            display: none;
+        }
     </style>
     <script type="text/javascript">
         if (location.protocol == 'http:' && location.port == '')
@@ -29,13 +36,18 @@
             <div id="list" class="row">
                 <!-- content -->
             </div>
-            <button class="btn btn-primary btn-lg col-md-offset-8" type="button">Save All</button>
+            <!-- <button class="btn btn-primary btn-lg col-md-offset-8" type="button">Save All</button> -->
         </form>
     </div>
 
 
     <script type="text/template" id="input-item-template">
         <label><<= name >></label><input type="text" value="<<= value >>" />
+    </script>
+
+
+    <script type="text/template" id="menu-template">
+        <button class="btn btn-default btn-add" type="button">Добавить</button>
     </script>    
 
     <script type="text/template" id="menu-item-template-bak">
@@ -46,24 +58,36 @@
     </script>    
 
     <script type="text/template" id="menu-item-template">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
-        <button class="btn btn-default" type="button" class="form-control">Удалить</button>
+        <div class="content form-group">
+            <button class="btn btn-default btn-remove" type="button" class="form-control">Удалить</button>
+            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-name="title"/>
+            <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-name="url"/>
+        </div>
+    </script>
+
+    <script type="text/template" id="root-menu-item-template">
+        <div class="content form-group">
+            <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>">
+                Развернуть
+            </button>
+            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-name="title"/>
+            <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-name="style"/>
+            <input type="text" value="<<= typeof(hide) == 'undefined' ? '' : hide >>" placeholder="hide" class="form-control" data-name="hide"/>
+        </div>
+
+        <div class="collapse" id="<<= cid >>">
+            
+        </div>
     </script>
 
     <script type="text/template" id="content-item-template">
-            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
-            <input type="file" name="upload" class="form-control"/>
-            <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control"/>
-            <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="description" class="form-control"/>
+            <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="content-url" class="form-control" data-name="content-url"/>
+            <input type="file" name="upload" class="form-control" data-name="content-upload"/>
+            <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="content-title" class="form-control" data-name="content-title"/>
+            <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>
     </script>
-    <script type="text/template" id="root-menu-item-template">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
-        <button class="btn btn-default" type="button" class="form-control">Добавить</button>
-    </script>
-
 
     <script src="js/lib/require.js"></script>
-
     
     <script>
         require(['js/common2.js'], function(common) {
