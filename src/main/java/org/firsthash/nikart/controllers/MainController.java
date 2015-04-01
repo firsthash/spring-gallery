@@ -29,6 +29,14 @@ public class MainController {
         return IOUtils.toByteArray(in);
     }
 
+    @RequestMapping(value = "/admin", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public byte[] newAdmin() throws IOException {
+        InputStream in = this.getClass().getResourceAsStream("/static/new_home_admin.html");
+        assert in != null : "resource not found";
+        return IOUtils.toByteArray(in);
+    }
+
     @RequestMapping(value = "/new")
     public String home(ModelMap model) {
         return "redirect:/static/new_home.html";
