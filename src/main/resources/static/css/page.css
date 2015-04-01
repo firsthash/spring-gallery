@@ -46,7 +46,7 @@
     /* logo */
     /* FIXME: eleminate specific dash style */
     .bs-docs-sidebar .nav:first-child>li:first-child {
-        height: 28px;
+        min-height: 28px;
         background-image: url('dash.png');
         background-position: bottom;
         background-repeat: repeat-x;
