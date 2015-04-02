@@ -53,43 +53,13 @@
         <button class="btn btn-default btn-add" type="button">Добавить</button>
     </script>
 
-    <script type="text/template" id="menu-item-template-bak">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>
-        <label class="control-label">Single</label>
-        <input type="checkbox" <<= typeof(single) == 'undefined' ? '' : 'checked' >>  class="form-control"/>
-        <button class="btn btn-default" type="button" class="form-control">Удалить</button>
-    </script>    
-
-    <script type="text/template" id="menu-item-template-bak">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-hide="title"/>
-        <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-hide="url"/>
-        <span class="content"></span>
-        <input type="text" value="<<= typeof(position) == 'undefined' ? '' : position >>" placeholder="position" class="form-control" data-hide="position"/>
-        <button class="btn btn-default btn-remove" type="button" class="form-control">Удалить</button>
-    </script>
-
-    <script type="text/template" id="root-menu-item-template-bak">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-hide="title"/>
-
-        <span class="content"></span>
-
-        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>">
-            Развернуть
-        </button>
-        <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-hide="style"/>
-        <input type="text" value="<<= typeof(hide) == 'undefined' ? '' : hide >>" placeholder="hide" class="form-control" data-hide="hide"/>
-
-        <div class="collapse" id="<<= cid >>">
-
-        </div>
-    </script>    
 
     <script type="text/template" id="menu-item-template">
         <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-hide="title"/>
         <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-hide="url"/>
         <span class="content"></span>
         <input type="text" value="<<= typeof(position) == 'undefined' ? '' : position >>" placeholder="position" class="form-control" data-hide="position"/>
-        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>" data-hide="btn-collapse">Развернуть</button>
+        <button class="btn btn-default btn-collapse" type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>" data-hide="btn-collapse">Развернуть</button>
         <button class="btn btn-default btn-remove" type="button" class="form-control" data-hide="btn-remove">Удалить</button>
 
         <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-hide="style"/>

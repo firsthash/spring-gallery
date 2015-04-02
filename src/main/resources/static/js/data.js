@@ -2,7 +2,7 @@ define(function(){
     // TODO: del 'single'
     // fields: title, url, description
     var data = [
-    {"title": "никита-лыськов-home", "single": "", "hide": "content-title content-description", "content": {"url": "img/logos/Transformation.gif"}},
+    {"title": "никита-лыськов-home", "single": "", "content": {"url": "img/logos/Transformation.gif"}},
     {"title": "&ensp;"},
     {"title": "анимация", "hide": "url content-upload style hide btn-collapse", "children": [
         {"title": "Трейлер", "content": {"url": "https://vimeo.com/118504449", "title": "Трейлер", "description": "Свежий трейлер из коммерческих и некоммерческих работ"}}, 

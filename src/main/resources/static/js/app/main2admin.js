@@ -10,7 +10,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
         hideFields: function(){
             // console.log(this.menu.hideFields, this.cid)
             if (!this.menu.hideFields)
-                return;
+                this.menu.hideFields = this.menu.hideFieldsDefault;
             var arr = this.menu.hideFields.split(/\s+/);
             _.each(arr, function(str){
                 this.$("[data-hide={}]".format(str)).addClass('hidden');
@@ -31,7 +31,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             return this.cid;
         },
         isRoot: false,
-        hideFields: "content-title position url style",
+        hideFieldsDefault: "content-title content-upload position url style",
         render: function(){
             this.$el.append(this.template());
             this.collection.each(function(model){
@@ -56,6 +56,16 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
         template: _.template($('#menu-item-template').html()),
         events: {
             'click .btn-remove': 'remove',
+            'click .btn-collapse': 'collapse',
+        },
+        hasChildren: function(){
+            return this.model.has('children') && this.model.get('children') != '';
+        },
+        collapse: function(){
+            if (!this.hasChildren()) {
+                console.log('no subm')
+                this.addSubmenu([{title: ""}]);
+            }
         },
         render: function(){
             var model = this.model.toJSON();
@@ -68,12 +78,18 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             contentItem.menu = this.menu;
             this.$('.content').append(contentItem.render().el);
 
-            if (this.model.has('children') && this.model.get('children') != '') {
-                var menu = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
-                menu.hideFields = this.model.get('hide'); // list of hidden stuff
-                this.$('.collapse').append(menu.render().el);
-            }
+            this.hasChildren() && this.addSubmenu();
             return this;
+        },
+        addSubmenu: function(children){
+            if (children) {
+                items = new module.MenuItems(children);
+                this.model.set('children', children);
+            } else
+                items = new module.MenuItems(this.model.get('children'));
+            var menu = new module.Menu({collection: items});
+            menu.hideFields = this.model.get('hide'); // list of hidden stuff
+            this.$('.collapse').append(menu.render().el);
         },
     });
 
