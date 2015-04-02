@@ -60,7 +60,8 @@
     </script>     
 
     <script type="text/template" id="menu-item-template">
-        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="blank"><span><<= title >></span></a>
+        <!-- IE fix: open new tab when using anhor with blank attribute -->
+        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url >>" target="<<= typeof(url) == 'undefined' ? '' : 'blank' >>"><span><<= title >></span></a>
     </script>        
 
     <script type="text/template" id="content-item-template">
