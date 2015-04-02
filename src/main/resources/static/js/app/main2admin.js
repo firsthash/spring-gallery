@@ -13,7 +13,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
                 return;
             var arr = this.menu.hideFields.split(/\s+/);
             _.each(arr, function(str){
-                this.$("[data-name={}]".format(str)).addClass('hidden');
+                this.$("[data-hide={}]".format(str)).addClass('hidden');
             }, this);
         }
     });
@@ -31,7 +31,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             return this.cid;
         },
         isRoot: false,
-        hideFields: "style hide content-title content-url",
+        hideFields: "content-title content-description position url btn-remove",
         render: function(){
             this.$el.append(this.template());
             this.collection.each(function(model){
@@ -42,9 +42,9 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
         addItem: function(model){
             var menuItem = new module.MenuItem({model: model});
             menuItem.menu = this;
-            if (this.isRoot) {
-                menuItem.template = _.template($('#root-menu-item-template').html());
-            }
+            // if (this.isRoot) {
+            //     menuItem.template = _.template($('#root-menu-item-template').html());
+            // }
             var menuItemElem = menuItem.render().el;
             this.$el.append(menuItemElem);
         },

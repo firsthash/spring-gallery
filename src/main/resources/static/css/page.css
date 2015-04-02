@@ -45,11 +45,11 @@
 @media (min-width: 768px) {
     /* logo */
     /* FIXME: eleminate specific dash style */
-    .bs-docs-sidebar .nav:first-child>li:first-child {
-        min-height: 28px;
-        background-image: url('dash.png');
-        background-position: bottom;
-        background-repeat: repeat-x;
+    .bs-docs-sidebar .nav:first-child>li:first-child>a {
+        /*min-height: 40px;*/
+        /*background-image: url('dash.png');*/
+        /*background-position: bottom;*/
+        /*background-repeat: repeat-x;*/
     }
 
     /* clearup logo */
@@ -58,11 +58,12 @@
     }
 
 
-    .bs-docs-sidebar ul:first-child>li>a, .nav-bottom {
-        background-image: url('dash.png');
-        background-repeat: repeat-x;
-        background-position: center left; 
-        padding-left: 10px;
+    .bs-docs-sidebar ul:first-child>li, .nav-bottom {
+        background-image: url('dash2.png');
+        background-repeat: repeat;
+        /*background-position: 0 0.5em;*/
+        background-size: 1em 1.5em; 
+        /*padding-left: 10px;*/
         /*background-attachment: fixed;*/
     }
 
@@ -73,7 +74,7 @@
     .bs-docs-sidebar .nav>li>a:hover,
     .bs-docs-sidebar .nav>li>a:focus,
     .bs-docs-sidebar .nav .active a {
-        background-color: white!important;
+        background-color: transparent!important;
     }
 
     .logo {
@@ -82,10 +83,11 @@
 
     .bs-docs-sidebar .nav .nav {
         padding-left: 15px!important;
+        background-color: white;
     }
 
-    .bs-docs-sidebar ul li:nth-child(3) ul {
-      width: 130px!important;
+    .bs-docs-sidebar ul:first-child>li>a {
+        padding-left: 10px!important;
     }
 }
 
@@ -94,7 +96,8 @@
 /* CALENDAR STYLE */
 
 .bs-docs-sidebar ul li.calendar ul {
-    width: 120px;
+    /*width: 120px;*/
+    padding-right: 20%;
 }
 .bs-docs-sidebar ul li.calendar ul li {
     padding: 5px;
@@ -114,7 +117,7 @@
 
 a, a:hover, a:focus {
     color: black;
-    text-decoration: none;
+    /*text-decoration: none;*/
 }
 
 .hidden {
