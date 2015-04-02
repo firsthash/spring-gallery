@@ -1,4 +1,4 @@
-define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
+define(['app/AppView2Admin'], function(AppView2Admin) {
 
     var module = {};
 
@@ -8,12 +8,11 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
 
     module.ItemBase = Backbone.View.extend({
         hideFields: function(){
-            // console.log(this.menu.hideFields, this.cid)
             if (!this.menu.hideFields)
                 this.menu.hideFields = this.menu.hideFieldsDefault;
             var arr = this.menu.hideFields.split(/\s+/);
             _.each(arr, function(str){
-                this.$("[data-hide={}]".format(str)).addClass('hidden');
+                this.$(".{}".format(str)).addClass('hidden');
             }, this);
         }
     });
