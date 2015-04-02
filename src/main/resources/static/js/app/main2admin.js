@@ -31,7 +31,7 @@ define(['app/AppView2Admin', 'data'], function(AppView2Admin, data) {
             return this.cid;
         },
         isRoot: false,
-        hideFields: "content-title content-description position url btn-remove",
+        hideFields: "content-title content-description position url",
         render: function(){
             this.$el.append(this.template());
             this.collection.each(function(model){

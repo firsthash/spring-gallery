@@ -25,9 +25,9 @@
             background-color: initial;
             margin-bottom: initial;
         }
-        #list>ul>.btn-add {
+/*        #list>ul>.btn-add {
             display: none;
-        }
+        }*/
 /*        ul:first-child>li {
             padding: 20px;
         }*/
@@ -39,7 +39,7 @@
             <div id="list" class="row">
                 <!-- content -->
             </div>
-            <!-- <button class="btn btn-primary btn-lg col-md-offset-8" type="button">Save All</button> -->
+            <button class="btn btn-primary btn-lg col-md-offset-5" type="button">Save All</button>
         </form>
     </div>
 
@@ -51,7 +51,7 @@
 
     <script type="text/template" id="menu-template">
         <button class="btn btn-default btn-add" type="button">Добавить</button>
-    </script>    
+    </script>
 
     <script type="text/template" id="menu-item-template-bak">
         <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control"/>

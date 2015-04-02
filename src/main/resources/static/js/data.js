@@ -44,7 +44,7 @@ define(function(){
         {"title": "19", "content": {"url": "img/comics/019.jpg", "title": "", "description": ""}},
         {"title": "20", "content": {"url": "img/comics/020.jpg", "title": "", "description": ""}},
     ]},  
-    {"title": "контакты", "hide": "content-upload content-url content-title content-description style hide btn-collapse", "children": [
+    {"title": "контакты", "hide": "content-upload content-title content-description style hide btn-collapse", "children": [
         {"title": "vk.com", "url": "http://vk.com/nikita_liskov"}, 
         {"title": "facebook.com", "url": "https://www.facebook.com/nikita.liskov"},
         {"title": "youtube.com", "url": "https://www.youtube.com/user/Nikitaliskov/videos"}, 
