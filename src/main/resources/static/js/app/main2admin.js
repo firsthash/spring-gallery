@@ -2,11 +2,22 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
 
     var module = {};
 
-    module.MenuItems = Backbone.Collection.extend({
-        url: '/crud/menuitems',
+    module.MenuItem = Backbone.Model.extend({
+        url: '/crud/menuitem',
+    });
+    
+    module.ContentItem = Backbone.Model.extend({
+        url: '/crud/contentitem',
     });
 
-    module.ItemBase = Backbone.View.extend({
+    module.MenuItems = Backbone.Collection.extend({
+        model: module.MenuItem,
+        // url: '/crud/menuitems',
+        url: 'http://www.nikitaliskov.com/crud/ImageModel',
+    });
+
+
+    module.ItemViewBase = Backbone.View.extend({
         hideFields: function(){
             if (!this.menu.hideFields)
                 this.menu.hideFields = this.menu.hideFieldsDefault;
@@ -17,14 +28,16 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
         }
     });
 
-    module.Menu = Backbone.View.extend({
+    module.MenuView = Backbone.View.extend({
         tagName: 'ul',
         events: {
             'click >.btn-add': 'add',
         },
         template: _.template($('#menu-template').html()),
         add: function(){
-            this.addItem(new Backbone.Model({}));
+            var model = new module.MenuItem({});
+            this.addItem(model);
+            this.collection.add(model);
         },
         id: function(){
             return this.cid;
@@ -39,7 +52,7 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
             return this;
         },
         addItem: function(model){
-            var menuItem = new module.MenuItem({model: model});
+            var menuItem = new module.MenuItemView({model: model});
             menuItem.menu = this;
             // if (this.isRoot) {
             //     menuItem.template = _.template($('#root-menu-item-template').html());
@@ -49,13 +62,18 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
         },
     });
 
-    module.MenuItem = module.ItemBase.extend({
+    module.MenuItemView = module.ItemViewBase.extend({
         tagName: 'li',
         className: 'panel', // workaround: makes collapse behave like accordion
         template: _.template($('#menu-item-template').html()),
         events: {
-            'click .btn-remove': 'remove',
+            'click .btn-remove': 'remove2',
             'click .btn-collapse': 'collapse',
+        },
+        remove2: function(){
+            this.remove();
+            this.model.destroy();
+            // this.parent.collection.remove(this.model);
         },
         hasChildren: function(){
             return this.model.has('children') && this.model.get('children') != '';
@@ -72,8 +90,8 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
             model.pid = this.menu.cid;
             this.$el.append(this.template(model)) && this.hideFields(); // hide some unneeded stuff
 
-            var contentModel = this.model.get('content') || {};
-            var contentItem = new module.ContentItem({model: new Backbone.Model(contentModel)});
+            var content = this.model.get('content') || {};
+            var contentItem = new module.ContentItemView({model: new module.ContentItem(content)});
             contentItem.menu = this.menu;
             this.$('.content').append(contentItem.render().el);
 
@@ -86,13 +104,13 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
                 this.model.set('children', children);
             } else
                 items = new module.MenuItems(this.model.get('children'));
-            var menu = new module.Menu({collection: items});
+            var menu = new module.MenuView({collection: items});
             menu.hideFields = this.model.get('hide'); // list of hidden stuff
             this.$('.collapse').append(menu.render().el);
         },
     });
 
-    module.ContentItem = module.ItemBase.extend({
+    module.ContentItemView = module.ItemViewBase.extend({
         tagName: 'span', // workaround: makes form inline
         template: _.template($('#content-item-template').html()),
         render: function(){
@@ -103,6 +121,10 @@ define(['app/AppView2Admin'], function(AppView2Admin) {
 
     // Main Controller
     module.AppView2Admin = AppView2Admin;
+
+    // Backbone.sync = function(method, model){
+    //     console.log(method, model)
+    // }
 
     return module;
 });

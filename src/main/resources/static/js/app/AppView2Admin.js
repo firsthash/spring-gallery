@@ -8,9 +8,12 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
         initialize: function(options){
             this.options = options;
 
-            var menuItems = new this.options.MenuItems(data);
+            var menuItems = new this.options.MenuItems();
+            menuItems.reset(data);
 
-            var menu = new this.options.Menu({collection: menuItems});
+            window.menuItems = menuItems;
+
+            var menu = new this.options.MenuView({collection: menuItems});
             // menu.hideFields = "content-title content-url";
             menu.isRoot = true;
             var menuElem = menu.render().el;

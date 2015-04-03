@@ -5,7 +5,7 @@ define(['app/AppView2'], function(AppView2){
         url: '/crud/menuitems',
     });
 
-    module.Menu = Backbone.View.extend({
+    module.MenuView = Backbone.View.extend({
         tagName: 'ul',
         className: 'nav',
         active: [null], // static variable
@@ -20,7 +20,7 @@ define(['app/AppView2'], function(AppView2){
         render: function(){
             this.items = [];
             this.collection.each(function(model){
-                var menuItem = new module.MenuItem({model: model, menu: this});
+                var menuItem = new module.MenuItemView({model: model, menu: this});
                 // menuItem.menu = this;
                 this.items.push(menuItem);
                 var menuItemElem = menuItem.render().el;
@@ -32,7 +32,6 @@ define(['app/AppView2'], function(AppView2){
             var itemIndex = -1;
             _.each(this.items, function(item, index){
                 if (item.$el.hasClass('active')){
-                    // console.log(index)
                     itemIndex = index;
                 }
             }, this);
@@ -58,7 +57,7 @@ define(['app/AppView2'], function(AppView2){
         },
     });
 
-    module.MenuItem = Backbone.View.extend({
+    module.MenuItemView = Backbone.View.extend({
         events: {
             'click': 'onClick'
         },
@@ -83,7 +82,7 @@ define(['app/AppView2'], function(AppView2){
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
             if (this.model.has('children') && this.model.get('children') != '') {
-                var submenu = new module.Menu({collection: new module.MenuItems(this.model.get('children'))});
+                var submenu = new module.MenuView({collection: new module.MenuItems(this.model.get('children'))});
                 this.submenu = submenu;
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
@@ -120,7 +119,7 @@ define(['app/AppView2'], function(AppView2){
         drawContent: function(){
             // draw element
             if (this.model.has('content') && this.model.get('content') != ''){
-                new module.ContentItem({model: new Backbone.Model(this.model.get('content'))});
+                new module.ContentItemView({model: new Backbone.Model(this.model.get('content'))});
                 // if (this.model.has('single')){
                 //     module.app.contentControls.hide();
                 // } else {
@@ -157,7 +156,7 @@ define(['app/AppView2'], function(AppView2){
                 _.each(arr, function(that, index){
                     // menu is collapsing... display nothing
                     if (index == 0 && that.submenu && that.$el.hasClass('active')){
-                        new module.ContentItem({model: new Backbone.Model({})});
+                        new module.ContentItemView({model: new Backbone.Model({})});
                         module.app.contentControls.hide();
                     // } else if (index == 0 && that.submenu && that.submenu != that.menu.active()){
                     } else if (index == 0 && that.submenu){ // menu is opening... imitate click on first submenu item
@@ -171,7 +170,7 @@ define(['app/AppView2'], function(AppView2){
         },
     });
 
-    module.ContentItem = Backbone.View.extend({
+    module.ContentItemView = Backbone.View.extend({
         template: _.template($('#content-item-template').html()),
         youtubeTemplate: _.template($('#youtube-template').html()),
         vimeoTemplate: _.template($('#vimeo-template').html()),
@@ -210,7 +209,7 @@ define(['app/AppView2'], function(AppView2){
         }
     });
 
-    module.ContentControls = Backbone.View.extend({
+    module.ContentControlsView = Backbone.View.extend({
         el: $('#content-controls'),
         events: {
             'click #prev': 'prev',

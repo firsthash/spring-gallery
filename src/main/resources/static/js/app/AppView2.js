@@ -57,14 +57,15 @@ define(['backbone', 'bootstrap', 'data', 'app/animQueue'], function(bb, bs, data
             module.app = this;
             this.options = module;
 
-            var menuItems = new this.options.MenuItems(data);
+            var menuItems = new this.options.MenuItems();
+            menuItems.reset(data);
 
-            var menu = new this.options.Menu({collection: menuItems});
+            var menu = new this.options.MenuView({collection: menuItems});
             menu.isRoot = true;
             var menuElem = menu.render().el;
             this.$('#menu').append(menuElem);
 
-            var contentControls = new this.options.ContentControls({menu: menu});
+            var contentControls = new this.options.ContentControlsView({menu: menu});
 
             this.contentControls = contentControls;
             // contentControls.next();
