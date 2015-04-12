@@ -17,6 +17,7 @@ public class MenuItemUploadController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UploadedImageRepository repository;
+    private String rootDir = Paths.get(System.getProperty("user.home"), "app-root", "data").toString();
 
     @RequestMapping(value = "/menuitems__", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
@@ -34,9 +35,9 @@ public class MenuItemUploadController {
     @RequestMapping(value = "/menuitemupload", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String uploadToFilesystem(@RequestParam("upload") MultipartFile file) throws IOException {
-        String basedir = "app-root/data/uploads";
+        String basedir = "uploads";
         String filename = file.getOriginalFilename().replaceAll(" |#", "_");
-        Path uploadPath = Paths.get(System.getProperty("user.home"), basedir, filename);
+        Path uploadPath = Paths.get(rootDir, basedir, filename);
         logger.info("upload path is: {}", uploadPath);
 
         File uploadFile = uploadPath.toFile();
@@ -58,7 +59,7 @@ public class MenuItemUploadController {
     public void uploadCleanup(@RequestBody String path) throws IOException {
         if (path.isEmpty())
             return;
-        Path abspath = Paths.get(System.getProperty("user.home"), path);
+        Path abspath = Paths.get(rootDir, path);
         logger.info("deleting file {}", abspath);
         Files.deleteIfExists(abspath);
     }
