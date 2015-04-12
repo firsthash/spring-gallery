@@ -34,7 +34,7 @@ public class MenuItemUploadController {
     @RequestMapping(value = "/menuitemupload", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String uploadToFilesystem(@RequestParam("upload") MultipartFile file) throws IOException {
-        String basedir = "uploads";
+        String basedir = "app-root/data/uploads";
         String filename = file.getOriginalFilename().replaceAll(" |#", "_");
         Path uploadPath = Paths.get(System.getProperty("user.home"), basedir, filename);
         logger.info("upload path is: {}", uploadPath);
