@@ -11,7 +11,7 @@
         <security:intercept-url pattern="/menuitems/**" method="GET" access="permitAll"/>
         <security:intercept-url pattern="/menuitems/**" access="hasRole('ROLE_ADMIN')"/>
         <security:remember-me key="myKey"/>
-        <csrf disabled="true"/>
+        <security:csrf disabled="true"/>
     </security:http>
 
     <!-- <bean class="org.yuliskov.nikitaliskov.config.WebSecurityConfig"/> -->
