@@ -1,0 +1,103 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- place to search for annotated classes -->
+    <context:component-scan base-package="org.yuliskov.nikart"/>
+    <context:component-scan base-package="org.yuliskov.nikitaliskov"/>
+
+    <!-- place to search for DAO interfaces -->
+    <jpa:repositories base-package="org.yuliskov.nikart.repositories"/>
+    <jpa:repositories base-package="org.yuliskov.nikitaliskov.repositories"/>
+
+    <!-- enable http related annotations -->
+    <mvc:annotation-driven/>
+
+    <!-- enable transaction related annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+        p:entityManagerFactory-ref="entityManagerFactory"/>
+
+    <!-- enable caching related annotations -->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="image"/>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="gallery"/>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="default"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- enable file posting -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+        p:maxUploadSize="#{10*1024*1024}"/>
+
+<!--    <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
+        <constructor-arg value="defaultLogger"/>
+    </bean>-->
+
+    <!-- other beans -->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:prefix="/WEB-INF/classes/pages/" p:suffix=".jsp" />
+
+    <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+        p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
+        p:username="${jdbc.username}" p:password="${jdbc.password}"/>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+        p:dataSource-ref="dataSource" p:persistenceUnitName="nikart" p:packagesToScan="org.yuliskov.nikart, org.yuliskov.nikitaliskov">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                p:database="${jpa.database}" p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"/>
+        </property>
+    </bean>
+
+    <mvc:resources location="classpath:/static/" mapping="/static/**"/>
+    <mvc:resources location="classpath:/static2/" mapping="/static2/**"/>
+    <mvc:resources location="file:${user.home}/uploads/" mapping="/uploads/**"/>
+    <!-- <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/> -->
+
+    <mvc:interceptors>
+        <!-- cache all for one day -->
+        <!-- exclude dynamic parts -->
+<!--         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/crud/**"/>
+            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
+                p:cacheSeconds="#{24*60*60}"/>
+        </mvc:interceptor> -->
+<!--         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="httpHeaderInterceptor" class="org.yuliskov.nikart.utils.HttpHeaderInterceptor"/>
+        </mvc:interceptor> -->
+        <!-- limit interception to root paths -->
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <bean id="domainNameInterceptor" class="org.yuliskov.nikart.utils.DomainNameInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

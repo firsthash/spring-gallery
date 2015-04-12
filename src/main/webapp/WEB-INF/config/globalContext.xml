@@ -1,29 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/crud/**" method="GET" access="permitAll"/>
+        <security:intercept-url pattern="/crud/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/menuitems/**" method="GET" access="permitAll"/>
+        <security:intercept-url pattern="/menuitems/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:remember-me key="myKey"/>
+        <!--<csrf disabled="true"/>-->
+    </security:http>
 
-    <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/crud/**" method="GET" access="permitAll"/>
-        <intercept-url pattern="/crud/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/form/**" access="hasRole('ROLE_ADMIN')"/>
-        <remember-me key="myKey"/>
-    </http>
+    <bean class="org.yuliskov.nikitaliskov.config.WebSecurityConfig"/>
 
     <!--
     User/Pass: admin/admin
     -->
-    <authentication-manager>
-        <authentication-provider>
-            <password-encoder hash="md5"/>
-            <user-service>
-                <user name="admin" password="21232f297a57a5a743894a0e4a801fc3" authorities="ROLE_ADMIN"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder hash="md5"/>
+            <security:user-service>
+                <security:user name="admin" password="21232f297a57a5a743894a0e4a801fc3" authorities="ROLE_ADMIN"/>
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
 
-</beans:beans>
+</beans>

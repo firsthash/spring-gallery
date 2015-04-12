@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <script type="text/javascript">
+        if (location.protocol == 'http:' && (location.port == '' || location.port == '8080'))
+            document.write('<base href="/static2/">');
+    </script>
+
+    <!-- Bootstrap -->
+    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
+
+    <style type="text/css">
+        li {
+            display: block;
+        }
+        .panel {
+            background-color: initial;
+            margin-bottom: initial;
+        }
+        input[data-name=position] {
+            width: 3em!important;
+        }
+        input[data-name=content-upload] {
+            width: 10em!important;
+        }
+    </style>
+
+    <script src="js/lib/require.js"></script>
+    <script>
+        require(['js/common.js'], function() {
+            require(['app/main_admin', 'app/appview_admin', 'holder'], function(main, AppView) {
+                new AppView(main);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid well">
+        <form class="form-inline">
+            <div id="list" class="row">
+                <!-- content -->
+            </div>
+            <!-- <button class="btn btn-primary btn-lg col-md-offset-5" type="button">Save All</button> -->
+        </form>
+    </div>
+
+
+    <script type="text/template" id="input-item-template">
+        <label><<= name >></label><input type="text" value="<<= value >>" />
+    </script>
+
+
+    <script type="text/template" id="menu-template">
+        <button class="btn btn-default btn-add" type="button">Добавить</button>
+    </script>
+
+    <script type="text/template" id="menu-wrapper-template">
+        <button class="btn btn-primary btn-lg col-md-offset-5 btn-save-all" type="button">Save All</button>
+    </script>
+
+
+    <script type="text/template" id="menu-item-template">
+        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-name="title"/>
+        <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-name="url"/>
+        <span class="content"></span>
+        <input type="text" value="<<= typeof(position) == 'undefined' ? '' : position >>" placeholder="position" class="form-control" data-name="position"/>
+        <button type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>" class="btn btn-default btn-collapse" data-name="btn-collapse">Развернуть</button>
+        <button type="button" class="form-control btn btn-default btn-remove">Удалить</button>
+
+        <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-name="style"/>
+        <input type="text" value="<<= typeof(hide) == 'undefined' ? '' : hide >>" placeholder="hide" class="form-control" data-name="hide"/>
+
+        <div class="collapse" id="<<= cid >>">
+
+        </div>
+    </script>
+
+    <script type="text/template" id="content-item-template">
+        <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="content-url" class="form-control" data-name="content-url"/>
+        <input type="file" name="upload" class="form-control" data-name="content-upload"/>
+        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="content-title" class="form-control" data-name="content-title"/>
+        <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>
+    </script>
+
+
+</body>
+</html>
