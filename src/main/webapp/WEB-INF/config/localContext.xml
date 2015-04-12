@@ -78,7 +78,7 @@
 
     <mvc:resources location="classpath:/static/" mapping="/static/**"/>
     <mvc:resources location="classpath:/static2/" mapping="/static2/**"/>
-    <mvc:resources location="file:${user.home}/uploads/" mapping="/uploads/**"/>
+    <mvc:resources location="file:${user.home}/app-root/data/uploads/" mapping="/uploads/**"/>
     <!-- <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/> -->
 
     <mvc:interceptors>
