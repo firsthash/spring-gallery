@@ -195,19 +195,19 @@ define(['backbone', 'app/animqueue'], function(){
         },
         embed: function(){
             var url = this.model.get('url') || '';
+            var isAbs = url.startsWith('http');
 
-            if (!url.startsWith('http'))
-                return this.imageTemplate(this.model.toJSON());
-
-            if (url.indexOf('youtube') > -1) {
+            if (isAbs && url.indexOf('youtube') > -1) {
                 var videoId = url.replace(/.*v=([^&]*).*/gi, '$1');
                 return this.youtubeTemplate({videoId: videoId});
             }
 
-            if (url.indexOf('vimeo') > -1) {
+            if (isAbs && url.indexOf('vimeo') > -1) {
                 var videoId = url.replace(/.*\/([^&]*).*/gi, '$1');
                 return this.vimeoTemplate({videoId: videoId});
             }
+
+            return this.imageTemplate(this.model.toJSON());
         },
         render: function() {
             return this;
