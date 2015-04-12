@@ -11,10 +11,10 @@
         <security:intercept-url pattern="/menuitems/**" method="GET" access="permitAll"/>
         <security:intercept-url pattern="/menuitems/**" access="hasRole('ROLE_ADMIN')"/>
         <security:remember-me key="myKey"/>
-        <!--<csrf disabled="true"/>-->
+        <csrf disabled="true"/>
     </security:http>
 
-    <bean class="org.yuliskov.nikitaliskov.config.WebSecurityConfig"/>
+    <!-- <bean class="org.yuliskov.nikitaliskov.config.WebSecurityConfig"/> -->
 
     <!--
     User/Pass: admin/admin
