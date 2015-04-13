@@ -79,10 +79,12 @@ define(['app/appview_admin'], function(AppView) {
             'change >input[type=file]': 'doUpload',
             'change >input[type=text]': 'saveChanges',
         },
-        baseInitialize: function() {
+        baseInitialize: function(options) {
             if (!this.events)
                 this.events = {};
             _.extend(this.events, this.baseEvents);
+            if (options.hide)
+                this.hide = options.hide;
         },
         hide: "content-title url style",
         hideFields: function(){
@@ -174,8 +176,7 @@ define(['app/appview_admin'], function(AppView) {
             return this;
         },
         addItem: function(model){
-            var view = new module.MenuItemView({model: model, parent: this, hide: this.hide});
-            view.menu = this;
+            var view = new module.MenuItemView({model: model, menu: this, hide: this.hide});
             var el = view.render().el;
             this.$el.append(el);
         },
@@ -189,13 +190,10 @@ define(['app/appview_admin'], function(AppView) {
         template: _.template($('#menu-item-template').html()),
         events: {
             'click .btn-remove': 'removeItem',
-            'click .btn-collapse': 'collapse',
         },
         initialize: function(options) {
-            this.baseInitialize();
-            this.parent = options.parent;
-            if (options.hide)
-                this.hide = options.hide;
+            this.baseInitialize(options);
+            this.menu = options.menu;
         },
         removeItem: function(){
             this.remove();
@@ -204,26 +202,20 @@ define(['app/appview_admin'], function(AppView) {
         hasChildren: function(){
             return this.model.has('children') && this.model.get('children') != '';
         },
-        collapse: function(){
-            if (!this.hasChildren()) {
-                this.addSubmenu([{}]);
-            }
-        },
         render: function(){
             var model = this.model.toJSON();
-            model.cid = this.cid;
-            model.pid = this.menu.cid;
+            model.viewId = this.cid;
+            model.parentViewId = this.menu.cid;
             this.$el.append(this.template(model)) && this.hideFields(); // hide some unneeded stuff
 
             var content = new module.ContentItem(this.model.get('content') || {});
             this.model.set('content', content);
-            var contentItem = new module.ContentItemView({model: content});
-            contentItem.menu = this.menu;
+            var contentItem = new module.ContentItemView({model: content, hide: this.hide});
+
             this.$('.content').append(contentItem.render().el);
 
-            if (this.hasChildren()) {
-                this.addSubmenu(this.model.get('children'));
-            }
+            this.addSubmenu(this.model.get('children'));
+
             return this;
         },
         addSubmenu: function(children){
@@ -231,7 +223,6 @@ define(['app/appview_admin'], function(AppView) {
             // replace json object with backbone collection
             this.model.set('children', items);
             var menu = new module.MenuView({collection: items, hide: this.model.get('hide')});
-            // menu.hideFields = this.model.get('hide'); // list of hidden stuff
             this.$('.collapse').append(menu.render().el);
         },
     });
@@ -240,8 +231,8 @@ define(['app/appview_admin'], function(AppView) {
         tagName: 'span', // workaround: makes form inline
         template: _.template($('#content-item-template').html()),
         prefix: 'content-',
-        initialize: function() {
-            this.baseInitialize();
+        initialize: function(options) {
+            this.baseInitialize(options);
         },
         render: function(){
             this.$el.append(this.template(this.model.toJSON())) && this.hideFields(); // hide some unneeded stuff

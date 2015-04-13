@@ -69,13 +69,13 @@
         <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-name="url"/>
         <span class="content"></span>
         <input type="text" value="<<= typeof(position) == 'undefined' ? '' : position >>" placeholder="position" class="form-control" data-name="position"/>
-        <button type="button" data-toggle="collapse" data-target="#<<= cid >>" data-parent="#<<= pid >>" class="btn btn-default btn-collapse" data-name="btn-collapse">Развернуть</button>
+        <button type="button" data-toggle="collapse" data-target="#<<= viewId >>" data-parent="#<<= parentViewId >>" class="btn btn-default btn-collapse" data-name="btn-collapse">Развернуть</button>
         <button type="button" class="form-control btn btn-default btn-remove">Удалить</button>
 
         <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-name="style"/>
         <input type="text" value="<<= typeof(hide) == 'undefined' ? '' : hide >>" placeholder="hide" class="form-control" data-name="hide"/>
 
-        <div class="collapse" id="<<= cid >>">
+        <div class="collapse" id="<<= viewId >>">
 
         </div>
     </script>
