@@ -1,6 +1,7 @@
-hide 'description' and 'url' from 2 level menu???
+* robust upload and database paths
 
 done:
+* hide 'description' and 'url' from 2 level menu???
 * button hidden click handler
 * replace SectionView with GalleryView
 * route sub domain queries (HandlerInterceptor)
