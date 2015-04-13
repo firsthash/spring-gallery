@@ -110,10 +110,11 @@ define(['app/appview_admin'], function(AppView) {
         filterInt: function(val, oldVal){
             if (isNaN(val))
                 return val;
-            var value = parseInt(val);
-            if (value > oldVal)
-                return val;
-            return --value;
+            if (val > oldVal)
+                return ++val;
+            if (val < oldVal)
+                return --val;
+            return val;
         },
         doUpload: function(e) {
             console.log('doUpload');
