@@ -4,6 +4,9 @@ define(['app/appview_admin'], function(AppView) {
 
     module.MenuItem = Backbone.Model.extend({
         url: '/menuitem',
+        initialize: function(){
+            // this.on('change:position', function(){console.log('change:position')}, this);
+        },
         sync: function(){
             return false;
         },
@@ -98,8 +101,19 @@ define(['app/appview_admin'], function(AppView) {
             var el = $(e.target);
             var name = el.data('name').replace(this.prefix, '');
             var value = el.val();
-            if (typeof value != 'undefined')
+            if (typeof value != 'undefined') {
+                value = this.filterInt(value, this.model.get(name));
+                console.log(value);
                 this.model.set(name, value);
+            }
+        },
+        filterInt: function(val, oldVal){
+            if (isNaN(val))
+                return val;
+            var value = parseInt(val);
+            if (value > oldVal)
+                return val;
+            return --value;
         },
         doUpload: function(e) {
             console.log('doUpload');
