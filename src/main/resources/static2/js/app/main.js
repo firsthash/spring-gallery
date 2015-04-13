@@ -261,41 +261,38 @@ define(['backbone', 'app/animqueue'], function(){
                 menu.next();
         },
         onkeydown: function(e){
-            var prev = 37;
-            var next = 39;
+            var left = 37;
+            var right = 39;
             var up = 38;
             var down = 40;
             var space = 32;
             switch (e.which) {
                 case up:
-                case prev:
+                case left:
                     this.prev();
                     return false;
                 case down:
-                case next:
+                case right:
                     this.next();
                     return false;
                 case space:
-                    if (this.play())
-                        this.next();
+                    this.play() && this.next();
                     return false;
             }
             return true;
         },
         play: function(){
-            var iframe = this.$('iframe');
-            // if (iframe.length && !iframe[0].src.contains('autoplay')){
-            if (iframe.length){
-                var src = iframe[0].src;
+            var iframe = $('iframe')[0];
+            if (iframe){
+                var src = iframe.src;
                 if (src.contains('autoplay')){
-                    iframe[0].src = src.replace(/autoplay[^&]*[&]*/, '');
+                    iframe.src = src.replace(/autoplay[^&]*[&]*/, '');
                     return false;
                 }
-                console.log(src)
                 var query = src.contains('?') ? '&' : '?';
                 query += 'autoplay=1';
-                console.log(query);
-                iframe[0].src += query;
+                iframe.src += query;
+                console.log(iframe.src);
                 return false;
             }
             return true;
