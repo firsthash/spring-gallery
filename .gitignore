@@ -4,11 +4,12 @@
 *.iws
 .idea/
 
-# backup/content files
+# backup files
 original/
 bak/
 *bak/
 tmp/
+temp/
 old/
 test/
 files/
@@ -22,9 +23,9 @@ files/
 target/
 *.war
 
-# HSQLDB database files
+# database files
 data/
 
-# win-scripts and personal notes
+# win-scripts and notes
 *.bat
 snippets.txt
