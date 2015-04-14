@@ -79,7 +79,7 @@ define(['app/appview_admin'], function(AppView) {
 
     module.ItemViewBase = Backbone.View.extend({
         baseEvents: {
-            'change >input[type=file]': 'doUpload',
+            'change >input[type=file]': 'uploadFile',
             'change >input[type=text]': 'saveChanges',
         },
         baseInitialize: function(options) {
@@ -102,21 +102,20 @@ define(['app/appview_admin'], function(AppView) {
             var name = el.data('name').replace(this.prefix, '');
             var value = el.val();
             if (typeof value != 'undefined') {
-                value = this.filterInt(value, this.model.get(name));
+                if (name == 'position')
+                    value = this.filterPos(value, this.model.get(name));
                 console.log(value);
                 this.model.set(name, value);
             }
         },
-        filterInt: function(val, oldVal){
-            if (isNaN(val))
-                return val;
+        filterPos: function(val, oldVal){
             if (val > oldVal)
                 return ++val;
             if (val < oldVal)
                 return --val;
             return val;
         },
-        doUpload: function(e) {
+        uploadFile: function(e) {
             console.log('doUpload');
             var formData = new FormData();
             var file = e.target.files[0];
