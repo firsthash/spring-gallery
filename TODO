@@ -1,4 +1,5 @@
-* robust upload and database paths
+* cleanup server from unused images. best way to do this when full model is being saved
+* handle different upload and database paths for local and remote servers
 
 done:
 * hide 'description' and 'url' from 2 level menu???

@@ -20,6 +20,10 @@ define(['backbone', 'app/animqueue'], function(){
         active: [null], // static variable
         items: null,
         isRoot: false,
+        initialize: function(){
+            if (!this.active())
+                this.active(this);
+        },
         active: function(menu){
             if (menu)
                 this.active[0] = menu;
@@ -31,7 +35,6 @@ define(['backbone', 'app/animqueue'], function(){
             this.collection.each(function(model, index){
                 model.set('position', index + 1);
                 var menuItem = new module.MenuItemView({model: model, menu: this});
-                // menuItem.menu = this;
                 this.items.push(menuItem);
                 var menuItemElem = menuItem.render().el;
                 this.$el.append(menuItemElem);
@@ -39,30 +42,33 @@ define(['backbone', 'app/animqueue'], function(){
             return this;
         },
         itemIndex: function(){
-            var itemIndex = -1;
-            _.each(this.items, function(item, index){
+            var itemIndex = 0;
+            _.each(this.active().items, function(item, index){
                 if (item.$el.hasClass('active')){
                     itemIndex = index;
                 }
             }, this);
             return itemIndex;   
         },
-        prev: function(){
+        item: function(index){
+            return this.active().items[index];
+        },
+        prevItem: function(){
             var itemIndex = this.itemIndex();
             if (itemIndex <= 0) 
-                itemIndex = this.items.length;
-            this.items[itemIndex - 1].doClick();
+                itemIndex = this.active().items.length;
+            return this.active().items[itemIndex - 1];
         },
-        next: function(){
+        nextItem: function(){
             var itemIndex = this.itemIndex();
-            if (itemIndex == (this.items.length - 1))
+            if (itemIndex == (this.active().items.length - 1))
                 itemIndex = -1;
-            this.items[itemIndex + 1].doClick();
+            return this.active().items[itemIndex + 1];
         },
-        hasNext: function(){
-            var ret = true;
-            if (this.items.length == 1 || this.isRoot)
-                ret = false;
+        hasNextItem: function(){
+            var ret = false;
+            if (this.nextItem().hasContent() && this.prevItem().hasContent())
+                ret = true;
             return ret;
         },
     });
@@ -83,9 +89,9 @@ define(['backbone', 'app/animqueue'], function(){
             this.model.set('children', children);
 
             this.menu = options.menu;
-            if (!this.menu.active() && content.get('url')) {
-                this.menu.active(this.menu);
-            }
+            // if (!this.menu.active() && content.get('url')) {
+            //     this.menu.active(this.menu);
+            // }
         },
         className: function(){
             var className = '';
@@ -105,6 +111,10 @@ define(['backbone', 'app/animqueue'], function(){
             }
             return this;
         },
+        hasContent: function(){
+            var content = this.model.get('content');
+            return content.notEmpty();
+        },
         onClick: function(e){
             e.stopPropagation();
             this.doClick(e);
@@ -119,7 +129,7 @@ define(['backbone', 'app/animqueue'], function(){
             if (this.submenu && this.menu.active() != this.submenu)
                 _.each(this.submenu.items, function(obj){obj.$el.removeClass('active')});
 
-            module.contentControls.toggle();
+            // module.contentControls.toggle();
         },
         drawContent: function(){
             // draw element
@@ -129,6 +139,7 @@ define(['backbone', 'app/animqueue'], function(){
                 new module.ContentItemView({model: content});
 
                 this.menu.active(this.menu);
+                module.contentControls.toggle();
             }
         },
         animate: function(){
@@ -159,7 +170,7 @@ define(['backbone', 'app/animqueue'], function(){
                 _.each(arr, function(that, index){
                     // menu is collapsing... display nothing
                     if (index == 0 && that.submenu && that.$el.hasClass('active')){
-                        new module.ContentItemView({model: new Backbone.Model({})});
+                        new module.ContentItemView({model: new module.MenuItem({})});
                         module.contentControls.hide();
                     } else if (index == 0 && that.model.get('content').get('url')) {
 
@@ -229,15 +240,11 @@ define(['backbone', 'app/animqueue'], function(){
             //this.contentControls = contentControls;
             console.assert(module.contentControls == null, "ContentControlsView cannot be instantiated twice");
             module.contentControls = this;
-            this.next();
-
-
-            // imitate click on first elem
-            //contentControls.next();
+            // this.next();
         },
         toggle: function(){
-            // console.log(this.menu.active().hasNext())
-            if (this.menu.active().hasNext())
+            // console.log('toggle', this.menu.hasNextItem())
+            if (this.menu.hasNextItem())
                 this.unhide();
             else
                 this.hide();
@@ -251,14 +258,14 @@ define(['backbone', 'app/animqueue'], function(){
             this.isHidden = true;
         },
         prev: function(){
-            var menu = this.menu.active() || this.menu.items[0].submenu;
+            // var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                menu.prev();
+                this.menu.prevItem().doClick();
         },
         next: function(){
-            var menu = this.menu.active() || this.menu.items[0].submenu;
+            // var menu = this.menu.active() || this.menu.items[0].submenu;
             if (!this.isHidden)
-                menu.next();
+                this.menu.nextItem().doClick();
         },
         onkeydown: function(e){
             var left = 37;

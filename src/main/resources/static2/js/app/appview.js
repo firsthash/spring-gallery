@@ -20,16 +20,20 @@ define(['data', 'backbone'], function(data) {
             menuItems.on('error', function(){menuItems.reset(data)}, this);
             menuItems.on('sync reset', function(){
                 var menu = new this.options.MenuView({collection: menuItems});
-                menu.isRoot = true;
+                // menu.isRoot = true;
                 var menuElem = menu.render().el;
                 this.$('#menu').append(menuElem);
 
                 var contentControls = new this.options.ContentControlsView({menu: menu});
 
+                // console.log(menu.active().items)
+                menu.item(0).doClick();
+                //menu.items()[0].doClick();
+
                 //this.contentControls = contentControls;
 
                 // imitate click on first elem
-                //contentControls.next();
+                // contentControls.next();
             }, this);
 
 
