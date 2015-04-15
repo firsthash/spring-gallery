@@ -84,7 +84,8 @@
         <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="content-url" class="form-control" data-name="content-url"/>
         <input type="file" name="upload" class="form-control" data-name="content-upload"/>
         <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="content-title" class="form-control" data-name="content-title"/>
-        <input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>
+        <textarea rows="1" placeholder="content-description" class="form-control" data-name="content-description"><<= typeof(description) == 'undefined' ? '' : description >></textarea>
+        <!--<input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>-->
     </script>
 
 

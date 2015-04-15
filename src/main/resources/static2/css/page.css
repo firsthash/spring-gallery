@@ -1,5 +1,15 @@
+body {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 #content img {
     max-width: 100%;
+}
+
+#content pre {
+    background-color: initial;
+    border: initial;
+    padding: initial;
 }
 
 @media (min-width: 768px) {
@@ -60,7 +70,7 @@
 
 
     .bs-docs-sidebar ul:first-child>li, .nav-bottom {
-        background-image: url('dash2.png');
+        background-image: url('dash.png');
         background-repeat: repeat;
         /*background-position: 0 0.5em;*/
         background-size: 1em 1.5em; 

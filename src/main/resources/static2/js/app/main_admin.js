@@ -80,7 +80,7 @@ define(['app/appview_admin'], function(AppView) {
     module.ItemViewBase = Backbone.View.extend({
         baseEvents: {
             'change >input[type=file]': 'uploadFile',
-            'change >input[type=text]': 'saveChanges',
+            'change >input[type=text], >textarea': 'saveChanges',
         },
         baseInitialize: function(options) {
             if (!this.events)
