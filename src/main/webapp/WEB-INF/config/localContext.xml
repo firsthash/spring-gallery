@@ -65,7 +65,7 @@
     <!-- jvm cmd line props override this ones -->
     <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
 
-    <util:properties id="dataProperties" location="/WEB-INF/config/data.properties" local-override="true"/>
+    <!--<util:properties id="dataProperties" location="/WEB-INF/config/data.properties" local-override="true"/>-->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
         p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
