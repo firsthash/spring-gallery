@@ -4,9 +4,6 @@ define(['app/appview_admin'], function(AppView) {
 
     module.MenuItem = Backbone.Model.extend({
         url: '/menuitem',
-        initialize: function(){
-            // this.on('change:position', function(){console.log('change:position')}, this);
-        },
         sync: function(){
             return false;
         },

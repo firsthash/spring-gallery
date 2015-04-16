@@ -1,4 +1,4 @@
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djpa.showSql=true -Djpa.generateDdl=true"
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.data=$OPENSHIFT_DATA_DIR -Djpa.showSql=false -Djpa.generateDdl=true"
 
 ########## HSQL ##########
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djdbc.driverClassName=org.hsqldb.jdbcDriver"
