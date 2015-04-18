@@ -6,6 +6,12 @@ From administration perspective user should able to perform basic operations (ad
 One of the straightforward ways to achieve this is an in place edit mode. 
 I.e. user no need to learn new graphic interface, instead all additional elements will be mixed with current ones. 
 
+Instant run: 
+
+- Enter in console: `mvn tomcat7:run`
+- Open url: `http://localhost:8080`
+
+
 # Technologies
 
 - User side: backbone.js, jquery, underscore.js.

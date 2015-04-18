@@ -1,0 +1,131 @@
+body {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#content img {
+    max-width: 100%;
+}
+
+#content pre {
+    background-color: initial;
+    border: initial;
+    padding: initial;
+}
+
+@media (min-width: 768px) {
+    .bs-docs-sidebar, #content-wrap {
+        padding: 5px;
+        padding-top: 20px;
+        padding-left: 20px
+    }
+    .bs-docs-sidebar {
+        width: 12%;
+    }
+}
+
+/* DASH STYLE */
+
+
+@media (min-width: 768px) {
+    /* logo */
+    .bs-docs-sidebar .nav:first-child>li:first-child {
+        min-height: 3em;
+    }
+
+    /* remove logo decoration */
+    .bs-docs-sidebar .nav:first-child>li:first-child>a {
+        text-decoration: none;
+    }
+
+    .bs-docs-sidebar ul:first-child>li, .nav-bottom {
+        background-image: url('dash.png');
+        background-repeat: repeat;
+        background-size: 1em 1.5em; 
+    }
+
+    .bs-docs-sidebar ul:first-child>li>a>span {
+        background-color: white;
+    }
+
+    .bs-docs-sidebar .nav>li>a:hover,
+    .bs-docs-sidebar .nav>li>a:focus,
+    .bs-docs-sidebar .nav .active a {
+        background-color: transparent!important;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .bs-docs-sidebar .nav .nav {
+        padding-left: 15px!important;
+        background-color: white;
+    }
+
+    .bs-docs-sidebar ul:first-child>li>a {
+        padding-left: 10px!important;
+    }
+}
+
+/* DASH STYLE END */
+
+/* CALENDAR STYLE */
+
+.bs-docs-sidebar ul li.calendar ul li {
+    min-width: 2em;
+}
+
+.bs-docs-sidebar ul li.calendar ul li, 
+.bs-docs-sidebar ul li.calendar ul li a {
+    display: inline-block;
+}
+
+/* CALENDAR STYLE END */
+
+a, a:hover, a:focus {
+    color: black;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#content-controls {
+    font-size: large;
+}
+
+.bs-docs-sidebar.affix {
+    position: static
+}
+
+.bs-docs-sidebar .nav>li>a {
+    padding: 0px;
+    font-weight: 500;
+}
+
+.bs-docs-sidebar .nav>li>a:hover {
+    background-color: transparent;
+    text-decoration: underline;
+}
+.bs-docs-sidebar .nav>.active:focus>a,
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active>a {
+    background-color: transparent;
+    text-decoration: underline;
+}
+.bs-docs-sidebar .nav .nav {
+    display: none;
+    padding-left: 5px;
+}
+.bs-docs-sidebar .nav .nav>li>a {
+    font-weight: 400
+}
+.bs-docs-sidebar .nav .nav>.active:focus>a,
+.bs-docs-sidebar .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav>.active>a {
+    font-weight: 500
+}
+
+.bs-docs-sidebar .nav>.active>ul {
+    display: block
+}

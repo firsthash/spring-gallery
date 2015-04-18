@@ -3,38 +3,30 @@ package org.yuliskov.nikitaliskov.controllers;
 import org.slf4j.*;
 import org.springframework.beans.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.beans.factory.config.*;
 import org.springframework.context.*;
-import org.springframework.context.support.*;
-import org.springframework.core.io.*;
-import org.springframework.core.io.support.*;
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.*;
-import org.springframework.web.context.support.*;
 import org.springframework.web.multipart.*;
 import org.yuliskov.nikitaliskov.models.*;
 import org.yuliskov.nikitaliskov.repositories.*;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.*;
 
 @Controller
 public class MenuItemUploadController implements ApplicationContextAware {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UploadedImageRepository repository;
-    private ConfigurableApplicationContext applicationContext;
     // private String rootDir = Paths.get(System.getProperty("user.home"), "app-root", "data").toString();
     private String rootDir = "";
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = (ConfigurableApplicationContext) applicationContext;
-        assert this.applicationContext != null : "applicationContext != null";
-        rootDir = this.applicationContext.getBeanFactory().resolveEmbeddedValue("${user.data}");
+        assert applicationContext instanceof ConfigurableApplicationContext : "applicationContext instanceof ConfigurableApplicationContext";
+        ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
+        rootDir = configurableApplicationContext.getBeanFactory().resolveEmbeddedValue("${user.data}");
         assert rootDir != null : "rootDir != null";
     }
 
@@ -42,7 +34,6 @@ public class MenuItemUploadController implements ApplicationContextAware {
     @ResponseStatus(value = HttpStatus.OK)
     public void uploadToDatabase(@RequestParam("id") long id, @RequestParam("upload") MultipartFile file) throws IOException {
         // save file to resources/static/upload directory
-        InputStream inputStream = file.getInputStream();
         byte[] bytes = file.getBytes();
         UploadedImage uploadedImage = new UploadedImage();
         uploadedImage.setBytes(bytes);

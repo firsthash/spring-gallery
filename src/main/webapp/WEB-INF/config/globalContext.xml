@@ -14,10 +14,8 @@
         <security:csrf disabled="true"/>
     </security:http>
 
-    <!-- <bean class="org.yuliskov.nikitaliskov.config.WebSecurityConfig"/> -->
-
     <!--
-    User/Pass: admin/admin
+    Default user/pass: admin/admin
     -->
     <security:authentication-manager>
         <security:authentication-provider>

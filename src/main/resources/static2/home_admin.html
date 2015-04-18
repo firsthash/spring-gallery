@@ -12,7 +12,6 @@
 
     <!-- Bootstrap -->
     <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
-    <link href="js/lib/bootstrap3/css/bootstrap-theme.css" rel="stylesheet">
 
     <style type="text/css">
         li {
@@ -42,15 +41,6 @@
             resize: none;
         }
     </style>
-
-    <script src="js/lib/require.js"></script>
-    <script>
-        require(['js/common.js'], function() {
-            require(['app/main_admin', 'app/appview_admin', 'holder'], function(main, AppView) {
-                new AppView(main);
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container-fluid well">
@@ -58,7 +48,6 @@
             <div id="list" class="row">
                 <!-- content -->
             </div>
-            <!-- <button class="btn btn-primary btn-lg col-md-offset-5" type="button">Save All</button> -->
         </form>
     </div>
 
@@ -101,6 +90,13 @@
         <!--<input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>-->
     </script>
 
-
+    <script src="js/lib/require.js"></script>
+    <script>
+        require(['js/common.js'], function() {
+            require(['app/main_admin', 'app/appview_admin', 'holder'], function(main, AppView) {
+                new AppView(main);
+            });
+        });
+    </script>
 </body>
 </html>

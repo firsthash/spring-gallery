@@ -15,24 +15,13 @@
 
     <!-- Bootstrap -->
     <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
-    <!-- <link href="js/lib/bootstrap3/css/bootstrap-theme.css" rel="stylesheet"> -->
-    <link href="css/page.css" rel="stylesheet">
-
-    <script src="js/lib/require.js"></script>
-    <script>
-        require(['js/common.js'], function() {
-            require(['app/main', 'app/appview'], function(main, AppView) {
-                new AppView(main);
-            });
-        });
-    </script>
+    <link href="css/all.css" rel="stylesheet">
 </head>
 <body>
     <div id="container" class="container-fluid">
         <div class="row">        
             <div class="bs-docs-sidebar affix col-md-2 col-sm-2" role="complementary">
                 <nav>
-                    <!-- <div class="logo"><a href="javascript:location.reload(true)"><img src="img/top.png"/></a></div> -->
                     <div id="menu">
 
                     </div>
@@ -53,8 +42,6 @@
 
 
     <script type="text/template" id="youtube-template">
-        <!-- https://www.youtube.com/watch?v=Imx52RhczX4
-         https://www.youtube.com/embed/Imx52RhczX4?rel=0 -->
          <iframe width="560" height="315" src="https://www.youtube.com/embed/<<= videoId >>?rel=0" frameborder="0" allowfullscreen></iframe>
     </script>
 
@@ -89,5 +76,13 @@
         <p><a href='http://nikitaliskov.com' target='blank'>www.nikitaliskov.com</a>, <a href='http://nikitaliskov.pp.ua' target='blank'>www.nikitaliskov.pp.ua</a>, <a href='http://nikitaliskov.tk' target='blank'>www.nikitaliskov.tk</a></p>
     </script>
 
+    <script src="js/lib/require.js"></script>
+    <script>
+        require(['js/common.js'], function() {
+            require(['app/main', 'app/appview'], function(main, AppView) {
+                new AppView(main);
+            });
+        });
+    </script>
 </body>
 </html>

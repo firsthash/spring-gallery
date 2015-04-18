@@ -5,7 +5,7 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- place to search for annotated classes -->
     <context:component-scan base-package="org.yuliskov.nikart"/>
@@ -53,14 +53,8 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
         p:maxUploadSize="#{10*1024*1024}"/>
 
-<!--    <bean id="logger" class="org.slf4j.LoggerFactory" factory-method="getLogger">
-        <constructor-arg value="defaultLogger"/>
-    </bean>-->
-
-    <!-- other beans -->
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/WEB-INF/classes/pages/" p:suffix=".jsp" />
+        p:prefix="/WEB-INF/classes/pages/" p:suffix=".jsp" p:order="2" />
 
     <!-- jvm cmd line props override this ones -->
     <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
@@ -82,25 +76,39 @@
     <mvc:resources location="classpath:/static/" mapping="/static/**"/>
     <mvc:resources location="classpath:/static2/" mapping="/static2/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
-    <!-- <mvc:resources location="classpath:/static/" mapping="/static/**" cache-period="#{24*60*60}"/> -->
 
     <mvc:interceptors>
-        <!-- cache all for one day -->
-        <!-- exclude dynamic parts -->
-<!--         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/crud/**"/>
-            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
-                p:cacheSeconds="#{24*60*60}"/>
-        </mvc:interceptor> -->
-<!--         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean id="httpHeaderInterceptor" class="org.yuliskov.nikart.utils.HttpHeaderInterceptor"/>
-        </mvc:interceptor> -->
-        <!-- limit interception to root paths -->
+        <!-- intercept only root path -->
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <bean id="domainNameInterceptor" class="org.yuliskov.nikart.utils.DomainNameInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- **************************************************************** -->
+    <!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->
+    <!--  TemplateResolver <- TemplateEngine <- ViewResolver              -->
+    <!-- **************************************************************** -->
+
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <!--<property name="prefix" value="/WEB-INF/templates/" />-->
+        <property name="prefix" value="/WEB-INF/classes/pages/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="LEGACYHTML5" />
+        <!-- Template cache is true by default. Set to false if you want -->
+        <!-- templates to be automatically updated when modified.        -->
+        <property name="cacheable" value="true" />
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="order" value="1"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
 </beans>
