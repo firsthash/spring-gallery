@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>N I K I T A&nbsp;&nbsp;&nbsp;L I S K O V</title>
 
-    <script type="text/javascript">
-        if (location.protocol == 'http:' && (location.port == '' || location.port == '8080'))
-            document.write('<base href="/static2/">');
-    </script>
-    
+    <base th:href="@{/static2/}" href="../static2/"/>
 
     <!-- Bootstrap -->
-    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
-    <link href="css/all.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/all.css" rel="stylesheet"/>
 </head>
 <body>
     <div id="container" class="container-fluid">
@@ -42,33 +38,33 @@
 
 
     <script type="text/template" id="youtube-template">
-         <iframe width="560" height="315" src="https://www.youtube.com/embed/<<= videoId >>?rel=0" frameborder="0" allowfullscreen></iframe>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/{{= videoId }}?rel=0" frameborder="0" allowfullscreen=""></iframe>
     </script>
 
     <script type="text/template" id="vimeo-template">
-        <iframe src="https://player.vimeo.com/video/<<= videoId >>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    </script>    
+        <iframe src="https://player.vimeo.com/video/{{= videoId }}" width="500" height="281" frameborder="0" allowfullscreen=""></iframe>
+    </script>
 
     <script type="text/template" id="image-template">
         <a href="javascript:">
-            <img src="<<= typeof(url) == 'undefined' ? '' : url >>"/>
+            <img src="{{= typeof(url) == 'undefined' ? '' : url }}"/>
         </a>
-    </script>     
+    </script>
 
     <script type="text/template" id="menu-item-template">
         <!-- IE fix: open new tab when using anhor with blank attribute -->
-        <a href="<<= typeof(url) == 'undefined' ? 'javascript:' : url || 'javascript:' >>" target="<<= typeof(url) == 'undefined' ? '' : 'blank' >>"><span><<= typeof title == 'undefined' || !title ? position : title >></span></a>
-    </script>        
+        <a href="{{= typeof(url) == 'undefined' || !url ? 'javascript:' : url }}" target="{{= typeof(url) == 'undefined' ? '' : 'blank' }}"><span>{{= typeof title == 'undefined' || !title ? position : title }}</span></a>
+    </script>
 
     <script type="text/template" id="content-item-template">
         <div class="embed">
         </div>
         <div>
             <strong>
-                <<= typeof(title) == 'undefined' ? '' : title >>
+                {{= typeof(title) == 'undefined' ? '' : title }}
             </strong>
-        </div>        
-        <pre><<= typeof(description) == 'undefined' ? '' : description >></pre>
+        </div>
+        <pre>{{= typeof(description) == 'undefined' ? '' : description }}</pre>
     </script>
 
 

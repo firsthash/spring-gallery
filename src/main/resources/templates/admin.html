@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Admin</title>
 
     <base th:href="@{/static2/}" href="../static2/"/>
 
     <!-- Bootstrap -->
-    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet">
+    <link href="js/lib/bootstrap3/css/bootstrap.css" rel="stylesheet"/>
 
     <style type="text/css">
         li {
             display: block;
         }
+        /* reset Bootstrap stylesheet */
         .panel {
             background-color: initial;
             margin-bottom: initial;
@@ -51,7 +52,7 @@
 
 
     <script type="text/template" id="input-item-template">
-        <label><<= name >></label><input type="text" value="<<= value >>" />
+        <label>{{= name }}</label><input type="text" value="{{= value }}" />
     </script>
 
 
@@ -65,27 +66,27 @@
 
 
     <script type="text/template" id="menu-item-template">
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="title" class="form-control" data-name="title"/>
-        <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="url" class="form-control" data-name="url"/>
+        <input type="text" value="{{= typeof(title) == 'undefined' ? '' : title }}" placeholder="title" class="form-control" data-name="title"/>
+        <input type="text" value="{{= typeof(url) == 'undefined' ? '' : url }}" placeholder="url" class="form-control" data-name="url"/>
         <span class="content"></span>
-        <input type="text" value="<<= typeof(position) == 'undefined' ? '' : position >>" placeholder="position" class="form-control" data-name="position"/>
-        <button type="button" data-toggle="collapse" data-target="#<<= viewId >>" data-parent="#<<= parentViewId >>" class="btn btn-default btn-collapse" data-name="btn-collapse">Развернуть</button>
+        <input type="text" value="{{= typeof(position) == 'undefined' ? '' : position }}" placeholder="position" class="form-control" data-name="position"/>
+        <button type="button" data-toggle="collapse" data-target="#{{= viewId }}" data-parent="#{{= parentViewId }}" class="btn btn-default btn-collapse" data-name="btn-collapse">Развернуть</button>
         <button type="button" class="form-control btn btn-default btn-remove">Удалить</button>
 
-        <input type="text" value="<<= typeof(style) == 'undefined' ? '' : style >>" placeholder="style" class="form-control" data-name="style"/>
-        <input type="text" value="<<= typeof(hide) == 'undefined' ? '' : hide >>" placeholder="hide" class="form-control" data-name="hide"/>
+        <input type="text" value="{{= typeof(style) == 'undefined' ? '' : style }}" placeholder="style" class="form-control" data-name="style"/>
+        <input type="text" value="{{= typeof(hide) == 'undefined' ? '' : hide }}" placeholder="hide" class="form-control" data-name="hide"/>
 
-        <div class="collapse" id="<<= viewId >>">
+        <div class="collapse" id="{{= viewId }}">
 
         </div>
     </script>
 
     <script type="text/template" id="content-item-template">
-        <input type="text" value="<<= typeof(url) == 'undefined' ? '' : url >>" placeholder="content-url" class="form-control" data-name="content-url"/>
+        <input type="text" value="{{= typeof(url) == 'undefined' ? '' : url }}" placeholder="content-url" class="form-control" data-name="content-url"/>
         <input type="file" name="upload" class="form-control" data-name="content-upload"/>
-        <input type="text" value="<<= typeof(title) == 'undefined' ? '' : title >>" placeholder="content-title" class="form-control" data-name="content-title"/>
-        <textarea rows="1" placeholder="content-description" class="form-control" data-name="content-description"><<= typeof(description) == 'undefined' ? '' : description >></textarea>
-        <!--<input type="text" value="<<= typeof(description) == 'undefined' ? '' : description >>" placeholder="content-description" class="form-control" data-name="content-description"/>-->
+        <input type="text" value="{{= typeof(title) == 'undefined' ? '' : title }}" placeholder="content-title" class="form-control" data-name="content-title"/>
+        <textarea rows="1" placeholder="content-description" class="form-control" data-name="content-description">{{= typeof(description) == 'undefined' ? '' : description }}</textarea>
+        <!--<input type="text" value="{{= typeof(description) == 'undefined' ? '' : description }}" placeholder="content-description" class="form-control" data-name="content-description"/>-->
     </script>
 
     <script src="js/lib/require.js"></script>

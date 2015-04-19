@@ -92,10 +92,9 @@
 
     <bean id="templateResolver"
           class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-        <!--<property name="prefix" value="/WEB-INF/templates/" />-->
-        <property name="prefix" value="/WEB-INF/classes/pages/" />
+        <property name="prefix" value="/WEB-INF/classes/templates/" />
         <property name="suffix" value=".html" />
-        <property name="templateMode" value="LEGACYHTML5" />
+        <property name="templateMode" value="HTML5" />
         <!-- Template cache is true by default. Set to false if you want -->
         <!-- templates to be automatically updated when modified.        -->
         <property name="cacheable" value="true" />

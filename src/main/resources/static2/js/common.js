@@ -69,11 +69,19 @@ if (!String.prototype.format) {
     }
 }
 
+// attempt to find template that best works with jsp/jsf technologies
 require(['underscore'], function() {
-    // attempt to find template that best works with jsp/jsf technologies
     _.templateSettings = {
-        evaluate: /<<([\s\S]+?)>>/g,
-        interpolate: /<<=([\s\S]+?)>>/g,
-        escape: /<<-([\s\S]+?)>>/g
-    }
+        evaluate: /\{\{([\s\S]+?)\}\}/g,
+        interpolate: /\{\{=([\s\S]+?)\}\}/g,
+        escape: /\{\{-([\s\S]+?)\}\}/g,
+    };
+    var original = _.template;
+    _.template = function(content) {
+        // replace html5 entities
+        content = content.replace(/&#39;/g, "'");
+        content = content.replace(/&lt;/g, "<");
+        content = content.replace(/&gt;/g, ">");
+        return original.call(this, content);
+    };
 });
