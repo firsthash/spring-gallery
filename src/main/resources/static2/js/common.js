@@ -78,7 +78,7 @@ require(['underscore'], function() {
     };
     var original = _.template;
     _.template = function(content) {
-        // replace html5 entities
+        // fix operators escaped by Thymeleaf HTML5 validator
         content = content.replace(/&#39;/g, "'");
         content = content.replace(/&lt;/g, "<");
         content = content.replace(/&gt;/g, ">");

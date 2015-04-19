@@ -2,70 +2,73 @@ body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-#content img {
-    max-width: 100%;
-}
-
 #content pre {
     background-color: initial;
     border: initial;
     padding: initial;
 }
 
-@media (min-width: 768px) {
-    .bs-docs-sidebar, #content-wrap {
-        padding: 5px;
-        padding-top: 20px;
-        padding-left: 20px
-    }
-    .bs-docs-sidebar {
-        width: 12%;
-    }
+/* RESPONSIVE FEATURES */
+
+.bs-docs-sidebar, #content-wrap {
+    padding-top: 1em;
 }
+
+.bs-docs-sidebar.col-sm-2 {
+    width: 15em;
+    max-width: 100%;
+}
+
+#content-wrap.col-sm-10 {
+    width: initial;
+}
+
+#content img {
+    max-width: 100%;
+}
+
+/* END RESPONSIVE FEATURES */
 
 /* DASH STYLE */
 
-
-@media (min-width: 768px) {
-    /* logo */
-    .bs-docs-sidebar .nav:first-child>li:first-child {
-        min-height: 3em;
-    }
-
-    /* remove logo decoration */
-    .bs-docs-sidebar .nav:first-child>li:first-child>a {
-        text-decoration: none;
-    }
-
-    .bs-docs-sidebar ul:first-child>li, .nav-bottom {
-        background-image: url('dash.png');
-        background-repeat: repeat;
-        background-size: 1em 1.5em; 
-    }
-
-    .bs-docs-sidebar ul:first-child>li>a>span {
-        background-color: white;
-    }
-
-    .bs-docs-sidebar .nav>li>a:hover,
-    .bs-docs-sidebar .nav>li>a:focus,
-    .bs-docs-sidebar .nav .active a {
-        background-color: transparent!important;
-    }
-
-    .logo {
-        text-align: center;
-    }
-
-    .bs-docs-sidebar .nav .nav {
-        padding-left: 15px!important;
-        background-color: white;
-    }
-
-    .bs-docs-sidebar ul:first-child>li>a {
-        padding-left: 10px!important;
-    }
+/* logo */
+.bs-docs-sidebar .nav:first-child > li:first-child {
+    min-height: 3em;
 }
+
+/* remove logo decoration */
+.bs-docs-sidebar .nav:first-child > li:first-child > a {
+    text-decoration: none;
+}
+
+.bs-docs-sidebar ul:first-child > li, .nav-bottom {
+    background: url('dash.png') repeat;
+    background-size: 1em 1.5em;
+}
+
+.bs-docs-sidebar ul:first-child > li > a > span {
+    background-color: white;
+}
+
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus,
+.bs-docs-sidebar .nav .active a {
+    background-color: transparent !important;
+}
+
+.logo {
+    text-align: center;
+}
+
+.bs-docs-sidebar .nav .nav {
+    padding-left: 15px !important;
+    background-color: white;
+}
+
+.bs-docs-sidebar ul:first-child > li > a {
+    padding-left: 10px !important;
+}
+
 
 /* DASH STYLE END */
 
