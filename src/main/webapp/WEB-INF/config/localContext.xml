@@ -73,7 +73,7 @@
         </property>
     </bean>
 
-    <mvc:resources location="classpath:/static/" mapping="/static/**"/>
+    <mvc:resources location="classpath:/static1/" mapping="/static/**"/>
     <mvc:resources location="classpath:/static2/" mapping="/static2/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
 

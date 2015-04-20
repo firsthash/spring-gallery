@@ -23,7 +23,7 @@ public class MenuItemRestController {
         List<MenuItem> all = repository.findAll();
         List<MenuItem> res = new ArrayList<>();
         if (all.size() == 0)
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // tells clent to load default set
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // tells to client to load default json objects
 
         for (MenuItem item : all) {
             if (item.getIsRoot()) res.add(item);
