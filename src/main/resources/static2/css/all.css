@@ -23,6 +23,7 @@ body {
     width: initial;
 }
 
+/* attempt to control sizes of content */
 #content img, #content iframe {
     max-width: 100%;
 }
