@@ -59,7 +59,7 @@
         << if (embed == "") { >>
         <div style="min-height: 10em">
             <img src="" data-src="<<= file >>" alt=""/>
-            <img style="position: absolute; left: 45%; top: 5em; width: 5em" class="placeholder" src="/static/img/loading.gif"/>
+            <img style="position: absolute; left: 45%; top: 5em; width: 5em" class="placeholder" src="static/img/loading.gif"/>
         </div>
         << } else { >>
         <<= embed >>
@@ -93,7 +93,7 @@
     </script>
 
     <script type="text/template" id="container-template">
-        <img style="position: absolute; left: 45%; top: 15em; width: 10%; z-index: 1000" class="placeholder" src="/static/img/loading.gif"/>
+        <img style="position: absolute; left: 45%; top: 15em; width: 10%; z-index: 1000" class="placeholder" src="static/img/loading.gif"/>
         <div id="<<= name >><<= id >>" class="row">
             <div class="header">
                 <<= header >>
@@ -132,4 +132,4 @@
     <%-- end content --%>
 </div>
 
-<script src="/static/js/lib/require.js"></script>
+<script src="static/js/lib/require.js"></script>

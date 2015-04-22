@@ -64,7 +64,7 @@
     </script>
 
     <script>
-        require(['/static/js/common.js'], function(common) {
+        require(['static/js/common.js'], function(common) {
             var module = 'app/admin';
 
             require([module], function(module) {

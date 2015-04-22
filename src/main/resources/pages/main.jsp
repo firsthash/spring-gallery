@@ -20,7 +20,7 @@
 
 
     <script>
-        require(['/static/js/common.js'], function(common) {
+        require(['static/js/common.js'], function(common) {
             var module = 'app/main';
 
             require([module], function(module) {
