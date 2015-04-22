@@ -76,8 +76,8 @@ define(['app/appview_admin'], function(AppView) {
 
     module.ItemViewBase = Backbone.View.extend({
         baseEvents: {
-            'change >input[type=file]': 'uploadFile',
-            'change >input[type=text], >textarea': 'saveChanges',
+            'change >input[type=file]': 'onFileChange',
+            'change >input[type=text], >textarea': 'onTextChange',
         },
         baseInitialize: function(options) {
             if (!this.events)
@@ -93,8 +93,15 @@ define(['app/appview_admin'], function(AppView) {
                 this.$("[data-name={}]".format(str)).addClass('hidden');
             }, this);
         },
-        saveChanges: function(e) {
-            console.log('saveChanges');
+        filterPos: function(val, oldVal){
+            if (val > oldVal)
+                return ++val;
+            if (val < oldVal)
+                return --val;
+            return val;
+        },
+        onTextChange: function(e) {
+            console.log('focus out');
             var el = $(e.target);
             var name = el.data('name').replace(this.prefix, '');
             var value = el.val();
@@ -105,14 +112,7 @@ define(['app/appview_admin'], function(AppView) {
                 this.model.set(name, value);
             }
         },
-        filterPos: function(val, oldVal){
-            if (val > oldVal)
-                return ++val;
-            if (val < oldVal)
-                return --val;
-            return val;
-        },
-        uploadFile: function(e) {
+        onFileChange: function(e) {
             console.log('doUpload');
             var formData = new FormData();
             var file = e.target.files[0];
