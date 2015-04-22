@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Spring-gallery by yuliskov</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Spring-gallery</h1>
+      <h2 class="project-tagline">My brother&#39;s site powered by Spring Framework, Twitter Bootstrap and Backbone.js</h2>
+      <a href="https://github.com/yuliskov/spring-gallery" class="btn">View on GitHub</a>
+      <a href="https://github.com/yuliskov/spring-gallery/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/yuliskov/spring-gallery/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="overview-purpose" class="anchor" href="#overview-purpose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview (Purpose)</h1>
+
+<p>Portfolio for graphic artist. Site main contents is an art works that are logically categorized. </p>
+
+<p>From administration perspective user should able to perform basic operations (add/remove/reorder items) as simple as possible. 
+One of the straightforward ways to achieve this is an in place edit mode. 
+I.e. user no need to learn new graphic interface, instead all additional elements will be mixed with current ones. </p>
+
+<p>Instant run: </p>
+
+<ul>
+<li>Enter in console: <code>mvn tomcat7:run</code>
+</li>
+<li>Open url: <code>http://localhost:8080</code>
+</li>
+</ul>
+
+<h1>
+<a id="technologies" class="anchor" href="#technologies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technologies</h1>
+
+<ul>
+<li>User side: backbone.js, jquery, underscore.js.</li>
+<li>Server side: spring, jpa, apache commons, gif animation, jackson json parser.</li>
+</ul>
+
+<h1>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why</h1>
+
+<p>Selected technologies had been selected because of communication scheme between client and server. </p>
+
+<p>This scheme so called REST: </p>
+
+<ul>
+<li>server responsible for data transfer </li>
+<li>client responsible how this data will be rendered </li>
+</ul>
+
+<p>REST helps:</p>
+
+<ul>
+<li>reduce traffic rate; </li>
+<li>re-render only area that has been changed</li>
+</ul>
+
+<h1>
+<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Structure</h1>
+
+<p>Overall architecture of project is MVC where client responsible for creating views from models. Models transported from server in JSON format.</p>
+
+<h2>
+<a id="server-side" class="anchor" href="#server-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server side</h2>
+
+<ul>
+<li>
+<p>Controllers: RestController, MainController, UtilController.</p>
+
+<ul>
+<li>RestController does REST processing</li>
+<li>MainController responsible for pages processing</li>
+<li>UtilController is handling uploads.</li>
+</ul>
+</li>
+<li>
+<p>Business objects: GalleryModel, ImageModel, DataModel. </p>
+
+<ul>
+<li>Purpose of GalleryModel to split images (arts) into logical parts. 
+As I said GalleryModel contains list of images. Also it contains title of a group. </li>
+<li>ImageModel contains image, video or other artwork with its title or name and preview.</li>
+<li>DataModel helps easy load ImageModel object obtained through SiteService class. Internally SiteService uses object specific DAOs.</li>
+</ul>
+</li>
+<li>
+<p>Helper objects: ImageConverter, UploadUtil. </p>
+
+<ul>
+<li>ImageConverter responsible of creation previews. It can process any type of images including animated GIFs.</li>
+<li>UploadUtil responsible of creation business objects from web forms post data.</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="client-side" class="anchor" href="#client-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Client side</h2>
+
+<ul>
+<li>Models with same names as their server analogs.
+
+<ul>
+<li>Models mostly but not fully corresponding to the same things in server side. Purpose is increasing performance of site.</li>
+</ul>
+</li>
+<li>Views
+
+<ul>
+<li>Stores UI code.</li>
+<li>Views are dynamically created from client side models.</li>
+</ul>
+</li>
+<li>Controller
+
+<ul>
+<li>It's is view that serves as entry point. </li>
+<li>Responsible for initialization views with data from models.</li>
+</ul>
+</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/yuliskov/spring-gallery">Spring-gallery</a> is maintained by <a href="https://github.com/yuliskov">yuliskov</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
