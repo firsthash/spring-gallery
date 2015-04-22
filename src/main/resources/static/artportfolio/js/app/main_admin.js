@@ -108,7 +108,7 @@ define(['app/appview_admin'], function(AppView) {
             if (typeof value != 'undefined') {
                 if (name == 'position')
                     value = this.filterPos(value, this.model.get(name));
-                console.log(value);
+                //console.log(value);
                 this.model.set(name, value);
             }
         },
