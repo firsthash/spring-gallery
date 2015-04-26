@@ -8,7 +8,7 @@ import org.yuliskov.artportfolio.repositories.*;
 
 @Controller
 public class MenuItemController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MenuItemRepository repository;
 

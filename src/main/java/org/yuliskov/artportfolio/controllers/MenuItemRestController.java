@@ -7,22 +7,19 @@ import org.springframework.web.bind.annotation.*;
 import org.yuliskov.artportfolio.models.*;
 import org.yuliskov.artportfolio.repositories.*;
 
-import javax.servlet.http.*;
 import java.util.*;
 
 @RestController
 public class MenuItemRestController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MenuItemRepository repository;
 
     @RequestMapping(value = "/menuitems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    List<MenuItem> findAll(HttpServletResponse response){
+    ResponseEntity<List<MenuItem>> findAll(){
         if (repository.count() == 0) {
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            //response.setStatus(HttpServletResponse.SC_NOT_FOUND); // tells to client to load default json objects
-            return null;
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         List<MenuItem> all = repository.findAll();
@@ -32,13 +29,15 @@ public class MenuItemRestController {
             if (item.getIsRoot()) res.add(item);
         }
 
-        return res;
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/menuitems", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    void saveAll(@RequestBody MenuItem[] items, HttpServletResponse response) {
+    @ResponseBody
+    ResponseEntity<List<MenuItem>> saveAll(@RequestBody MenuItem[] items) {
+        HttpStatus status = HttpStatus.OK;
         if (repository.count() == 0) {
-            response.setStatus(HttpServletResponse.SC_CREATED);
+            status = HttpStatus.CREATED;
         }
         repository.deleteAllInBatch();
         for (MenuItem item : items) {
@@ -48,6 +47,8 @@ public class MenuItemRestController {
         logger.info("items before {}", Arrays.toString(items));
         List<MenuItem> itemsAfter = repository.save(Arrays.asList(items));
         logger.info("items after {}", itemsAfter);
+
+        return new ResponseEntity<>(Arrays.asList(items), status);
     }
 
 }

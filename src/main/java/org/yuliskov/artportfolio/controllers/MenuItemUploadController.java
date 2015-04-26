@@ -11,12 +11,13 @@ import org.springframework.web.multipart.*;
 import org.yuliskov.artportfolio.models.*;
 import org.yuliskov.artportfolio.repositories.*;
 
+import javax.servlet.http.*;
 import java.io.*;
 import java.nio.file.*;
 
 @Controller
 public class MenuItemUploadController implements ApplicationContextAware {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UploadedImageRepository repository;
     private String rootDir = "";
@@ -29,10 +30,8 @@ public class MenuItemUploadController implements ApplicationContextAware {
         assert rootDir != null : "rootDir != null";
     }
 
-    @RequestMapping(value = "/menuitems__", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
+    @RequestMapping(value = "/menuitems__", method = RequestMethod.POST)
     public void uploadToDatabase(@RequestParam("id") long id, @RequestParam("upload") MultipartFile file) throws IOException {
-        // save file to resources/static/upload directory
         byte[] bytes = file.getBytes();
         UploadedImage uploadedImage = new UploadedImage();
         uploadedImage.setBytes(bytes);
@@ -43,6 +42,7 @@ public class MenuItemUploadController implements ApplicationContextAware {
 
     @RequestMapping(value = "/menuitemupload", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
     public String uploadToFilesystem(@RequestParam("upload") MultipartFile file) throws IOException {
         String basedir = "uploads";
         String filename = file.getOriginalFilename().replaceAll(" |#", "_"); // forbidden chars in url world
@@ -57,13 +57,14 @@ public class MenuItemUploadController implements ApplicationContextAware {
         return String.format("/%s/%s", basedir, filename);
     }
 
-    @RequestMapping(value = "/uploadcleanup", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void uploadCleanup(@RequestBody String path) throws IOException {
-        if (path.isEmpty())
-            return;
+    @RequestMapping(value = "/uploadcleanup", method = RequestMethod.POST, consumes = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<Void> uploadCleanup(@RequestBody String path) throws IOException {
+        if (path.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         Path abspath = Paths.get(rootDir, path);
         logger.info("deleting file {}", abspath);
         Files.deleteIfExists(abspath);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

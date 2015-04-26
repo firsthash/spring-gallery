@@ -53,26 +53,68 @@ define(['app/appview_admin'], function(AppView) {
 
 
     // workaround: upload full object graph at once, call 'save' method
-    module.MenuWrapper = Backbone.Model.extend({
-        url: '/menuitems',
-        initialize: function(options) {
-            this.items = new module.MenuItems();
+    module.MenuItemsWrapper = module.MenuItems.extend({
+        initialize: function(models, options) {
+            this.on('sync', this.onSync, this);
+            this.on('error', this.onError, this);
             this.data = options.data;
         },
-        reset: function(data){
-            this.items.reset(data);
+        onError: function(e){
+            console.log('fetch error');
+            if (this.length == 0) {
+                console.log('server returns empty collection');
+                this.reset(this.data);
+                //this.trigger('sync');
+            }
         },
-        toJSON: function() {
-            return this.items.toJSON();
+        onSync: function(){
+            if (this.length == 0) {
+                console.log('server returns empty collection');
+                this.reset(this.data);
+            }
         },
-        fetch: function(){
-            this.items.on('error', function(){console.log('fetch error')}, this);
-            this.items.fetch();
+        save: function() {
+            var collection = this;
+            var options = {
+                success: function(model, resp, xhr) {
+                    console.assert(model.length != 0, "model.length != 0");
+                    console.log('success', model);
+                    collection.reset(model);
+                    collection.trigger('sync');
+            }};
+            return Backbone.sync('create', this, options);
         }
     });
 
 
-
+    module.MenuViewWrapper = Backbone.View.extend({
+        template: _.template($('#menu-wrapper-template').html()),
+        events: {
+            'click >.btn-save-all': 'saveAll',
+        },
+        el: $('#list'),
+        initialize: function(options){
+            this.data = options.data;
+            this.menu = new module.MenuItemsWrapper([], {data: options.data});
+            console.assert(this.menu.length == 0, 'this.menu.length == 0');
+            this.listenTo(this.menu, 'sync', this.render);
+            this.menu.fetch();
+        },
+        saveAll: function(e){
+            console.log('saving to the server');
+            // this.menu.save();
+            this.menu.save();
+            //location.reload();
+        },
+        render: function(){
+            console.log('sync');
+            var view = new module.MenuView({collection: this.menu});
+            this.$el.html('');
+            this.$el.append(this.template());
+            this.$el.prepend(view.render().el);
+            return this;
+        },
+    });
 
     module.ItemViewBase = Backbone.View.extend({
         baseEvents: {
@@ -101,7 +143,7 @@ define(['app/appview_admin'], function(AppView) {
             return val;
         },
         onTextChange: function(e) {
-            console.log('focus out');
+            console.log('onTextChange called');
             var el = $(e.target);
             var name = el.data('name').replace(this.prefix, '');
             var value = el.val();
@@ -134,34 +176,6 @@ define(['app/appview_admin'], function(AppView) {
                 context: this,
             });
             console.log('doUpload');
-        },
-    });
-
-    module.MenuViewWrapper = Backbone.View.extend({
-        template: _.template($('#menu-wrapper-template').html()),
-        events: {
-            'click >.btn-save-all': 'saveAll',
-        },
-        el: $('#list'),
-        saveAll: function(e){
-            console.log('saving to the server');
-            this.menu.save();
-        },
-        initialize: function(options){
-            this.data = options.data;
-            this.menu = new module.MenuWrapper({data: options.data});
-            this.listenToOnce(this.menu.items, 'sync', function() {console.log('sync');this.render()});
-            this.menu.fetch();
-        },
-        render: function(){
-            if (this.menu.items.length == 0) {
-                console.log('server returns empty collection');
-                this.menu.items.reset(this.data);
-            }
-            var view = new module.MenuView({collection: this.menu.items});
-            this.$el.append(this.template());
-            this.$el.prepend(view.render().el);
-            return this;
         },
     });
 

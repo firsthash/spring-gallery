@@ -1,3 +1,7 @@
+* pending upload clenup
+* add saved notification
+* isdebugenabled в log4j
+* add shopping cart example (https://github.com/Jan90/Shop2)
 * REST return codes (201, 204, 404, 488 etc)
     https://www.playframework.com/documentation/2.0/ScalaActions
 * cleanup server from unused images. best way to do this when full model is being saved

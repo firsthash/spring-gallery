@@ -12,28 +12,45 @@ define(['backbone', 'app/animqueue'], function(){
         model: module.MenuItem,
         url: '/menuitems',
         comparator: 'position',
-        initialize: function(options) {
+    });
+
+    module.MenuItemsWrapper = module.MenuItems.extend({
+        initialize: function(models, options) {
+            console.assert(options.data != null, "options.data != null");
             this.data = options.data;
-            this.on('error', function(){console.log('fetch error')}, this);
+            this.on('sync', this.onSync, this);
+            this.on('error', this.onError, this);
+            console.assert(this.length == 0, 'this.length == 0');
         },
+        onError: function(){
+            console.log('fetch error');
+            if (this.length == 0) {
+                this.reset(this.data);
+                this.trigger('sync');
+            }
+        },
+        onSync: function(){
+            if (this.length == 0) {
+                console.log('server returns empty collection');
+                this.reset(this.data);
+            }
+        }
     });
 
     module.MenuViewWrapper = Backbone.View.extend({
         el: $('#menu'),
         initialize: function(options){
             this.data = options.data;
-            this.items = new module.MenuItems({data: options.data});
-            this.listenToOnce(this.items, 'sync', function() {console.log('sync');this.render()});
+            this.items = new module.MenuItemsWrapper([], {data: options.data});
+            console.assert(this.items.length == 0, 'this.items.length == 0');
+            this.listenToOnce(this.items, 'sync', this.render);
             this.items.fetch();
         },
         render: function(){
-            if (this.items.length == 0) {
-                console.log('server returns empty collection');
-                this.items.reset(this.data);
-            }
             var menu = new module.MenuView({collection: this.items});
             this.$el.prepend(menu.render().el);
             var contentControls = new module.ContentControlsView({menu: menu});
+            // draw first element
             menu.item(0).doClick();
             return this;
         },
