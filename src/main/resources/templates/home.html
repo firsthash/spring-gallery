@@ -84,7 +84,7 @@
                     console.log('init done!!!');
                 });
             });
-            require(['app/main', 'app/appview'], function(main, AppView) {
+            require(['app/objects', 'app/app'], function(main, AppView) {
                 new AppView(main);
             });
         });

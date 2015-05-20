@@ -1,4 +1,4 @@
-define(['app/appview_admin'], function(AppView) {
+define(['backbone'], function() {
 
     var module = {};
 
@@ -267,9 +267,6 @@ define(['app/appview_admin'], function(AppView) {
             return this;
         },
     });
-
-    // Main Controller
-    module.AppView = AppView;
 
     return module;
 });
