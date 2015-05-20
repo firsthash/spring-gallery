@@ -62,9 +62,8 @@ define(['app/appview_admin'], function(AppView) {
         onError: function(e){
             console.log('fetch error');
             if (this.length == 0) {
-                console.log('server returns empty collection');
                 this.reset(this.data);
-                //this.trigger('sync');
+                this.trigger('sync');
             }
         },
         onSync: function(){

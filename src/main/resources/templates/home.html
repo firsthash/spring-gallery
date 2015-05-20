@@ -14,6 +14,10 @@
     <link href="css/all.css" rel="stylesheet"/>
 </head>
 <body>
+    <div id="loading" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 100; text-align: center">
+        <h1>Никита Лыськов</h1>
+        <img src="img/loading.gif"/>
+    </div>
     <div id="container" class="container-fluid">
         <div class="bs-docs-sidebar affix col-sm-2">
             <nav>
@@ -73,6 +77,12 @@
     <script src="js/lib/require.js"></script>
     <script>
         require(['js/common.js'], function() {
+            require(['jquery'], function() {
+                $(document).on('initDone', function() {
+                    console.log('init done!!!');
+                    $('#loading').hide();
+                });
+            });
             require(['app/main', 'app/appview'], function(main, AppView) {
                 new AppView(main);
             });

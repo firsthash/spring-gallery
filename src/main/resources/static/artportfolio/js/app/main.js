@@ -52,6 +52,7 @@ define(['backbone', 'app/animqueue'], function(){
             var contentControls = new module.ContentControlsView({menu: menu});
             // draw first element
             menu.item(0).doClick();
+            $(document).trigger('initDone');
             return this;
         },
     });
