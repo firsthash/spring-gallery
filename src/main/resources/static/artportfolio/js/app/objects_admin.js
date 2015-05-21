@@ -72,7 +72,7 @@ define(['backbone'], function() {
                 this.reset(this.data);
             }
         },
-        save: function() {
+        save: function(callback) {
             var collection = this;
             var options = {
                 success: function(model, resp, xhr) {
@@ -80,6 +80,7 @@ define(['backbone'], function() {
                     console.log('success', model);
                     collection.reset(model);
                     collection.trigger('sync');
+                    callback();
             }};
             return Backbone.sync('create', this, options);
         }
@@ -102,8 +103,12 @@ define(['backbone'], function() {
         saveAll: function(e){
             console.log('saving to the server');
             // this.menu.save();
-            this.menu.save();
+            this.menu.save(this.successMessage);
             //location.reload();
+        },
+        successMessage: function(e){
+            $('#success').toggleClass('hidden');
+            _.delay(function() {$('#success').toggleClass('hidden');}, 5000);
         },
         render: function(){
             console.log('sync');
