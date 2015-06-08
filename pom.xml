@@ -6,7 +6,7 @@
     <!-- determine what goals to bind to a particular phase -->
     <packaging>war</packaging>
     <version>2.0</version>
-    <name>Spring Gallery</name>
+    <name>Art Portfolio</name>
     <!-- check actual versions: http://mvnrepository.com/artifact/<groupId> -->
     <properties>
         <!-- implicit -->
