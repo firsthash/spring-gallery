@@ -24,14 +24,9 @@ body {
 }
 
 /* fit image/video into environment */
-#content img, #content iframe {
+#content .embed img, #content .embed iframe {
     max-width: 100%;
-    max-height: 100%;
-}
-
-/* fit image/video into environment */
-#content .embed {
-    height: 40em;
+    max-height: 40em;
 }
 
 /* END RESPONSIVE FEATURES */
