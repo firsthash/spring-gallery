@@ -116,6 +116,7 @@ define(['backbone'], function() {
             this.$el.html('');
             this.$el.append(this.template());
             this.$el.prepend(view.render().el);
+            $(document).trigger('initDone');
             return this;
         },
     });

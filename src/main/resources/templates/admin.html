@@ -41,7 +41,7 @@
         <h5>Загрузка...</h5>
         <img style="width: 5em" src="img/loading.gif"/>
     </div>
-    <div class="container-fluid well">
+    <div id="container" style="display: none" class="container-fluid well">
         <form class="form-inline">
             <div id="list" class="row">
                 <!-- content -->
@@ -99,6 +99,7 @@
         require(['js/common.js'], function() {
             require(['jquery'], function() {
                 $(document).on('initDone', function() {
+                    $('#container').show();
                     $('#loading').remove();
                     console.log('init done!!!');
                 });
