@@ -53,7 +53,7 @@
           p:maxUploadSize="#{10*1024*1024}"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/classes/pages/" p:suffix=".jsp" p:order="2"/>
+          p:prefix="/WEB-INF/classes/pages_old/" p:suffix=".jsp" p:order="2"/>
 
     <!-- jvm cmd line props override this ones -->
     <context:property-placeholder location="/WEB-INF/config/data.properties" system-properties-mode="OVERRIDE"/>
