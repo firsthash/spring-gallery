@@ -37,6 +37,10 @@
     </style>
 </head>
 <body>
+    <div id="loading" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 100; text-align: center">
+        <h5>Загрузка...</h5>
+        <img style="width: 5em" src="img/loading.gif"/>
+    </div>
     <div class="container-fluid well">
         <form class="form-inline">
             <div id="list" class="row">
@@ -93,6 +97,12 @@
     <script src="js/lib/require.js"></script>
     <script>
         require(['js/common.js'], function() {
+            require(['jquery'], function() {
+                $(document).on('initDone', function() {
+                    $('#loading').remove();
+                    console.log('init done!!!');
+                });
+            });
             require(['app/objects_admin', 'app/app_admin', 'holder'], function(main, AppView) {
                 new AppView(main);
             });
