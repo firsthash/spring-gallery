@@ -1,6 +1,9 @@
 package org.yuliskov.artportfolio.util;
 
+import org.springframework.util.*;
 import org.springframework.web.context.request.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.support.*;
 import org.yuliskov.artportfolio.model.*;
 
 import javax.servlet.http.*;
@@ -9,8 +12,8 @@ import java.util.*;
 public class MenuItemLocalizator {
     private static final String LANGUAGE = "language";
     private static MenuItemLocalizator instanse;
-    private static final String RUSSIAN = "rus";
-    private static final String ENGLISH = "eng";
+    private static final String RUSSIAN = "ru";
+    private static final String ENGLISH = "en";
 
     public static MenuItemLocalizator getInstanse() {
         return instanse == null ? instanse = new MenuItemLocalizator() : instanse;
@@ -87,12 +90,20 @@ public class MenuItemLocalizator {
     }
 
     private String getCurrentLanguage() {
-        Object language = retrieveSession().getAttribute(LANGUAGE);
-        return language == null ? RUSSIAN : (String) language;
+        //Object language = retrieveSession().getAttribute(LANGUAGE);
+        //return language == null ? RUSSIAN : (String) language;
+
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(retrieveRequest());
+        return localeResolver.resolveLocale(retrieveRequest()).getLanguage();
     }
 
     private HttpSession retrieveSession() {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         return attr.getRequest().getSession(true); // true == allow create
+    }
+
+    private HttpServletRequest retrieveRequest() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest();
     }
 }

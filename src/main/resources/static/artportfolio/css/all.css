@@ -1,3 +1,10 @@
+/*.lang {*/
+    /*position: absolute;*/
+    /*z-index: 1000;*/
+    /*left: 13.4em;*/
+    /*background-color: white;*/
+/*}*/
+
 body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
