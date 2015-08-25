@@ -50,12 +50,12 @@ body {
     text-decoration: none;
 }
 
-.bs-docs-sidebar ul:first-child > li, .nav-bottom {
+.bs-docs-sidebar ul:first-child > li, .nav-bottom, .lang {
     background: url('dash.png') repeat;
     background-size: 1em 1.5em;
 }
 
-.bs-docs-sidebar ul:first-child > li > a > span {
+.bs-docs-sidebar ul:first-child > li > a > span, .lang > a {
     background-color: white;
 }
 
@@ -74,7 +74,7 @@ body {
     background-color: white;
 }
 
-.bs-docs-sidebar ul:first-child > li > a {
+.bs-docs-sidebar ul:first-child > li > a, .lang {
     padding-left: 10px !important;
 }
 
