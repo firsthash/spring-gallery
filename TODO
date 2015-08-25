@@ -1,13 +1,13 @@
+* internationalization
 * add history api
-* pending upload clenup
-* add saved notification
+* pending upload cleanup
 * isdebugenabled в log4j
 * add shopping cart example (https://github.com/Jan90/Shop2)
-* REST return codes (201, 204, 404, 488 etc)
-    https://www.playframework.com/documentation/2.0/ScalaActions
 * cleanup server from unused images. best way to do this when full model is being saved
 
 done:
+* add save notification
+* add REST return codes (201, 204, 404, 488 etc) https://www.playframework.com/documentation/2.0/ScalaActions
 * assign different upload and database paths for local and remote servers
 * hide 'description' and 'url' from 2 level menu???
 * button hidden click handler
@@ -31,3 +31,8 @@ done:
 * convert pasted url to plain text (admin.js)
 * avoid gallery refresh on move on delete (main.js)
 * move carousel key binding to global App object (main.js)
+
+tehniques:
+* internationalization
+* REST
+* used template engine Thymeleaf

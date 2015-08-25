@@ -1,19 +1,23 @@
-package org.yuliskov.artportfolio.controllers;
+package org.yuliskov.artportfolio.controller;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.yuliskov.artportfolio.models.*;
-import org.yuliskov.artportfolio.repositories.*;
+import org.yuliskov.artportfolio.model.*;
+import org.yuliskov.artportfolio.repository.*;
+import org.yuliskov.artportfolio.service.*;
 
 import java.util.*;
 
 @RestController
 public class MenuItemRestController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    public static final String LANGUAGE = "language";
+
+    //private MenuItemRepository repository;
     @Autowired
-    private MenuItemRepository repository;
+    private MenuItemService repository;
 
     @RequestMapping(value = "/menuitems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

@@ -1,4 +1,4 @@
-package org.yuliskov.artportfolio.controllers;
+package org.yuliskov.artportfolio.controller;
 
 import org.slf4j.*;
 import org.springframework.beans.*;
@@ -8,10 +8,9 @@ import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.*;
-import org.yuliskov.artportfolio.models.*;
-import org.yuliskov.artportfolio.repositories.*;
+import org.yuliskov.artportfolio.model.*;
+import org.yuliskov.artportfolio.repository.*;
 
-import javax.servlet.http.*;
 import java.io.*;
 import java.nio.file.*;
 

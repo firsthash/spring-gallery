@@ -1,4 +1,4 @@
-package org.yuliskov.artportfolio.models;
+package org.yuliskov.artportfolio.model;
 
 import javax.persistence.*;
 

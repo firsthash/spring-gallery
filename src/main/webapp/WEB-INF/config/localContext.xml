@@ -24,7 +24,7 @@
 
     <!-- place to search for DAO interfaces -->
     <jpa:repositories base-package="org.yuliskov.oldsite.repositories"/>
-    <jpa:repositories base-package="org.yuliskov.artportfolio.repositories"/>
+    <jpa:repositories base-package="org.yuliskov.artportfolio.repository"/>
 
     <!-- enable http related annotations -->
     <mvc:annotation-driven/>

@@ -1,4 +1,4 @@
-package org.yuliskov.artportfolio.models;
+package org.yuliskov.artportfolio.model;
 
 
 import javax.persistence.*;
@@ -10,8 +10,14 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    private String titleEn;
+    private String titleRu;
     @Column(length = 100*1024)
     private String description;
+    @Column(length = 100*1024)
+    private String descriptionEn;
+    @Column(length = 100*1024)
+    private String descriptionRu;
     private String url;
     private int position;
     @OneToOne(cascade = CascadeType.ALL)
@@ -95,6 +101,9 @@ public class MenuItem {
     }
 
     public void setDescription(String description) {
+        if (description == null) {
+            return;
+        }
         this.description = description;
     }
 
@@ -103,6 +112,41 @@ public class MenuItem {
     }
 
     public void setTitle(String title) {
+        if (title == null) {
+            return;
+        }
         this.title = title;
+    }
+
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    public void setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
+    }
+
+    public String getTitleEn() {
+        return titleEn;
+    }
+
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
+    }
+
+    public String getTitleRu() {
+        return titleRu;
+    }
+
+    public void setTitleRu(String titleRu) {
+        this.titleRu = titleRu;
+    }
+
+    public String getDescriptionRu() {
+        return descriptionRu;
+    }
+
+    public void setDescriptionRu(String descriptionRu) {
+        this.descriptionRu = descriptionRu;
     }
 }
