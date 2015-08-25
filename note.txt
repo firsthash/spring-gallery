@@ -1,3 +1,14 @@
+element.style {
+    position: relative;
+    top: 1.4em;
+    z-index: 10000;
+    right: 0p;
+    left: 11.4em;
+    /* background-color: white; */
+}
+
+//////////////
+
 @Component
 @Scope("session")
 public class Cart { .. }
