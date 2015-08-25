@@ -16,12 +16,15 @@ public class MenuItemController {
     @Autowired
     private MenuItemRepository repository;
 
-    @RequestMapping(value = {"/", "/{language}"})
-    public String home(HttpSession session, @PathVariable Map<String, String> pathVariables) {
-        if (pathVariables.containsKey(LANGUAGE)) {
-            session.setAttribute(LANGUAGE, pathVariables.get(LANGUAGE));
-        }
+    @RequestMapping(value = "/")
+    public String home() {
         return "home.html";
+    }
+
+    @RequestMapping(value = "/{language}")
+    public String switchLanguage(HttpSession session, @PathVariable String language) {
+        session.setAttribute(LANGUAGE, language);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/admin")
