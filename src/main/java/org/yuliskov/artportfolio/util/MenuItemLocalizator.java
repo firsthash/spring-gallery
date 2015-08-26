@@ -1,6 +1,5 @@
 package org.yuliskov.artportfolio.util;
 
-import org.springframework.util.*;
 import org.springframework.web.context.request.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.support.*;
@@ -20,79 +19,67 @@ public class MenuItemLocalizator {
     }
 
     public List<MenuItem> localize(List<MenuItem> items) {
+        if (items == null) {
+            return null;
+        }
         String currentLanguage = getCurrentLanguage();
 
         for (MenuItem item : items) {
-            pullTitle(item, currentLanguage);
-            pullDescription(item, currentLanguage);
-            if (item.getChildren() != null) {
-                localize(item.getChildren());
-            }
+            pullFields(item, currentLanguage);
+            pullFields(item.getContent(), currentLanguage);
+            localize(item.getChildren());
         }
         return items;
     }
 
-    private void pullDescription(MenuItem item, String language) {
+    public List<MenuItem> delocalize(List<MenuItem> items) {
+        if (items == null) {
+            return null;
+        }
+        String currentLocale = getCurrentLanguage();
+
+        for (MenuItem item : items) {
+            pushFields(item, currentLocale);
+            pushFields(item.getContent(), currentLocale);
+            delocalize(item.getChildren());
+        }
+        return items;
+    }
+
+
+    private void pullFields(MenuItem item, String language) {
+        if (item == null) {
+            return;
+        }
         switch (language) {
             case RUSSIAN:
+                item.setTitle(item.getTitleRu());
                 item.setDescription(item.getDescriptionRu());
                 break;
             case ENGLISH:
+                item.setTitle(item.getTitleEn());
                 item.setDescription(item.getDescriptionEn());
                 break;
         }
     }
 
-    private void pullTitle(MenuItem item, String language) {
-        switch (language) {
-            case RUSSIAN:
-                item.setTitle(item.getTitleRu());
-                break;
-            case ENGLISH:
-                item.setTitle(item.getTitleEn());
-                break;
+    private void pushFields(MenuItem item, String language) {
+        if (item == null) {
+            return;
         }
-    }
-
-    private void pushDescription(MenuItem item, String language) {
         switch (language) {
             case RUSSIAN:
+                item.setTitleRu(item.getTitle());
                 item.setDescriptionRu(item.getDescription());
                 break;
             case ENGLISH:
+                item.setTitleEn(item.getTitle());
                 item.setDescriptionEn(item.getDescription());
                 break;
         }
     }
 
-    private void pushTitle(MenuItem item, String language) {
-        switch (language) {
-            case RUSSIAN:
-                item.setTitleRu(item.getTitle());
-                break;
-            case ENGLISH:
-                item.setTitleEn(item.getTitle());
-                break;
-        }
-    }
-
-    public Iterable<MenuItem> delocalize(List<MenuItem> items) {
-        String currentLocale = getCurrentLanguage();
-
-        for (MenuItem item : items) {
-            pushTitle(item, currentLocale);
-            pushDescription(item, currentLocale);
-            if (item.getChildren() != null) {
-                delocalize(item.getChildren());
-            }
-        }
-        return items;
-    }
-
     private String getCurrentLanguage() {
-        //Object language = retrieveSession().getAttribute(LANGUAGE);
-        //return language == null ? RUSSIAN : (String) language;
-
         LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(retrieveRequest());
         return localeResolver.resolveLocale(retrieveRequest()).getLanguage();
     }

@@ -1,3 +1,8 @@
+//Object language = retrieveSession().getAttribute(LANGUAGE);
+//return language == null ? RUSSIAN : (String) language;
+
+//////
+
 element.style {
     position: relative;
     top: 1.4em;

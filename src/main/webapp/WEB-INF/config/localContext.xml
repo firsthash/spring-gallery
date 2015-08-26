@@ -77,6 +77,11 @@
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
 
     <mvc:interceptors>
+        <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/"/>-->
+        <!--&lt;!&ndash; to change locale: http://localhost:8080/?locale=ru &ndash;&gt;-->
+        <!--<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>-->
+        <!--</mvc:interceptor>-->
         <!-- intercept only root path -->
         <mvc:interceptor>
             <mvc:mapping path="/"/>
@@ -88,8 +93,9 @@
         <property name="basename" value="Messages" />
     </bean>
 
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="ru" />
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="en" />
+        <property name="cookiePath" value="/"/>
     </bean>
 
     <!-- **************************************************************** -->

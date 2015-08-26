@@ -24,17 +24,16 @@ public class MenuItemController {
         return "home.html";
     }
 
-    @RequestMapping(value = "/{language}")
-    public String switchLanguage(HttpServletRequest request, HttpServletResponse response, @PathVariable String language) {
-        //session.setAttribute(LANGUAGE, language);
-        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
-        localeResolver.setLocale(request, response, StringUtils.parseLocaleString(language));
-        return "redirect:/";
-    }
-
     @RequestMapping(value = "/admin")
     public String admin() {
         return "admin.html";
+    }
+
+    @RequestMapping(value = "/", params = "locale")
+    public String switchLanguage(HttpServletRequest request, HttpServletResponse response, @RequestParam String locale) {
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        localeResolver.setLocale(request, response, StringUtils.parseLocaleString(locale));
+        return "redirect:/";
     }
 
 }
