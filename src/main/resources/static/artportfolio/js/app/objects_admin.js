@@ -93,7 +93,7 @@ define(['backbone'], function() {
             'click >.btn-save-all': 'saveAll',
         },
         el: $('#list'),
-        pushed: false,
+        inprogress: false,
         initialize: function(options){
             this.data = options.data;
             this.menu = new module.MenuItemsWrapper([], {data: options.data});
@@ -102,17 +102,16 @@ define(['backbone'], function() {
             this.menu.fetch();
         },
         saveAll: function(e){
-            if (this.pushed) {
+            // avoid multiple pushes
+            if (this.inprogress) {
                 return;
-            } else {
-                this.pushed = true;
             }
+            this.inprogress = true;
             console.log('saving to the server');
-            // avoid fake push
-            this.menu.save(this.successMessage);
+            this.menu.save(_.bind(this.successMessage, this));
         },
         successMessage: function(e){
-            this.pushed = false;
+            this.inprogress = false;
             $('#success').toggleClass('hidden');
             _.delay(function() {$('#success').toggleClass('hidden');}, 5000);
         },
