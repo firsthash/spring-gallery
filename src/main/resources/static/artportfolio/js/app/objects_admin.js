@@ -201,7 +201,7 @@ define(['backbone'], function() {
         add: function(){
             var model = this.collection.create();
             model.set('position', this.collection.length);
-            this.addItem(model);
+            this.appendItem(model);
         },
         id: function(){
             return this.cid;
@@ -210,11 +210,11 @@ define(['backbone'], function() {
             this.$el.append(this.template());
             this.collection.each(function(model, index){
                 model.set('position', index + 1);
-                this.addItem(model);
+                this.appendItem(model);
             }, this);
             return this;
         },
-        addItem: function(model){
+        appendItem: function(model){
             var view = new module.MenuItemView({model: model, menu: this, hide: this.hide});
             var el = view.render().el;
             this.$el.append(el);

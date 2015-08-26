@@ -42,6 +42,11 @@
         <img style="width: 5em" src="img/loading.gif"/>
     </div>
     <div id="container" style="display: none" class="container-fluid well">
+        <div class="btn-group col-md-offset-5">
+            <a class="btn btn-default" href="/">www.nikitaliskov.com</a>
+            <a class="btn btn-default" href="/admin?locale=ru">ru</a>
+            <a class="btn btn-default" href="/admin?locale=us">en</a>
+        </div>
         <form class="form-inline">
             <div id="list" class="row">
                 <!-- content -->
@@ -57,7 +62,6 @@
 
     <script type="text/template" id="menu-template">
         <button th:text="#{button.addItem}" class="btn btn-default btn-add" type="button">Add</button>
-        <a class="btn btn-default" href="/">www.nikitaliskov.com</a>
     </script>
 
     <script type="text/template" id="menu-wrapper-template">
@@ -78,7 +82,6 @@
         <span class="content"></span>
         <input type="text" value="{{= typeof(position) == 'undefined' ? '' : position }}" placeholder="position" class="form-control" data-name="position"/>
         <button th:text="#{button.remove}" type="button" class="form-control btn btn-default btn-remove">Remove</button>
-
         <input type="text" value="{{= typeof(style) == 'undefined' ? '' : style }}" placeholder="style" class="form-control" data-name="style"/>
         <input type="text" value="{{= typeof(hide) == 'undefined' ? '' : hide }}" placeholder="hide" class="form-control" data-name="hide"/>
 
