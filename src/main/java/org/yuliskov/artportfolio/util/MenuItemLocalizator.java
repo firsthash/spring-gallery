@@ -9,10 +9,9 @@ import javax.servlet.http.*;
 import java.util.*;
 
 public class MenuItemLocalizator {
-    private static final String LANGUAGE = "language";
     private static MenuItemLocalizator instanse;
     private static final String RUSSIAN = "ru";
-    private static final String ENGLISH = "en";
+    private static final String ENGLISH = "us";
 
     public static MenuItemLocalizator getInstanse() {
         return instanse == null ? instanse = new MenuItemLocalizator() : instanse;
