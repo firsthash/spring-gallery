@@ -5,6 +5,8 @@
     /*background-color: white;*/
 /*}*/
 
+
+
 body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -40,6 +42,10 @@ body {
 
 /* DASH STYLE */
 
+.nav > li > a {
+    display: inline;
+}
+
 /* logo */
 .bs-docs-sidebar .nav:first-child > li:first-child {
     min-height: 3em;
@@ -50,12 +56,12 @@ body {
     text-decoration: none;
 }
 
-.bs-docs-sidebar ul:first-child > li, .nav-bottom, .lang {
+.bs-docs-sidebar ul:first-child > li, .nav-bottom {
     background: url('dash.png') repeat;
     background-size: 1em 1.5em;
 }
 
-.bs-docs-sidebar ul:first-child > li > a > span, .lang > a {
+.bs-docs-sidebar ul:first-child > li > a > span, .lang > a > span {
     background-color: white;
 }
 

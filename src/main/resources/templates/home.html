@@ -29,10 +29,10 @@
     </div>
     <div id="container" class="container-fluid" style="display: none">
         <div class="bs-docs-sidebar affix col-sm-2">
-            <div class="lang">
-                <a href="/?locale=ru">ru</a>
-                <a href="/?locale=us">en</a>
-            </div>
+            <!--<div class="lang">-->
+                <!--<a href="/?locale=ru">ru</a>-->
+                <!--<a href="/?locale=us">en</a>-->
+            <!--</div>-->
             <nav>
                 <div id="menu">
 
@@ -50,6 +50,13 @@
             </div>
         </div>
     </div>
+
+    <script type="text/template" id="lang-switch">
+        <span class="lang">
+                <a href="/?locale=ru"><span>ru</span></a>
+                <a href="/?locale=us"><span>en</span></a>
+        </span>
+    </script>
 
 
     <script type="text/template" id="youtube-template">
@@ -95,6 +102,7 @@
                     $('#container').show();
                     $('#loading').remove();
                     console.log('init done!!!');
+                    $('#menu').find('>ul>li').eq(0).append($('#lang-switch').html());
                 });
             });
             require(['app/objects', 'app/app'], function(main, AppView) {
