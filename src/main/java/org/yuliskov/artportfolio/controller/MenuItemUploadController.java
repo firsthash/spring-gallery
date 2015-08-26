@@ -57,11 +57,11 @@ public class MenuItemUploadController implements ApplicationContextAware {
     }
 
     @RequestMapping(value = "/uploadcleanup", method = RequestMethod.POST, consumes = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<Void> uploadCleanup(@RequestBody String path) throws IOException {
-        if (path.isEmpty()) {
+    public ResponseEntity<Void> uploadCleanup(@RequestBody String url) throws IOException {
+        if (url.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        Path abspath = Paths.get(rootDir, path);
+        Path abspath = Paths.get(rootDir, url);
         logger.info("deleting file {}", abspath);
         Files.deleteIfExists(abspath);
         return new ResponseEntity<>(HttpStatus.OK);
