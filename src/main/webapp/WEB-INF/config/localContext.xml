@@ -53,10 +53,7 @@
 
     <mvc:resources location="classpath:/static/oldsite/" mapping="/old/static/**"/>
     <mvc:resources location="classpath:/static/artportfolio/" mapping="/static/**"/>
-    <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
 
-    <import resource="datasource-config.xml"/>
-    <import resource="thymeleaf-config.xml"/>
 
 
     <mvc:interceptors>
@@ -78,9 +75,19 @@
     <!-- jvm cmd line props override this ones -->
     <beans profile="prod">
         <context:property-placeholder location="/WEB-INF/config/data_prod.properties" system-properties-mode="OVERRIDE"/>
+
+        <import resource="datasource-config.xml"/>
+        <import resource="thymeleaf-config.xml"/>
+
+        <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
     </beans>
 
     <beans profile="dev,test">
         <context:property-placeholder location="/WEB-INF/config/data_dev.properties" system-properties-mode="OVERRIDE"/>
+
+        <import resource="datasource-config.xml"/>
+        <import resource="thymeleaf-config.xml"/>
+
+        <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
     </beans>
 </beans>
