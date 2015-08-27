@@ -12,6 +12,8 @@
     <!-- enable transaction related annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
              p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
@@ -24,6 +26,4 @@
                    p:database="${jpa.database}" p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"/>
         </property>
     </bean>
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
 </beans>

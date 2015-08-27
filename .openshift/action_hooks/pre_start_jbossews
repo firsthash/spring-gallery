@@ -1,3 +1,4 @@
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Dspring.profiles.active=prod"
 #export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.data=$OPENSHIFT_DATA_DIR -Djpa.showSql=false -Djpa.generateDdl=true"
 
 ########## HSQL ##########
