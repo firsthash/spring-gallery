@@ -8,7 +8,7 @@ define(['backbone', 'bootstrap', 'data'], function(bb, bs, data) {
         initialize: function(options){
             this.options = options;
 
-            var view = new this.options.MenuViewWrapper({data: data});
+            var view = new this.options.MenuViewDecorator({data: data});
             window.menuview = view;
         },
 

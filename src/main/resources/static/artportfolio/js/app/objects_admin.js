@@ -53,7 +53,7 @@ define(['backbone'], function() {
 
 
     // workaround: upload full object graph at once, call 'save' method
-    module.MenuItemsWrapper = module.MenuItems.extend({
+    module.MenuItemsDecorator = module.MenuItems.extend({
         initialize: function(models, options) {
             this.on('sync', this.onSync, this);
             this.on('error', this.onError, this);
@@ -87,7 +87,7 @@ define(['backbone'], function() {
     });
 
 
-    module.MenuViewWrapper = Backbone.View.extend({
+    module.MenuViewDecorator = Backbone.View.extend({
         template: _.template($('#menu-wrapper-template').html()),
         events: {
             'click >.btn-save-all': 'saveAll',
@@ -96,7 +96,7 @@ define(['backbone'], function() {
         inprogress: false,
         initialize: function(options){
             this.data = options.data;
-            this.menu = new module.MenuItemsWrapper([], {data: options.data});
+            this.menu = new module.MenuItemsDecorator([], {data: options.data});
             console.assert(this.menu.length == 0, 'this.menu.length == 0');
             this.listenTo(this.menu, 'sync', this.render);
             this.menu.fetch();

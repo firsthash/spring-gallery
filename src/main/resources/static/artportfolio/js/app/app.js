@@ -11,7 +11,7 @@ define(['data', 'backbone'], function(data) {
 
             console.assert(data, 'initial data is not defined');
 
-            var view = new this.options.MenuViewWrapper({data: data});
+            var view = new this.options.MenuViewDecorator({data: data});
             // for debugging purposes
             window.menuview = view;
         },

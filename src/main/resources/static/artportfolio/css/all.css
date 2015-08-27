@@ -1,12 +1,3 @@
-/*.lang {*/
-    /*position: absolute;*/
-    /*z-index: 1000;*/
-    /*left: 13.4em;*/
-    /*background-color: white;*/
-/*}*/
-
-
-
 body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -42,9 +33,23 @@ body {
 
 /* DASH STYLE */
 
+/* language switcher */
+
 .nav > li > a {
-    display: inline;
+    display: inline-block;
 }
+
+.lang {
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.lang > a > span {
+    background-color: white;
+}
+
+
+/* language switcher end */
 
 /* logo */
 .bs-docs-sidebar .nav:first-child > li:first-child {
@@ -61,14 +66,15 @@ body {
     background-size: 1em 1.5em;
 }
 
-.bs-docs-sidebar ul:first-child > li > a > span, .lang > a > span {
+.bs-docs-sidebar ul:first-child > li > a > span {
     background-color: white;
 }
 
+/* TODO: avoid using important tags */
 .bs-docs-sidebar .nav > li > a:hover,
 .bs-docs-sidebar .nav > li > a:focus,
 .bs-docs-sidebar .nav .active a {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .logo {
@@ -76,12 +82,12 @@ body {
 }
 
 .bs-docs-sidebar .nav .nav {
-    padding-left: 15px !important;
+    padding-left: 15px;
     background-color: white;
 }
 
-.bs-docs-sidebar ul:first-child > li > a, .lang {
-    padding-left: 10px !important;
+.bs-docs-sidebar ul:first-child > li > a {
+    padding-left: 10px;
 }
 
 
@@ -133,17 +139,16 @@ a, a:hover, a:focus {
 }
 .bs-docs-sidebar .nav .nav {
     display: none;
-    padding-left: 5px;
 }
-.bs-docs-sidebar .nav .nav>li>a {
-    font-weight: 400
-}
-.bs-docs-sidebar .nav .nav>.active:focus>a,
-.bs-docs-sidebar .nav .nav>.active:hover>a,
-.bs-docs-sidebar .nav .nav>.active>a {
-    font-weight: 500
-}
-
-.bs-docs-sidebar .nav>.active>ul {
+.bs-docs-sidebar .nav > .active > ul {
     display: block
 }
+/*.bs-docs-sidebar .nav .nav > li > a {*/
+/*font-weight: 400*/
+/*}*/
+/*.bs-docs-sidebar .nav .nav>.active:focus>a,*/
+/*.bs-docs-sidebar .nav .nav>.active:hover>a,*/
+/*.bs-docs-sidebar .nav .nav>.active>a {*/
+/*font-weight: 500*/
+
+/*}*/

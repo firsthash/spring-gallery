@@ -21,6 +21,11 @@
         <param-value>/WEB-INF/config/globalContext.xml</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>normal</param-value>
+    </context-param>
+
     <!-- required by spring-security -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -14,7 +14,7 @@ define(['backbone', 'app/animqueue'], function(){
         comparator: 'position',
     });
 
-    module.MenuItemsWrapper = module.MenuItems.extend({
+    module.MenuItemsDecorator = module.MenuItems.extend({
         initialize: function(models, options) {
             console.assert(options.data != null, "options.data != null");
             this.data = options.data;
@@ -37,11 +37,11 @@ define(['backbone', 'app/animqueue'], function(){
         }
     });
 
-    module.MenuViewWrapper = Backbone.View.extend({
+    module.MenuViewDecorator = Backbone.View.extend({
         el: $('#menu'),
         initialize: function(options){
             this.data = options.data;
-            this.items = new module.MenuItemsWrapper([], {data: options.data});
+            this.items = new module.MenuItemsDecorator([], {data: options.data});
             console.assert(this.items.length == 0, 'this.items.length == 0');
             this.listenToOnce(this.items, 'sync', this.render);
             this.items.fetch();
