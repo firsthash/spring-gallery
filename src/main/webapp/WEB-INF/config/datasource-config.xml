@@ -8,22 +8,22 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-        <!-- enable transaction related annotations -->
-        <tx:annotation-driven transaction-manager="transactionManager"/>
 
-        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-              p:entityManagerFactory-ref="entityManagerFactory"/>
+    <!-- enable transaction related annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 
-       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
              p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
              p:username="${jdbc.username}" p:password="${jdbc.password}"/>
 
-       <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
              p:dataSource-ref="dataSource" p:persistenceUnitName="nikart" p:packagesToScan="org.yuliskov.oldsite, org.yuliskov.artportfolio">
-              <property name="jpaVendorAdapter">
-                     <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-                           p:database="${jpa.database}" p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"/>
-              </property>
-       </bean>
+        <property name="jpaVendorAdapter">
+             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+                   p:database="${jpa.database}" p:showSql="${jpa.showSql}" p:generateDdl="${jpa.generateDdl}"/>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
 </beans>
