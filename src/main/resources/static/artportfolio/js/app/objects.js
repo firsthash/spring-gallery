@@ -43,10 +43,11 @@ define(['backbone', 'app/animqueue'], function(){
             this.data = options.data;
             this.items = new module.MenuItemsDecorator([], {data: options.data});
             console.assert(this.items.length == 0, 'this.items.length == 0');
-            this.listenToOnce(this.items, 'sync', this.render);
+            this.listenTo(this.items, 'sync', this.render);
             this.items.fetch();
         },
         render: function(){
+            this.$el.empty();
             var menu = new module.MenuView({collection: this.items});
             this.$el.prepend(menu.render().el);
             var contentControls = new module.ContentControlsView({menu: menu});
@@ -118,7 +119,8 @@ define(['backbone', 'app/animqueue'], function(){
 
     module.MenuItemView = Backbone.View.extend({
         events: {
-            'click': 'onClick'
+            'click': 'onClick',
+            'click .lang>a': 'onMenuClick',
         },
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
@@ -157,6 +159,12 @@ define(['backbone', 'app/animqueue'], function(){
         hasContent: function(){
             var content = this.model.get('content');
             return content.notEmpty();
+        },
+        onMenuClick: function(e) {
+            $.get(e.currentTarget.href, function() {
+                menuview.items.fetch();
+            });
+            return false;
         },
         onClick: function(e){
             e.stopPropagation();

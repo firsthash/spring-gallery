@@ -1,21 +1,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
+
+
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache.xsd
+
+
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
@@ -29,18 +27,6 @@
     <!-- enable http related annotations -->
     <mvc:annotation-driven/>
 
-    <!-- enable caching related annotations -->
-    <cache:annotation-driven cache-manager="cacheManager"/>
-
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="image"/>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="gallery"/>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" name="default"/>
-            </set>
-        </property>
-    </bean>
 
     <!-- enable file posting -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
@@ -54,10 +40,6 @@
     <mvc:resources location="classpath:/static/artportfolio/" mapping="/static/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
 
-    <import resource="datasource-config.xml"/>
-    <import resource="thymeleaf-config.xml"/>
-
-
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/"/>
@@ -65,14 +47,10 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="Messages" />
-    </bean>
-
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-        <property name="defaultLocale" value="us" />
-        <property name="cookiePath" value="/"/>
-    </bean>
+    <import resource="datasource.xml"/>
+    <import resource="cache.xml"/>
+    <import resource="thymeleaf.xml"/>
+    <import resource="locale.xml"/>
 
     <!-- jvm cmd line props override this ones -->
     <beans profile="prod">

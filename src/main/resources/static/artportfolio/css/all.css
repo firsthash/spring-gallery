@@ -42,6 +42,8 @@ body {
 .lang {
     padding-left: 10px;
     display: inline-block;
+    background: url('dash.png') repeat;
+    background-size: 1em 1.5em;
 }
 
 .lang > a > span {
