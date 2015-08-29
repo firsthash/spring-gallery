@@ -87,6 +87,7 @@ define(['backbone', 'app/animqueue'], function(){
             console.assert(this.items.length == 0, 'this.items.length == 0');
             var menu = new module.MenuView({collection: this.items});
             var contentControls = new module.ContentControlsView({menu: menu});
+            module.currentContentView = new module.ContentItemView({model: new Backbone.Model()});
             this.$el.prepend(menu.render().el);
 
             //this.listenTo(this.items, 'sync', this.render);
@@ -224,7 +225,8 @@ define(['backbone', 'app/animqueue'], function(){
                 this.$el.append(submenu.render().el);
             }
             if (module.currentContentView && module.currentContentView.model.get('id') == this.model.get('content').get('id')) {
-                module.currentContentView.model.set(this.model.get('content').toJSON());
+                //module.currentContentView.model.set(this.model.get('content').toJSON());
+                this.doClick();
             }
             return this;
         },
@@ -256,7 +258,8 @@ define(['backbone', 'app/animqueue'], function(){
             // draw element
             var content = this.model.get('content');
             if (content.notEmpty()){
-                module.currentContentView = new module.ContentItemView({model: content});
+                //module.currentContentView = new module.ContentItemView({model: content});
+                module.currentContentView.model.set(content.toJSON());
 
                 this.menu.active(this.menu);
                 module.contentControls.toggle();
