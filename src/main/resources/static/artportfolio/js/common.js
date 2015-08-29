@@ -4,6 +4,7 @@ require.config({
     paths: {
         app: '../app',
         backbone: 'backbone/backbone',
+        'backbone-nestify': 'backbone/backbone-nestify',
         underscore: 'backbone/underscore',
         bootstrap: 'bootstrap3/js/bootstrap',
         jquery: 'jquery/jquery',
@@ -17,7 +18,7 @@ require.config({
     },
     // non-AMD scripts
     shim: {
-        bootstrap: ['jquery'],
+        bootstrap: ['jquery', 'backbone-nestify'],
         backbone: {
             deps: ['jquery', 'underscore'],
             exports: 'Backbone'

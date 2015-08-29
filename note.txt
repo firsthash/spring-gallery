@@ -1,3 +1,42 @@
+        //parse: function(response) {
+        //    console.log(response);
+        //
+        //    var content = new module.MenuItem(response.content || {});
+        //    this.set('content', content);
+        //    delete response.content;
+        //
+        //    var children = new module.MenuItems(response.children || []);
+        //    this.set('children', children);
+        //    delete response.children;
+        //    return response;
+        //},
+        //initialize: function() {
+        //    // because initialize is called after parse
+        //    _.defaults(this, {
+        //        children: new module.MenuItems(),
+        //        content: new module.MenuItem()
+        //    });
+        //},
+        //parse: function(response) {
+        //    if (_.has(response, "children")) {
+        //        this.children = new module.MenuItems(response.children);
+        //        delete response.children;
+        //    }
+        //    if (_.has(response, "content")) {
+        //        this.content = new module.MenuItem(response.content);
+        //        delete response.content;
+        //    }
+        //    return response;
+        //},
+        //toJSON: function() {
+        //    var json = _.clone(this.attributes);
+        //    json.children = this.children.toJSON();
+        //    json.content = this.content.toJSON();
+        //    return json;
+        //}
+
+\\\\\\\\\\\\\\
+
 <!--<mvc:interceptor>-->
 <!--<mvc:mapping path="/"/>-->
 <!--&lt;!&ndash; to change locale: http://localhost:8080/?locale=ru &ndash;&gt;-->

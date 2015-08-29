@@ -41,7 +41,7 @@ define(['backbone'], function() {
         },
     });
     
-    module.ContentItem = Backbone.Model.extend({
+    module.BaseItem = Backbone.Model.extend({
         url: '/contentitem',
     });
 
@@ -247,7 +247,7 @@ define(['backbone'], function() {
             model.parentViewId = this.menu.cid;
             this.$el.append(this.template(model)) && this.hideFields(); // hide some unneeded stuff
 
-            var content = new module.ContentItem(this.model.get('content') || {});
+            var content = new module.BaseItem(this.model.get('content') || {});
             this.model.set('content', content);
             var contentItem = new module.ContentItemView({model: content, hide: this.hide});
 
