@@ -224,9 +224,9 @@ define(['backbone', 'app/animqueue'], function(){
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
             }
-            if (module.currentContentView.model.get('id') == this.model.get('content').get('id') && children.length == 0) {
-                //module.currentContentView.model.set(this.model.get('content').toJSON());
-                this.doClick();
+            if (module.currentContentView.model.get('id') == this.model.get('content').get('id')) {
+                this.showContent();
+                this.$el.addClass('active');
             }
             return this;
         },
@@ -258,7 +258,6 @@ define(['backbone', 'app/animqueue'], function(){
             // draw element
             var content = this.model.get('content');
             if (content.notEmpty()){
-                //module.currentContentView = new module.ContentItemView({model: content});
                 module.currentContentView.model.set(content.toJSON());
 
                 this.menu.active(this.menu);
