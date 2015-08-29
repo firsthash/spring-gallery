@@ -33,6 +33,7 @@ done:
 * move carousel key binding to global App object (main.js)
 
 tehniques:
+* backbone, one to many relationship (nested models)
 * using spring profiles to handle production and development evironments
 * using HttpSession, Session Beans, CookieLocaleResolver, SessionLocaleResolver
 * internationalization/localization

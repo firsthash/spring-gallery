@@ -42,6 +42,11 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
+            <mvc:mapping path="/uploads/**"/>
+            <bean id="responseCachingFilter" class="org.springframework.web.servlet.mvc.WebContentInterceptor"
+                p:cacheSeconds="#{5*60}"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
             <mvc:mapping path="/"/>
             <bean id="domainNameInterceptor" class="org.yuliskov.oldsite.utils.DomainNameInterceptor"/>
         </mvc:interceptor>
