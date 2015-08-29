@@ -224,7 +224,7 @@ define(['backbone', 'app/animqueue'], function(){
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
             }
-            if (module.currentContentView && module.currentContentView.model.get('id') == this.model.get('content').get('id')) {
+            if (module.currentContentView.model.get('id') == this.model.get('content').get('id') && children.length == 0) {
                 //module.currentContentView.model.set(this.model.get('content').toJSON());
                 this.doClick();
             }
