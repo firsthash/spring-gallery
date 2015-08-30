@@ -309,6 +309,7 @@ define(['backbone', 'app/animqueue'], function(){
 
     module.ContentItemView = Backbone.View.extend({
         template: _.template($('#content-item-template').html()),
+        textTemplate: _.template($('#content-item-template-text').html()),
         youtubeTemplate: _.template($('#youtube-template').html()),
         vimeoTemplate: _.template($('#vimeo-template').html()),
         imageTemplate: _.template($('#image-template').html()),
@@ -319,13 +320,15 @@ define(['backbone', 'app/animqueue'], function(){
             },
         },
         initialize: function(){
-            this.model.on('change', function() {
-                console.log('model ContentItemView changed');
-                this.render();
+            this.model.on('change:title change:description', function() {
+                this.renderText();
+            }, this);
+            this.model.on('change:url', function() {
+                this.renderMedia();
             }, this);
             this.render();
         },
-        embed: function(){
+        select: function(){
             var url = this.model.get('url') || '';
             var isAbs = url.startsWith('http');
 
@@ -341,13 +344,20 @@ define(['backbone', 'app/animqueue'], function(){
 
             return this.imageTemplate(this.model.toJSON());
         },
+        renderMedia: function() {
+            var elem = this.select();
+            this.$('.media').html(elem);
+        },
+        renderText: function() {
+            var elem = this.textTemplate(this.model.toJSON());
+            this.$('.text').html(elem);
+        },
         render: function() {
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
-
-            var elem = this.embed();
-            this.$('.embed').append(elem);
             $('#content').html(this.el);
+            this.renderMedia();
+            this.renderText();
             return this;
         }
     });
