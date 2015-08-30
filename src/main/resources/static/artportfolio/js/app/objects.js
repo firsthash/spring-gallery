@@ -70,8 +70,10 @@ define(['backbone', 'app/animqueue'], function(){
 
             this.items.fetch({success: function() {
                 console.log('init done!!!');
-                menu.item(0).doClick();
                 $(document).trigger('initDone');
+                module.workspace = new Workspace();
+                menu.item(0).doClick();
+                Backbone.history.start();
             }});
 
             this.items.on('sync', function() {
@@ -191,13 +193,24 @@ define(['backbone', 'app/animqueue'], function(){
         },
         onClick: function(e){
             e.stopPropagation();
+
             this.doClick(e);
         },
+        OPEN: 0,
+        CLOSE: 1,
         doClick: function(e){
+            module.workspace.navigate('show/item' + this.model.get('id'));
+
             // draw element
             this.showContent();
 
-            this.animate();
+            this.animate(_.bind(function() {
+                //menu is opening... imitate click on first submenu item
+                if (this.submenu && this.$el.hasClass('active')) {
+                    var item = this.submenu.items[0];
+                    item.model.get('content').notEmpty() && item.doClick();
+                }
+            }, this));
 
             // reset previously selected submenu item
             if (this.submenu && this.menu.active() != this.submenu)
@@ -213,7 +226,17 @@ define(['backbone', 'app/animqueue'], function(){
                 module.contentControls.toggle();
             }
         },
-        animate: function(){
+        animate: function(onFinish) {
+            if (this.menu.parentItem && !this.menu.parentItem.$el.hasClass('active')) {
+                console.log('parent not active');
+                this.menu.parentItem.animate(_.bind(function() {
+                    this.doAnimate(onFinish);
+                }, this));
+            } else {
+                this.doAnimate(onFinish);
+            }
+        },
+        doAnimate: function(onFinish) {
             var that = null;
             // find previously clicked item
             _.each(this.menu.items, function(item){
@@ -241,17 +264,18 @@ define(['backbone', 'app/animqueue'], function(){
                 _.each(arr, function(that, index){
                     // menu is collapsing... display nothing
                     if (index == 0 && that.submenu && that.$el.hasClass('active')){
-                        new module.ContentItemView({model: new module.MenuItem({})});
-                        module.contentControls.hide();
+                        //new module.ContentItemView({model: new module.MenuItem({})});
+                        //module.contentControls.hide();
                     } else if (index == 0 && that.model.get('content').get('url')) {
 
                     } else if (index == 0 && that.submenu){ // menu is opening... imitate click on first submenu item
-                        var item = that.submenu.items[0];
-                        item.model.get('content').notEmpty() && item.doClick();
+                        //var item = that.submenu.items[0];
+                        //item.model.get('content').notEmpty() && item.doClick();
                     }
                     that && that.$el.toggleClass('active');
                     that && that.submenu && that.submenu.$el.css('display', '');
-                })
+                });
+                onFinish && onFinish();
             }}, [this, that]);
         },
     });
@@ -386,6 +410,20 @@ define(['backbone', 'app/animqueue'], function(){
             return true;
         },
     });
+
+
+    var Workspace = Backbone.Router.extend({
+        routes: {
+            "show/item:id": "show"
+        },
+        show: function(id) {
+            $('#' + id).trigger('click');
+            console.log('route:show', id);
+        }
+
+    });
+
+
 
 
 

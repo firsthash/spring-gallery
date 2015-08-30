@@ -75,7 +75,7 @@
 
     <script type="text/template" id="menu-item-template">
         <!-- IE fix: open new tab when using anhor with blank attribute -->
-        <a href="{{= typeof(url) == 'undefined' || !url ? 'javascript:' : url }}" target="{{= typeof(url) == 'undefined' ? '' : 'blank' }}"><span>{{= typeof title == 'undefined' || !title ? position : title }}</span></a>
+        <a id="{{= id}}" href="{{= typeof(url) == 'undefined' || !url ? 'javascript:' : url }}" target="{{= typeof(url) == 'undefined' ? '' : 'blank' }}"><span>{{= typeof title == 'undefined' || !title ? position : title }}</span></a>
     </script>
 
     <script type="text/template" id="content-item-template">
