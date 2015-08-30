@@ -1,4 +1,19 @@
         //parse: function(response) {
+        //    if (this.init == false) {
+        //        this.init = true;
+        //        this.set({
+        //            content: new module.BaseItem(),
+        //            children: new module.MenuItems()
+        //        });
+        //    }
+        //    this.content = response.content;
+        //    this.children = response.children;
+        //    delete response.content;
+        //    delete response.children;
+        //    return response;
+        //},
+
+        //parse: function(response) {
         //    console.log(response);
         //
         //    var content = new module.MenuItem(response.content || {});

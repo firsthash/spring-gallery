@@ -24,7 +24,7 @@ body {
 }
 
 /* fit image/video into environment */
-#content .embed img, #content .embed iframe {
+#content .media img, #content .media iframe {
     max-width: 100%;
     max-height: 40em;
 }

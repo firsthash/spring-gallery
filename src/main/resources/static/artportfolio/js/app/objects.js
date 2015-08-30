@@ -14,15 +14,6 @@ define(['backbone', 'app/animqueue'], function(){
             this.on('change:children', function(model, value) {
                 console.log('on change MenuItem', model.title, value.length);
             });
-            //if (this.init) {
-            //    console.log('already initialized');
-            //}
-            //this.set({
-            //    content: new module.BaseItem(this.get('content') || {}),
-            //    children: new module.MenuItems(this.get('children') || []),
-            //});
-
-            //this.init = true;
         },
         set: function(key, val, options) {
             if (typeof key === 'object') {
@@ -33,20 +24,6 @@ define(['backbone', 'app/animqueue'], function(){
 
             return Backbone.Model.prototype.set.call(this, key, val, options);
         },
-        //parse: function(response) {
-        //    if (this.init == false) {
-        //        this.init = true;
-        //        this.set({
-        //            content: new module.BaseItem(),
-        //            children: new module.MenuItems()
-        //        });
-        //    }
-        //    this.content = response.content;
-        //    this.children = response.children;
-        //    delete response.content;
-        //    delete response.children;
-        //    return response;
-        //},
     });
 
     module.MenuItems = Backbone.Collection.extend({
@@ -86,11 +63,11 @@ define(['backbone', 'app/animqueue'], function(){
             this.items = new module.MenuItemsDecorator([], {data: options.data});
             console.assert(this.items.length == 0, 'this.items.length == 0');
             var menu = new module.MenuView({collection: this.items});
-            var contentControls = new module.ContentControlsView({menu: menu});
+            window.allItems = this.items;
+            module.contentControlsView = new module.ContentControlsView({menu: menu});
             module.currentContentView = new module.ContentItemView({model: new Backbone.Model()});
             this.$el.prepend(menu.render().el);
 
-            //this.listenTo(this.items, 'sync', this.render);
             this.items.fetch({success: function() {
                 console.log('init done!!!');
                 menu.item(0).doClick();
@@ -101,16 +78,6 @@ define(['backbone', 'app/animqueue'], function(){
                 $('#menu').find('>ul>li').eq(0).append($('#lang-switch').html());
             });
         },
-        //render: function(){
-        //    this.$el.empty();
-        //    var menu = new module.MenuView({collection: this.items});
-        //    this.$el.prepend(menu.render().el);
-        //    var contentControls = new module.ContentControlsView({menu: menu});
-        //    // draw first element
-        //    menu.item(0).doClick();
-        //    $(document).trigger('initDone');
-        //    return this;
-        //},
     });
 
     module.MenuView = Backbone.View.extend({
@@ -128,10 +95,6 @@ define(['backbone', 'app/animqueue'], function(){
             if (this.collection.length > 0) {
                 this.collection.each(this.onAdd, this);
             }
-
-            //this.collection.on('change', function() {
-            //    console.log('onchange');
-            //}, this);
         },
         active: function(menu){
             if (menu)
@@ -148,12 +111,6 @@ define(['backbone', 'app/animqueue'], function(){
             this.items.push(menuItem);
             this.$el.append(menuItem.render().el);
         },
-        //render: function(){
-        //    //this.items = [];
-        //    //this.collection.each(this.onAdd, this);
-        //
-        //    return this;
-        //},
         itemIndex: function(){
             var itemIndex = 0;
             _.each(this.active().items, function(item, index){
@@ -196,14 +153,6 @@ define(['backbone', 'app/animqueue'], function(){
         submenu: null,
         menu: null,
         initialize: function(options){
-            //var content = new module.MenuItem(this.model.get('content') || {});
-            //var content = this.model.get('content');
-            //this.model.set('content', content);
-
-            //var children = new module.MenuItems(this.model.get('children') || []);
-            //var children = this.model.get('children');
-            //this.model.set('children', children);
-
             this.menu = options.menu;
 
             this.model.on('change', this.render, this);
@@ -314,7 +263,7 @@ define(['backbone', 'app/animqueue'], function(){
         vimeoTemplate: _.template($('#vimeo-template').html()),
         imageTemplate: _.template($('#image-template').html()),
         events: {
-            'click .embed a': function(){
+            'click .media a': function(){
                 module.contentControls.next();
                 return false;
             },
