@@ -1,8 +1,10 @@
-define(['backbone', 'app/app', 'app/model/MenuItemsDecorator', 'app/view/MenuView', 'app/view/ContentControlsView', 'app/view/ContentItemView', 'app/util/Workspace'],
+define(['backbone', 'app/App', 'app/model/MenuItemsDecorator', 'app/view/MenuView', 'app/view/ContentControlsView', 'app/view/ContentItemView', 'app/util/Workspace'],
     function(Backbone, app, MenuItemsDecorator, MenuView, ContentControlsView, ContentItemView, Workspace) {
     return Backbone.View.extend({
         el: $('#menu'),
         initialize: function(options){
+            app = require('app/App');
+
             this.data = options.data;
             this.items = new MenuItemsDecorator([], {data: options.data});
             console.assert(this.items.length == 0, 'this.items.length == 0');

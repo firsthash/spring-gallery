@@ -1,4 +1,4 @@
-define(['backbone', 'app/app', 'app/view/MenuView', 'app/util/animqueue'], function(none, app, MenuView) {
+define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], function(Backbone, app, MenuView) {
     return Backbone.View.extend({
         events: {
             'click': 'onClick',
@@ -9,6 +9,9 @@ define(['backbone', 'app/app', 'app/view/MenuView', 'app/util/animqueue'], funct
         submenu: null,
         menu: null,
         initialize: function(options){
+            app = require('app/App');
+            MenuView = require('app/view/MenuView');
+
             this.menu = options.menu;
 
             this.model.on('change', this.render, this);
@@ -24,7 +27,6 @@ define(['backbone', 'app/app', 'app/view/MenuView', 'app/util/animqueue'], funct
             this.$el.html(el);
             var children = this.model.get('children');
             if (children.length) {
-                var MenuView = require('app/view/MenuView');
                 var submenu = new MenuView({collection: children});
                 this.submenu = submenu;
                 submenu.parentItem = this;

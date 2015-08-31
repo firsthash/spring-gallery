@@ -1,4 +1,4 @@
-define(['backbone', 'app/app'], function(Backbone, app) {
+define(['backbone', 'app/App'], function(Backbone, app) {
     return Backbone.View.extend({
         template: _.template($('#content-item-template').html()),
         textTemplate: _.template($('#content-item-template-text').html()),

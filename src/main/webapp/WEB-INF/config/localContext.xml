@@ -48,17 +48,17 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <import resource="datasource.xml"/>
-    <import resource="cache.xml"/>
-    <import resource="thymeleaf.xml"/>
-    <import resource="locale.xml"/>
+    <import resource="import/datasource.xml"/>
+    <import resource="import/caching.xml"/>
+    <import resource="import/thymeleaf.xml"/>
+    <import resource="import/localization.xml"/>
 
     <!-- jvm cmd line props override this ones -->
     <beans profile="prod">
-        <context:property-placeholder location="/WEB-INF/config/data_prod.properties" system-properties-mode="OVERRIDE"/>
+        <context:property-placeholder location="/WEB-INF/config/property/prod.properties" system-properties-mode="OVERRIDE"/>
     </beans>
 
     <beans profile="dev,test">
-        <context:property-placeholder location="/WEB-INF/config/data_dev.properties" system-properties-mode="OVERRIDE"/>
+        <context:property-placeholder location="/WEB-INF/config/property/dev.properties" system-properties-mode="OVERRIDE"/>
     </beans>
 </beans>
