@@ -32,12 +32,8 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
           p:maxUploadSize="#{10*1024*1024}"/>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/classes/pages_old/" p:suffix=".jsp" p:order="2"/>
 
-
-    <mvc:resources location="classpath:/static/oldsite/" mapping="/old/static/**"/>
-    <mvc:resources location="classpath:/static/artportfolio/" mapping="/static/**"/>
+    <mvc:resources location="classpath:/static/" mapping="/static/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
 
     <mvc:interceptors>

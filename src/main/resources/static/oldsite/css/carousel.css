@@ -1,9 +1,0 @@
-/* most specific selectors win */
-.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
-    top: 5em;
-}
-
-/* don't allow image to go beyond boundaries */
-.carousel .item img {
-    max-width: 100%;
-}

@@ -1,3 +1,11 @@
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/classes/pages_old/" p:suffix=".jsp" p:order="2"/>
+
+
+    <mvc:resources location="classpath:/static/oldsite/" mapping="/old/static/**"/>
+
+///////
+
         //parse: function(response) {
         //    if (this.init == false) {
         //        this.init = true;
