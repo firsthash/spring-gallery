@@ -3,7 +3,7 @@ define(['backbone', 'app/view/MenuItemView'],
         return Backbone.View.extend({
             tagName: 'ul',
             className: 'nav',
-            static: [null], // static variable
+            activeMenu: [null], // static variable
             items: null,
             isRoot: false,
             initialize: function(){
@@ -18,9 +18,9 @@ define(['backbone', 'app/view/MenuItemView'],
             },
             active: function(menu){
                 if (menu)
-                    this.static[0] = menu;
+                    this.activeMenu[0] = menu;
                 else
-                    return this.static[0];
+                    return this.activeMenu[0];
             },
             onAdd: function(model, index){
                 if (this.items == null) {
