@@ -1,4 +1,5 @@
 define(['data', 'backbone', 'app/view/MenuViewDecorator'], function(data, Backbone, MenuViewDecorator) {
+
     // top-level piece of UI
     return Backbone.View.extend({
         // Instead of generating a new element, bind to the existing element
