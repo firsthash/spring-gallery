@@ -108,8 +108,8 @@
                     console.log('init done!!!');
                 });
             });
-            require(['app/objects_admin', 'app/app_admin', 'holder'], function(main, AppView) {
-                new AppView(main);
+            require(['admin/view/AppView', 'holder'], function(AppView) {
+                new AppView();
             });
         });
     </script>

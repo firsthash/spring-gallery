@@ -109,8 +109,8 @@
 
                 });
             });
-            require(['app/objects', 'app/app'], function(main, AppView) {
-                new AppView(main);
+            require(['app/view/AppView'], function(AppView) {
+                new AppView();
             });
         });
     </script>

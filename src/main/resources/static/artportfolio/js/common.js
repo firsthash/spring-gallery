@@ -3,6 +3,7 @@ require.config({
     // apply "baseUrl + paths" rules for finding
     paths: {
         app: '../app',
+        admin: '../admin',
         backbone: 'backbone/backbone',
         'backbone-nestify': 'backbone/backbone-nestify',
         underscore: 'backbone/underscore',
