@@ -6,20 +6,8 @@ define(['backbone', 'data', 'admin/view/MenuViewDecorator', 'bootstrap'], functi
 
         // bind collection events, when items are added or changed
         initialize: function(){
-            //this.options = options;
-
             var view = new MenuViewDecorator({data: data});
             window.menuview = view;
         },
-
-        // add one item
-        addOne: function(model) {
-        },
-
-        // batch add item
-        addAll: function() {
-            this.collection.each(this.addOne, this);
-        }
-
     });
 });

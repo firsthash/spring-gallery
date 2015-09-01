@@ -13,15 +13,5 @@ define(['data', 'backbone', 'app/view/MenuViewDecorator'], function(data, Backbo
             // for debugging purposes
             window.menuview = view;
         },
-
-        // add one item
-        addOne: function(model) {
-        },
-
-        // batch add item
-        addAll: function() {
-            this.collection.each(this.addOne, this);
-        }
-
     });
 });
