@@ -4,6 +4,9 @@
 *.iws
 .idea/
 
+# Openshift PaaS internal files
+.openshift/
+
 # backup files
 original/
 bak/
