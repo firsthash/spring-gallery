@@ -10,9 +10,6 @@ import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.support.*;
 import org.yuliskov.artportfolio.repository.*;
 
-import javax.servlet.http.*;
-import java.util.*;
-
 @Controller
 public class MenuItemController {
     private static final String LANGUAGE = "language";

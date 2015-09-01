@@ -31,6 +31,8 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
           p:maxUploadSize="#{10*1024*1024}"/>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/classes/view/" p:suffix=".jsp" p:order="2"/>
 
     <mvc:resources location="classpath:/static/" mapping="/static/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>
@@ -43,10 +45,10 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <import resource="import/datasource.xml"/>
-    <import resource="import/caching.xml"/>
-    <import resource="import/thymeleaf.xml"/>
-    <import resource="import/localization.xml"/>
+    <import resource="other/datasource.xml"/>
+    <import resource="other/caching.xml"/>
+    <import resource="other/thymeleaf.xml"/>
+    <import resource="other/localization.xml"/>
 
     <!-- jvm cmd line props override this ones -->
     <beans profile="prod">

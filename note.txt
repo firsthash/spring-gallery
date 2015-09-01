@@ -1,3 +1,8 @@
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewNames" value="redirect*" />
+    </bean>
+
+
     <jpa:repositories base-package="org.yuliskov.oldsite.repositories"/>
 
         <mvc:interceptor>
