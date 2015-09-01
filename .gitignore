@@ -4,6 +4,8 @@
 *.iws
 .idea/
 
+.openshift/
+
 # backup files
 original/
 bak/
