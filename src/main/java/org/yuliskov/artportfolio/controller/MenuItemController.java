@@ -20,7 +20,7 @@ public class MenuItemController {
 
     @RequestMapping(value = "/", params = "locale")
     public ResponseEntity<Void> homeSwitchLocale(@RequestParam String locale) {
-        switchLanguage(locale);
+        switchLocale(locale);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -31,11 +31,11 @@ public class MenuItemController {
 
     @RequestMapping(value = "/admin", params = "locale")
     public String adminSwitchLocale(@RequestParam(required = false) String locale) {
-        switchLanguage(locale);
+        switchLocale(locale);
         return "redirect:/admin";
     }
 
-    public void switchLanguage(@RequestParam String locale) {
+    public void switchLocale(@RequestParam String locale) {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(attr.getRequest());
         localeResolver.setLocale(attr.getRequest(), attr.getResponse(), StringUtils.parseLocaleString(locale));

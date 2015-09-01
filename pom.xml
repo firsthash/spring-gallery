@@ -21,7 +21,7 @@
         <!-- package versions -->
         <jstl>1.2</jstl>
         <jsp-api>2.2</jsp-api>
-        <servlet-api>2.5</servlet-api>
+        <!--<servlet-api>3.0.1</servlet-api>-->
         <commons-fileupload>1.3</commons-fileupload>
         <commons-io>2.4</commons-io>
         <json>20131018</json>
@@ -43,8 +43,14 @@
         <spring-data-rest-core>2.3.0.RELEASE</spring-data-rest-core>
         <thymeleaf-spring4>2.1.2.RELEASE</thymeleaf-spring4>
         <nekohtml>1.9.13</nekohtml>
+        <javax.servlet-api>3.0.1</javax.servlet-api>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet-api}</version>
+        </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
@@ -60,12 +66,12 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>${spring-data-rest-core}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${servlet-api}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>servlet-api</artifactId>-->
+            <!--<version>${servlet-api}</version>-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--</dependency>-->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
