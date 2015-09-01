@@ -12,6 +12,7 @@ define(['backbone', 'app/App'], function(Backbone, app) {
             },
         },
         initialize: function(){
+            app = require('app/App');
             this.model.on('change:title change:description', function() {
                 this.renderText();
             }, this);
