@@ -1,1 +1,0 @@
-define(["data","backbone","app/view/MenuViewDecorator"],function(a,c,b){return c.View.extend({el:$("body"),initialize:function(){console.assert(a,"initial data is not defined");var d=new b({data:a});window.menuview=d},})});

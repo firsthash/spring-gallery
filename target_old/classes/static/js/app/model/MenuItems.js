@@ -1,1 +1,0 @@
-define(["backbone","app/model/MenuItem"],function(a,b){return Backbone.Collection.extend({model:b,url:"/menuitems",comparator:"position",})});

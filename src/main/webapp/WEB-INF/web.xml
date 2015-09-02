@@ -18,7 +18,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/globalContext.xml</param-value>
+        <param-value>classpath:config/globalContext.xml</param-value>
     </context-param>
 
     <context-param>
@@ -36,7 +36,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/config/localContext.xml</param-value>
+            <param-value>classpath:config/localContext.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

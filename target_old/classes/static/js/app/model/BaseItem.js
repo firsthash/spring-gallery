@@ -1,1 +1,0 @@
-define(["backbone"],function(a){return a.Model.extend({notEmpty:function(){return this.get("url")||this.get("description")},})});

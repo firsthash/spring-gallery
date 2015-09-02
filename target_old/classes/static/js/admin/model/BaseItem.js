@@ -1,1 +1,0 @@
-define(["backbone"],function(a){return a.Model.extend({url:"/contentitem",})});
