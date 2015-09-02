@@ -31,6 +31,7 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
           p:maxUploadSize="#{10*1024*1024}"/>
 
+    <!-- handles construction "redirect:/home.html" -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/classes/view/" p:suffix=".jsp" p:order="2"/>
 
@@ -45,10 +46,10 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <import resource="other/datasource.xml"/>
-    <import resource="other/caching.xml"/>
-    <import resource="other/thymeleaf.xml"/>
-    <import resource="other/localization.xml"/>
+    <import resource="beans/datasource.xml"/>
+    <import resource="beans/caching.xml"/>
+    <import resource="beans/thymeleaf.xml"/>
+    <import resource="beans/localization.xml"/>
 
     <!-- jvm cmd line props override this ones -->
     <beans profile="prod">

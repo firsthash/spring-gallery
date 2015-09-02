@@ -1,0 +1,1 @@
+define(["backbone","data","admin/view/MenuViewDecorator","bootstrap"],function(c,a,b){return c.View.extend({el:$("body"),initialize:function(){var d=new b({data:a});window.menuview=d},})});

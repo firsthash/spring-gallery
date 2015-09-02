@@ -21,7 +21,6 @@
         <!-- package versions -->
         <jstl>1.2</jstl>
         <jsp-api>2.2</jsp-api>
-        <!--<servlet-api>3.0.1</servlet-api>-->
         <commons-fileupload>1.3</commons-fileupload>
         <commons-io>2.4</commons-io>
         <json>20131018</json>
@@ -50,6 +49,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.servlet-api}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -66,12 +66,6 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>${spring-data-rest-core}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>${servlet-api}</version>-->
-            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
-        <!--</dependency>-->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
@@ -154,11 +148,6 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>${hibernate-jpa-2.0-api}</version>
         </dependency>
-<!--         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>${hibernate-jpa-2.1-api}</version>
-        </dependency> -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -231,44 +220,7 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>com.samaxes.maven</groupId>
-                <artifactId>minify-maven-plugin</artifactId>
-                <version>${minify-maven-plugin}</version>
-                <executions>
-                    <execution>
-                        <id>default-minify</id>
-                        <!-- run on package phase so development builds won't be affected -->
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <webappSourceDir>src/main/resources</webappSourceDir>
-                            <webappTargetDir>target/classes</webappTargetDir>
-                            <skipMerge>true</skipMerge>
-                            <nosuffix>true</nosuffix>
-                            <cssSourceDir>static</cssSourceDir>
-                            <cssSourceIncludes>
-                                <cssSourceInclude>**/*.css</cssSourceInclude>
-                            </cssSourceIncludes>
-                            <cssSourceExcludes>
-                                <cssSourceExclude>**/*.min.css</cssSourceExclude>
-                                <cssSourceExclude>**/*-min.css</cssSourceExclude>
-                            </cssSourceExcludes>
-                            <jsSourceDir>static</jsSourceDir>
-                            <jsSourceIncludes>
-                                <jsSourceInclude>**/*.js</jsSourceInclude>
-                            </jsSourceIncludes>
-                            <jsSourceExcludes>
-                                <jsSourceExclude>**/*.min.js</jsSourceExclude>
-                                <jsSourceExclude>**/*-min.js</jsSourceExclude>
-                                <jsSourceExclude>**/*.pack.js</jsSourceExclude>
-                            </jsSourceExcludes>
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
     <profiles>
@@ -292,6 +244,10 @@
                             <!-- if you are using minimizer change this to compiler output directory -->
                             <systemProperties>
                                 <!-- put your properties here -->
+                                <systemProperty>
+                                    <name>spring.profiles.active</name>
+                                    <value>dev</value>
+                                </systemProperty>
                             </systemProperties>
                             <server>tomcat-development-server</server>
                             <path>/</path>
@@ -316,6 +272,44 @@
                             <outputDirectory>webapps</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.samaxes.maven</groupId>
+                        <artifactId>minify-maven-plugin</artifactId>
+                        <version>${minify-maven-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>default-minify</id>
+                                <!-- run on package phase so development builds won't be affected -->
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <webappSourceDir>src/main/resources</webappSourceDir>
+                                    <webappTargetDir>target/classes</webappTargetDir>
+                                    <skipMerge>true</skipMerge>
+                                    <nosuffix>true</nosuffix>
+                                    <cssSourceDir>static</cssSourceDir>
+                                    <cssSourceIncludes>
+                                        <cssSourceInclude>**/*.css</cssSourceInclude>
+                                    </cssSourceIncludes>
+                                    <cssSourceExcludes>
+                                        <cssSourceExclude>**/*.min.css</cssSourceExclude>
+                                        <cssSourceExclude>**/*-min.css</cssSourceExclude>
+                                    </cssSourceExcludes>
+                                    <jsSourceDir>static</jsSourceDir>
+                                    <jsSourceIncludes>
+                                        <jsSourceInclude>**/*.js</jsSourceInclude>
+                                    </jsSourceIncludes>
+                                    <jsSourceExcludes>
+                                        <jsSourceExclude>**/*.min.js</jsSourceExclude>
+                                        <jsSourceExclude>**/*-min.js</jsSourceExclude>
+                                        <jsSourceExclude>**/*.pack.js</jsSourceExclude>
+                                    </jsSourceExcludes>
+                                </configuration>
+                                <goals>
+                                    <goal>minify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

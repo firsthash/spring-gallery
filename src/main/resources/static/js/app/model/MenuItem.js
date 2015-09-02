@@ -4,7 +4,7 @@ define(['backbone', 'app/model/BaseItem', 'app/model/MenuItems'], function(Backb
         init: false,
         initialize: function() {
             this.on('change:children', function(model, value) {
-                console.log('on change MenuItem', model.title, value.length);
+                console.log('MenuItem children property has changed, lenght', value.length);
             });
         },
         set: function(key, val, options) {

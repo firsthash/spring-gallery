@@ -8,7 +8,7 @@ I.e. user no need to learn new graphic interface, instead all additional element
 
 Instant run: 
 
-- Enter in console: `mvn tomcat7:run`
+- Enter in console: `mvn tomcat7:run -Dspring.profiles.active=dev`
 - Open url: `http://localhost:8080`
 
 

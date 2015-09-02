@@ -1,3 +1,11 @@
+                            <additionalClasspathDirs>
+                                <classpathDir>${basedir}/src/main/resources</classpathDir>
+                            </additionalClasspathDirs>
+                            <warSourceDirectory>${basedir}/src/main/resources</warSourceDirectory>
+
+                            //////////
+
+
 @Test
 public void getAccount() throws Exception {
     this.mockMvc.perform(get("/accounts/1").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
