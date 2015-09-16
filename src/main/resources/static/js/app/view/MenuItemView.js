@@ -23,10 +23,20 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             return className;
         },
         isActive: function() {
-            return app.contentView.model.get('id') == this.model.get('content').get('id');
+            return this.$el.hasClass('active') || app.contentView.model.get('id') == this.model.get('content').get('id');
         },
         hasSubmenu: function() {
             return this.submenu != null;
+        },
+        toggleActive: function() {
+            this.$el.toggleClass('active');
+        },
+        setActive: function(val) {
+            if (val) {
+                this.$el.addClass('active');
+            } else {
+                this.$el.removeClass('active');
+            }
         },
         render: function(){
             var el = this.template(this.model.toJSON());
@@ -40,7 +50,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             }
             // restore selected item state
             if (this.isActive() && !this.hasSubmenu()) {
-                this.doClick();
+                this.toggleActive();
             }
             return this;
         },
@@ -112,15 +122,15 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             var that = null;
             // find previously clicked item
             _.each(this.menu.items, function(item){
-                if (item.$el.hasClass('active') && item != this) {
+                if (item.isActive() && item != this) {
                     that = item;
                 }
             }, this);
             var el1 = that && that.submenu ? that.submenu.$el : null;
             var el2 = this.submenu ? this.submenu.$el : null;
             if (!el1 && !el2){
-                this && this.$el.addClass('active');
-                that && that.$el.removeClass('active');
+                this.setActive(true);
+                that && that.setActive(false);
                 return;
             }
             var queue = [
@@ -134,7 +144,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
 
             $.slideQueue(queue, {callback: function(arr){
                 _.each(arr, function(that, index){
-                    that && that.$el.toggleClass('active');
+                    that && that.toggleActive();
                     that && that.submenu && that.submenu.$el && that.submenu.$el.css('display', '');
                 });
                 onFinish && onFinish();

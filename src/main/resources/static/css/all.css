@@ -2,11 +2,19 @@ body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+/* CONTENT VIEW STYLE */
+
 #content pre {
     background-color: initial;
     border: initial;
     padding: initial;
+    /* don't break the words */
+    white-space: pre-wrap;
+    word-break: normal;
 }
+
+/* END CONTENT VIEW STYLE */
+
 
 /* FIXED NAVBAR */
 
