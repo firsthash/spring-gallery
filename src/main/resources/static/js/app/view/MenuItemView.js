@@ -22,11 +22,14 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
                 className = this.model.get('style');
             return className;
         },
+        //hasSubmenu: function() {
+        //    return this.submenu != null;
+        //},
+        //isSelected: function() {
+        //    return app.contentView.model.get('id') == this.model.get('content').get('id');
+        //},
         isActive: function() {
-            return this.$el.hasClass('active') || app.contentView.model.get('id') == this.model.get('content').get('id');
-        },
-        hasSubmenu: function() {
-            return this.submenu != null;
+            return this.$el.hasClass('active');
         },
         toggleActive: function() {
             this.$el.toggleClass('active');
@@ -49,9 +52,10 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
                 this.$el.append(submenu.render().el);
             }
             // restore selected item state
-            if (this.isActive() && !this.hasSubmenu()) {
-                this.toggleActive();
-            }
+            //if (this.isSelected()) {
+            //    this.setActive(true);
+            //    this.showContent();
+            //}
             return this;
         },
         hasContent: function(){
@@ -59,9 +63,10 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             return content.notEmpty();
         },
         onMenuClick: function(e) {
-            console.log('lang clk');
             $.get(e.currentTarget.href, function() {
-                menuview.items.fetch();
+                menuview.items.fetch({success: function(){
+                    Backbone.history.loadUrl(Backbone.history.fragment); // refresh page in Backbone
+                }});
             });
             return false;
         },
@@ -99,11 +104,6 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
                 app.contentView.model.set(content.toJSON());
                 app.contentView.reInitialize();
 
-                //if (this.menu == this.menu.active()) {
-                //    this.menu.active(null);
-                //} else {
-                //    this.menu.active(this.menu);
-                //}
                 this.menu.active(this.menu);
                 app.contentControls.toggle();
             }
