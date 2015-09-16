@@ -10,9 +10,9 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
         menu: null,
         initialize: function(options){
             app = require('app/App');
-            MenuView = require('app/view/MenuView');
-
             this.menu = options.menu;
+
+            MenuView = require('app/view/MenuView');
 
             this.model.on('change', this.render, this);
         },
@@ -21,6 +21,12 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             if (this.model.has('style'))
                 className = this.model.get('style');
             return className;
+        },
+        isActive: function() {
+            return app.contentView.model.get('id') == this.model.get('content').get('id');
+        },
+        hasSubmenu: function() {
+            return this.submenu != null;
         },
         render: function(){
             var el = this.template(this.model.toJSON());
@@ -32,9 +38,9 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
             }
-            if (app.contentView.model.get('id') == this.model.get('content').get('id')) {
-                this.showContent();
-                this.$el.addClass('active');
+            // restore selected item state
+            if (this.isActive() && !this.hasSubmenu()) {
+                this.doClick();
             }
             return this;
         },
@@ -43,12 +49,14 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             return content.notEmpty();
         },
         onMenuClick: function(e) {
+            console.log('lang clk');
             $.get(e.currentTarget.href, function() {
                 menuview.items.fetch();
             });
             return false;
         },
         onClick: function(e){
+            console.log('clk');
             e.stopPropagation();
 
             this.doClick(e);
@@ -56,6 +64,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
         OPEN: 0,
         CLOSE: 1,
         doClick: function(e){
+            console.log('do clk');
             app.workspace.navigate('show/item' + this.model.get('id'));
 
             // draw element
@@ -63,7 +72,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
 
             this.animate(_.bind(function() {
                 //menu is opening... imitate click on first submenu item
-                if (this.submenu && this.$el.hasClass('active')) {
+                if (this.submenu && this.submenu.items && this.$el.hasClass('active')) {
                     var item = this.submenu.items[0];
                     item.model.get('content').notEmpty() && item.doClick();
                 }
@@ -78,7 +87,13 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             var content = this.model.get('content');
             if (content.notEmpty()){
                 app.contentView.model.set(content.toJSON());
+                app.contentView.reInitialize();
 
+                //if (this.menu == this.menu.active()) {
+                //    this.menu.active(null);
+                //} else {
+                //    this.menu.active(this.menu);
+                //}
                 this.menu.active(this.menu);
                 app.contentControls.toggle();
             }
@@ -120,7 +135,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             $.slideQueue(queue, {callback: function(arr){
                 _.each(arr, function(that, index){
                     that && that.$el.toggleClass('active');
-                    that && that.submenu && that.submenu.$el.css('display', '');
+                    that && that.submenu && that.submenu.$el && that.submenu.$el.css('display', '');
                 });
                 onFinish && onFinish();
             }}, [this, that]);

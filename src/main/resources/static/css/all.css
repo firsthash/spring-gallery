@@ -8,6 +8,16 @@ body {
     padding: initial;
 }
 
+/* FIXED NAVBAR */
+
+.bs-docs-sidebar nav {
+    position: fixed;
+    top: 20px;
+    width: inherit;
+}
+
+/* END FIXED NAVBAR */
+
 /* RESPONSIVE FEATURES */
 
 .bs-docs-sidebar, #content-wrap {
@@ -101,7 +111,7 @@ body {
     min-width: 2em;
 }
 
-.bs-docs-sidebar ul li.calendar ul li, 
+.bs-docs-sidebar ul li.calendar ul li,
 .bs-docs-sidebar ul li.calendar ul li a {
     display: inline-block;
 }

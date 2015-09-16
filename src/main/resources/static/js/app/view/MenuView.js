@@ -1,10 +1,11 @@
-define(['backbone', 'app/view/MenuItemView'],
-    function(Backbone, MenuItemView) {
+define(['backbone', 'app/view/MenuItemView', 'app/util/MenuItemFactory'],
+    function(Backbone, MenuItemView, MenuItemFactory) {
         return Backbone.View.extend({
             tagName: 'ul',
             className: 'nav',
             activeMenu: [null], // static variable
             items: null,
+            parentItem: null,
             isRoot: false,
             initialize: function(){
                 if (!this.active())
@@ -23,6 +24,7 @@ define(['backbone', 'app/view/MenuItemView'],
                     return this.activeMenu[0];
             },
             onAdd: function(model, index){
+                MenuItemView = MenuItemFactory.getByModel(model);
                 if (this.items == null) {
                     this.items = [];
                 }

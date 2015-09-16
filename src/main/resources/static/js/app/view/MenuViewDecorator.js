@@ -9,6 +9,7 @@ define(['backbone', 'app/App', 'app/model/MenuItemsDecorator', 'app/view/MenuVie
             this.items = new MenuItemsDecorator([], {data: options.data});
             console.assert(this.items.length == 0, 'this.items.length == 0');
             var menu = new MenuView({collection: this.items});
+            app.rootMenu = menu;
             window.allItems = this.items;
             app.contentControls = new ContentControlsView({menu: menu});
             app.contentView = new ContentItemView({model: new Backbone.Model()});
@@ -18,7 +19,7 @@ define(['backbone', 'app/App', 'app/model/MenuItemsDecorator', 'app/view/MenuVie
                 console.log('init done!!!');
                 $(document).trigger('initDone');
                 app.workspace = new Workspace();
-                menu.item(0).doClick();
+                //menu.item(0).doClick();
                 Backbone.history.start();
             }});
 

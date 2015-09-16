@@ -32,7 +32,7 @@ done:
 * avoid gallery refresh on move on delete (main.js)
 * move carousel key binding to global App object (main.js)
 
-tehniques:
+tehniques (Responsibilities):
 * add Spring MockMvc for testing controllers
 * add routing
 * backbone, one to many relationship (nested models)

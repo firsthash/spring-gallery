@@ -6,12 +6,12 @@ define(['backbone', 'app/App'], function(Backbone, app) {
         vimeoTemplate: _.template($('#vimeo-template').html()),
         imageTemplate: _.template($('#image-template').html()),
         events: {
-            'click .media a': function(){
+            'click .media a': function() {
                 app.contentControls.next();
                 return false;
             },
         },
-        initialize: function(){
+        initialize: function() {
             app = require('app/App');
             this.model.on('change:title change:description', function() {
                 this.renderText();
@@ -21,7 +21,7 @@ define(['backbone', 'app/App'], function(Backbone, app) {
             }, this);
             this.render();
         },
-        select: function(){
+        select: function() {
             var url = this.model.get('url') || '';
             var isAbs = url.startsWith('http');
 
@@ -37,6 +37,11 @@ define(['backbone', 'app/App'], function(Backbone, app) {
 
             return this.imageTemplate(this.model.toJSON());
         },
+        reInitialize: function() {
+            //console.log('content changed');
+            $('#content').html(this.el);  // TODO: fix if item erased by news list
+            this.delegateEvents(); // events accidentally stop working
+        },
         renderMedia: function() {
             var elem = this.select();
             this.$('.media').html(elem);
@@ -45,12 +50,13 @@ define(['backbone', 'app/App'], function(Backbone, app) {
             var elem = this.textTemplate(this.model.toJSON());
             this.$('.text').html(elem);
         },
-        render: function() {
+        renderContainer: function() {
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
+        },
+        render: function() {
+            this.renderContainer();
             $('#content').html(this.el);
-            this.renderMedia();
-            this.renderText();
             return this;
         }
     });

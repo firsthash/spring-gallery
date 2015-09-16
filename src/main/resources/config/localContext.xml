@@ -33,7 +33,7 @@
 
     <!-- handles construction "redirect:/home.html" -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/classes/view/" p:suffix=".jsp" p:order="2"/>
+          p:prefix="classpath:view/" p:suffix=".jsp" p:order="2"/>
 
     <mvc:resources location="classpath:/static/" mapping="/static/**"/>
     <mvc:resources location="file:${user.data}/uploads/" mapping="/uploads/**"/>

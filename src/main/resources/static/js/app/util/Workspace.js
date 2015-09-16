@@ -1,9 +1,18 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'app/App'], function(Backbone, app) {
     return Backbone.Router.extend({
-        routes: {
-            "show/item:id": "show"
+        initialize: function() {
+            console.log('route init');
         },
-        show: function(id) {
+        routes: {
+            "": "showHome",
+            "show/item:id": "showItem"
+        },
+        showHome: function() {
+            app = require('app/App');
+            var model = app.rootMenu.items[0].model;
+            this.showItem(model.get('id'));
+        },
+        showItem: function(id) {
             $('#' + id).trigger('click');
             console.log('route:show', id);
         },
