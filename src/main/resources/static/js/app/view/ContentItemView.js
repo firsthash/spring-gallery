@@ -38,8 +38,11 @@ define(['backbone', 'app/App'], function(Backbone, app) {
             return this.imageTemplate(this.model.toJSON());
         },
         reInitialize: function() {
-            //console.log('content changed');
-            $('#content').html(this.el);  // TODO: fix if item erased by news list
+            var $content = $('#content');
+            if ($content.children().is(this.el)) {
+                return;
+            }
+            $content.html(this.el);  // TODO: fix if item erased by news list
             this.delegateEvents(); // events accidentally stop working
         },
         renderMedia: function() {
