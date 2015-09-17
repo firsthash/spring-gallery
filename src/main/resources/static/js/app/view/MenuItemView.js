@@ -2,7 +2,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
     return Backbone.View.extend({
         events: {
             'click': 'onClick',
-            'click .lang>a': 'onMenuClick',
+            'click .lang>a': 'onLangClick',
         },
         tagName: 'li',
         template: _.template($('#menu-item-template').html()),
@@ -62,7 +62,7 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
             var content = this.model.get('content');
             return content.notEmpty();
         },
-        onMenuClick: function(e) {
+        onLangClick: function(e) {
             $.get(e.currentTarget.href, function() {
                 menuview.items.fetch({success: function(){
                     Backbone.history.loadUrl(Backbone.history.fragment); // refresh page in Backbone

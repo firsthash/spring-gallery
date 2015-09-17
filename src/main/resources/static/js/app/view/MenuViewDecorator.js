@@ -23,9 +23,9 @@ define(['backbone', 'app/App', 'app/model/MenuItemsDecorator', 'app/view/MenuVie
                 Backbone.history.start();
             }});
 
-            this.items.on('sync', function() {
-                $('#menu').find('>ul>li').eq(0).append($('#lang-switch').html());
-            });
+            //this.items.on('sync', function() {
+            //    $('#menu').find('>ul>li').eq(0).append($('#lang-switch').html());
+            //});
         },
     });
 });

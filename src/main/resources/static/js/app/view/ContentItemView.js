@@ -24,14 +24,15 @@ define(['backbone', 'app/App'], function(Backbone, app) {
         select: function() {
             var url = this.model.get('url') || '';
             var isAbs = url.startsWith('http');
+            var videoId;
 
             if (isAbs && url.indexOf('youtube') > -1) {
-                var videoId = url.replace(/.*v=([^&]*).*/gi, '$1');
+                videoId = url.replace(/.*v=([^&]*).*/gi, '$1');
                 return this.youtubeTemplate({videoId: videoId});
             }
 
             if (isAbs && url.indexOf('vimeo') > -1) {
-                var videoId = url.replace(/.*\/([^&]*).*/gi, '$1');
+                videoId = url.replace(/.*\/([^&]*).*/gi, '$1');
                 return this.vimeoTemplate({videoId: videoId});
             }
 
@@ -42,8 +43,8 @@ define(['backbone', 'app/App'], function(Backbone, app) {
             if ($content.children().is(this.el)) {
                 return;
             }
-            $content.html(this.el);  // TODO: fix if item erased by news list
-            this.delegateEvents(); // events accidentally stop working
+            $content.html(this.el);
+            this.delegateEvents(); // reinit events
         },
         renderMedia: function() {
             var elem = this.select();

@@ -4,11 +4,8 @@ define(['backbone', 'app/view/MenuItemView', 'app/App', 'app/view/NewsView', 'ap
             app = require('app/App');
             var el = this.template(this.model.toJSON());
             this.$el.html(el);
+            this.$el.append($('#lang-switch').html());
 
-            if (app.contentView.model.get('id') == this.model.get('content').get('id')) {
-                this.showContent();
-                this.$el.addClass('active');
-            }
             return this;
         },
         showContent: function(){
