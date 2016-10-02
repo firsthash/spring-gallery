@@ -9,7 +9,7 @@ define(['backbone', 'app/App'], function(Backbone, app) {
         },
         showHome: function() {
             app = require('app/App');
-            var model = app.rootMenu.items[0].model;
+            var model = app.rootMenu.items[1].model;
             this.showItem(model.get('id'));
         },
         showItem: function(id) {
