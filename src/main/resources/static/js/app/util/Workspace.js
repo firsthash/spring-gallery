@@ -1,7 +1,8 @@
-define(['backbone', 'app/App'], function(Backbone, app) {
+define(['backbone', 'app/App', 'app/util/Preload'], function(Backbone, app, Preload) {
     return Backbone.Router.extend({
         initialize: function() {
             console.log('route init');
+            Preload.doPreload();
         },
         routes: {
             "": "showHome",

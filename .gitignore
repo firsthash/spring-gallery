@@ -8,9 +8,11 @@
 #.openshift/
 
 # backup files
+test_data/
 original/
 bak/
 *bak/
+*bak2/
 tmp/
 temp/
 old/

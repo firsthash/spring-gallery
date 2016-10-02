@@ -51,11 +51,6 @@ define(['backbone', 'app/App', 'app/view/MenuView', 'app/util/animqueue'], funct
                 submenu.parentItem = this;
                 this.$el.append(submenu.render().el);
             }
-            // restore selected item state
-            //if (this.isSelected()) {
-            //    this.setActive(true);
-            //    this.showContent();
-            //}
             return this;
         },
         hasContent: function(){
