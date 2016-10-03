@@ -29,6 +29,11 @@ public class MenuItemController {
         return "admin.html";
     }
 
+    @RequestMapping(value = "/google8751348e92fea714.html")
+    public String googleVerification() {
+        return "google8751348e92fea714.html";
+    }
+
     @RequestMapping(value = "/admin", params = "locale")
     public String adminSwitchLocale(@RequestParam(required = false) String locale) {
         switchLocale(locale);
