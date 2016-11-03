@@ -36,7 +36,7 @@ public class MenuItemController {
 
     @RequestMapping(value = "/admin", params = "locale")
     public String adminSwitchLocale(@RequestParam(required = false) String locale) {
-        switchLocale(locale);
+        // switchLocale(locale);
         return "redirect:/admin";
     }
 
