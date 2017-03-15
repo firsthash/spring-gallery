@@ -19,7 +19,8 @@ body {
 /* FIXED NAVBAR */
 
 .bs-docs-sidebar nav {
-    position: fixed;
+    /* fix overlapped elems on small screens */
+    /*position: fixed;*/
     top: 20px;
     width: inherit;
 }
