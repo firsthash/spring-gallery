@@ -10,6 +10,7 @@ body {
 
 #content-wrap {
     position: inherit;
+    padding-right: 0px;
 }
 
 /* CONTENT VIEW STYLE */
