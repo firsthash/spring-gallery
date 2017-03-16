@@ -2,7 +2,7 @@ body {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Fix layout on phones */
+/* FIX LAYOUT ON PHONES */
 
 .bs-docs-sidebar.affix.col-sm-2 {
     padding-left: 0px;
@@ -12,6 +12,12 @@ body {
     position: inherit;
     padding-right: 0px;
 }
+
+#container {
+    min-width: 970px;
+}
+
+/* END FIX LAYOUT ON PHONES */
 
 /* CONTENT VIEW STYLE */
 
