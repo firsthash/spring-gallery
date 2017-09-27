@@ -21,9 +21,10 @@
         <param-value>classpath:config/globalContext.xml</param-value>
     </context-param>
 
+    <!-- TODO: replace to 'prod' when fix be done -->
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>prod</param-value>
+        <param-value>dev</param-value>
     </context-param>
 
     <!-- required by spring-security -->
